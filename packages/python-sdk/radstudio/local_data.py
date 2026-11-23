@@ -218,7 +218,8 @@ def _infer_classes(
                 field="label_column",
             )
         return positive, negative
-    if set(values) <= {"0", "1"} and len(values) == 2:
+    # 0/1 标签按固定映射；允许单类样本（读取层不强制两类，训练节点会自行报错）
+    if set(values) <= {"0", "1"} and values:
         return "1", "0"
     if len(values) == 2:
         return values[1], values[0]

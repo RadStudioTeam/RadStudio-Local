@@ -78,7 +78,7 @@ def test_run_read_images_node_end_to_end(tmp_path):
     result = runner.run(request, out, lambda _t, _p: None)
     payload = json.loads((out / result["data_input"]["samples"]["path"]).read_text(encoding="utf-8"))
     assert len(payload) == 2
-    assert {sample["sampleId"] for sample in payload} == {"case1", "case2"}
+    assert {sample["imageId"] for sample in payload} == {"case1", "case2"}
     assert all(Path(sample["imagePath"]).is_file() for sample in payload)
     assert {sample["label"] for sample in payload} == {0, 1}
 
