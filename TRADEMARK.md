@@ -16,7 +16,7 @@
 
 ## 仓库内的 Logo 文件
 
-仓库内 `assets/logo.png` 与 `assets/social-preview.png` 仅用于项目识别与展示，**不随 Apache-2.0 代码许可授权**；fork 请替换为自己的品牌素材。
+仓库内 `assets/logo.svg`、`assets/logo.png` 与 `assets/social-preview.png` 仅用于项目识别与展示，**不随 Apache-2.0 代码许可授权**；fork 请替换为自己的品牌素材。
 
 ## 学术引用
 
