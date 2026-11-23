@@ -1,0 +1,1530 @@
+[
+  {
+    "name": "feature valid",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "duplicate columns",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "a"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "row width",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.2
+          ]
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/0/values"
+  },
+  {
+    "name": "duplicate sample",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        },
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/1/imageId"
+  },
+  {
+    "name": "boolean feature",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            true,
+            1
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "invalid binary label",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 2,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "missing patient",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "same patient multiple images",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "empty table structurally valid",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": []
+    },
+    "valid": true
+  },
+  {
+    "name": "oof valid",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "out_of_fold",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 0.7,
+          "fold": 0
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "oof needs fold",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "out_of_fold",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 0.7,
+          "fold": null
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/0/fold"
+  },
+  {
+    "name": "external no folds",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "external",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 0.7,
+          "fold": 0
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/0/fold"
+  },
+  {
+    "name": "external valid",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "external",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 0.7,
+          "fold": null
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "external needs label",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "external",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": null,
+          "probability": 0.7,
+          "fold": null
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/0/label"
+  },
+  {
+    "name": "inference nullable labels",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "inference",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": null,
+          "probability": 0.7,
+          "fold": null
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "bad probability",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "out_of_fold",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 1.1,
+          "fold": 0
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "unknown role",
+    "physicalType": "prediction_table",
+    "contract": {
+      "id": "radstudio/prediction-table",
+      "version": "1"
+    },
+    "value": {
+      "evaluation": "training",
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "probability": 0.7,
+          "fold": 0
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "unknown contract",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "org/new",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "unknown version",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "2"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "physical mismatch",
+    "physicalType": "model",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "unsupported regression",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1",
+      "task": "regression"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "i",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false
+  },
+  {
+    "name": "sample collection valid",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection dataset storage path shape",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "malignant (1)",
+        "patientId": "malignant (1)",
+        "label": 1,
+        "imagePath": "/data/uploads/datasets/f111b3e1/malignant/images/malignant (1).png",
+        "roiPath": "/data/uploads/datasets/f111b3e1/malignant/masks/malignant (1)_mask.png",
+        "qcStatus": "pending"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection roi path blank allowed",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection roi path omitted",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection duplicate key",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i0",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/3/imageId"
+  },
+  {
+    "name": "sample collection blank image key",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "  ",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/3/imageId"
+  },
+  {
+    "name": "sample collection blank patient key",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": " ",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/2/patientId"
+  },
+  {
+    "name": "sample collection unbound patient key",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/patientId"
+  },
+  {
+    "name": "sample collection patient label conflict",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 1,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/2/label"
+  },
+  {
+    "name": "sample collection image path escape",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "../outside.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/imagePath"
+  },
+  {
+    "name": "sample collection image path traversal",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/../3_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/2/imagePath"
+  },
+  {
+    "name": "sample collection image path backslash",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data\\1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/1/imagePath"
+  },
+  {
+    "name": "sample collection image path control char",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2\u0007image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/2/imagePath"
+  },
+  {
+    "name": "sample collection image path over budget",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/imagePath"
+  },
+  {
+    "name": "sample collection roi path escape",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "../0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/roiPath"
+  },
+  {
+    "name": "sample collection empty",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [],
+    "valid": false
+  },
+  {
+    "name": "sample collection missing label",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false
+  },
+  {
+    "name": "sample collection label domain",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 2,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false
+  },
+  {
+    "name": "sample collection qc domain",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png",
+        "qcStatus": "failed"
+      }
+    ],
+    "valid": false
+  },
+  {
+    "name": "sample collection record not object",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      "i0"
+    ],
+    "valid": false
+  },
+  {
+    "name": "sample collection imageId at storage width",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画画",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection imageId beyond storage width",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+        "patientId": "p0",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/imageId"
+  },
+  {
+    "name": "sample collection patientId at storage width",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": true
+  },
+  {
+    "name": "sample collection patientId beyond storage width",
+    "physicalType": "sample_collection",
+    "contract": {
+      "id": "radstudio/sample-collection",
+      "version": "1"
+    },
+    "value": [
+      {
+        "imageId": "i0",
+        "patientId": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+        "label": 1,
+        "imagePath": "data/0_image.png",
+        "roiPath": "data/0_roi.png",
+        "qcStatus": "accepted"
+      },
+      {
+        "imageId": "i1",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/1_image.png",
+        "roiPath": "data/1_roi.png",
+        "qcStatus": "warning"
+      },
+      {
+        "imageId": "i2",
+        "patientId": "p1",
+        "label": 0,
+        "imagePath": "data/2_image.png",
+        "qcStatus": "pending",
+        "metadata": {
+          "series": "s1"
+        }
+      },
+      {
+        "imageId": "i3",
+        "patientId": "p2",
+        "label": null,
+        "imagePath": "data/3_image.png"
+      }
+    ],
+    "valid": false,
+    "fieldPath": "/0/patientId"
+  },
+  {
+    "name": "feature table imageId at storage width",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": true
+  },
+  {
+    "name": "feature table imageId beyond storage width",
+    "physicalType": "feature_table",
+    "contract": {
+      "id": "radstudio/feature-table",
+      "version": "1"
+    },
+    "value": {
+      "featureNames": [
+        "a",
+        "b"
+      ],
+      "records": [
+        {
+          "imageId": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+          "patientId": "p",
+          "label": 1,
+          "values": [
+            0.25,
+            null
+          ]
+        }
+      ]
+    },
+    "valid": false,
+    "fieldPath": "/records/0/imageId"
+  }
+]

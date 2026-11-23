@@ -1,0 +1,79 @@
+{
+  "source": {
+    "image": {
+      "path": "packages/compliance/ibsi-2d/phantom.nii.gz",
+      "sha256": "83773ac2a288aa93cf819a98eaf301c18d35d5876182ec9c18733184e2b7a83a"
+    },
+    "mask": {
+      "path": "packages/compliance/ibsi-2d/mask.nii.gz",
+      "sha256": "3032d340944b577b83bc559ea7ae9a6034b84633a840eff39570ec17aa1d6281"
+    }
+  },
+  "note": "体模强度为整数 1–9、掩膜为 0/1，导出为 8 位灰度 PNG 属无损转换；脚本已读回逐像素校验。",
+  "slices": [
+    {
+      "sliceIndex": 0,
+      "image": {
+        "path": "packages/compliance/ibsi-2d/slices/phantom_z0.png",
+        "sha256": "c2e7172621a68da00bdacb52b4e6169fccb65a04476d25b3fd250d1e59eea13d"
+      },
+      "mask": {
+        "path": "packages/compliance/ibsi-2d/slices/mask_z0.png",
+        "sha256": "16dcd0ac5c733666505291e81a14db1d2d79f4c21c51253fb71a7a2da670c90b"
+      },
+      "shape": [
+        4,
+        5
+      ],
+      "roiVoxels": 20
+    },
+    {
+      "sliceIndex": 1,
+      "image": {
+        "path": "packages/compliance/ibsi-2d/slices/phantom_z1.png",
+        "sha256": "0535d74b11989a9edc3c1e10b696afa53b61755d2e75408860d881d61c96d6ce"
+      },
+      "mask": {
+        "path": "packages/compliance/ibsi-2d/slices/mask_z1.png",
+        "sha256": "1ad1d8caa96564c24a35e96fb8b9e3bd39194f6e74f6838ce185b446cc09bc98"
+      },
+      "shape": [
+        4,
+        5
+      ],
+      "roiVoxels": 19
+    },
+    {
+      "sliceIndex": 2,
+      "image": {
+        "path": "packages/compliance/ibsi-2d/slices/phantom_z2.png",
+        "sha256": "2f3ec054ef70d39b985f789932e2d16a9ee8a9d94d11b7e57ed1027b633faf5a"
+      },
+      "mask": {
+        "path": "packages/compliance/ibsi-2d/slices/mask_z2.png",
+        "sha256": "01a067046259552b43f6c513a62fa7875c2cffbd1fdfa9c0ea1c9e60a2ee27f7"
+      },
+      "shape": [
+        4,
+        5
+      ],
+      "roiVoxels": 17
+    },
+    {
+      "sliceIndex": 3,
+      "image": {
+        "path": "packages/compliance/ibsi-2d/slices/phantom_z3.png",
+        "sha256": "207fd89bbf748496fda79d49a06c789eb9a51813cfafb5068081fc87ce8978ee"
+      },
+      "mask": {
+        "path": "packages/compliance/ibsi-2d/slices/mask_z3.png",
+        "sha256": "b38d0cc69201558270d667a0971f1b143ed54a5542f15313a426ea7e090486c7"
+      },
+      "shape": [
+        4,
+        5
+      ],
+      "roiVoxels": 18
+    }
+  ]
+}

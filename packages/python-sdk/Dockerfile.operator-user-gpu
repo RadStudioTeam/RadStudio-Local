@@ -1,0 +1,69 @@
+# 用户自定义算子统一运行时 · GPU 镜像（入口 radstudio.user_serve）。
+#
+# 与 Dockerfile.operator-user 的差异只有一处：依赖在 [user] extra 之上叠加 [dl] extra
+# （torch/torchvision/monai），并预下载 ImageNet 预训练权重到 TORCH_HOME——
+# 隔离、鉴权、流式日志、异常现场、依赖白名单等全部机制与 CPU 镜像同源。
+# GPU 档白名单（operator.user.gpu.allow_packages 默认值）必须与本镜像预置包保持一致。
+#
+# 对应 FC 函数（部署时由用户授权后操作）：radstudio-user-operator-gpu，
+# 规格参照 radstudio-operator-dl（fc.gpu.tesla.1 / 16384MB、cpu 8、memory 32768、
+# timeout 86400、instanceConcurrency 1、OSS 只读挂载、TCR 匿名 pull）。
+#
+# 构建（仓库根目录）：
+#   默认 CPU 轮子（本地验证 import 链路、torch.cuda.is_available()=false）：
+#     docker build --provenance=false --platform linux/amd64 \
+#       -f packages/python-sdk/Dockerfile.operator-user-gpu \
+#       -t radstudio-operator-user-gpu:<TAG> .
+#   CUDA 构建（生产 GPU 函数口径，与 Dockerfile.operator-dl 一致）：
+#     --build-arg TORCH_INDEX=https://download.pytorch.org/whl/cu124
+#   UV_DEFAULT_INDEX：GitHub/PyPI 直连不稳时传国内镜像（如 https://mirrors.aliyun.com/pypi/simple/）
+FROM python:3.12-slim AS builder
+ARG TORCH_INDEX=""
+ARG UV_DEFAULT_INDEX=""
+ENV UV_DEFAULT_INDEX=${UV_DEFAULT_INDEX}
+COPY --from=ghcr.io/astral-sh/uv:0.8.22 /uv /usr/local/bin/uv
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/runner
+COPY packages/python-sdk/pyproject.toml packages/python-sdk/uv.lock ./
+# pyradiomics 固定为 GitHub 源码包（PyPI sdist 损坏）；本仓不携带 vendor 二进制，
+# 构建时从钉死 commit 拉取；网络受限可用 --build-arg PY_RADIOMICS_URL=<镜像地址> 覆盖。
+RUN uv sync --frozen --no-dev --no-install-project --extra user --extra dl --no-install-package pyradiomics \
+    && uv pip install --python .venv/bin/python "$PY_RADIOMICS_URL" \
+    && rm -rf ./vendor
+# CUDA 构建：从 TORCH_INDEX 覆盖安装 torch/torchvision（基础依赖按 lock 解析为 CPU 轮子）。
+RUN if [ -n "$TORCH_INDEX" ]; then \
+        uv pip install --python .venv/bin/python \
+            --index-url "$TORCH_INDEX" \
+            --reinstall-package torch --reinstall-package torchvision \
+            "torch>=2.2,<3" "torchvision>=0.17,<1"; \
+    fi
+# 预下载 ImageNet 预训练权重（torchvision resnet/efficientnet + MONAI DenseNet121）到
+# 共享缓存；GPU 运行容器不联网下载权重，用户代码直接用预置骨干。
+ENV TORCH_HOME=/opt/torch_cache
+RUN <<'EOF'
+.venv/bin/python -c "
+from torchvision.models import resnet18, resnet34, resnet50, efficientnet_b0
+from monai.networks.nets import DenseNet121
+for build in (resnet18, resnet34, resnet50, efficientnet_b0):
+    build(weights='IMAGENET1K_V1')
+DenseNet121(spatial_dims=2, in_channels=3, out_channels=1, pretrained=True, progress=False)
+print('pretrained weights cached')
+"
+EOF
+
+FROM python:3.12-slim
+# 隔离子进程继承本 UID；显式登记 passwd 条目，避免依赖 getpass 的库在非 root UID 下报错
+RUN echo 'nonroot:x:65532:65532:nonroot:/nonexistent:/sbin/nologin' >> /etc/passwd \
+    && echo 'nonroot:x:65532:' >> /etc/group
+WORKDIR /opt/runner
+COPY --from=builder /opt/runner/.venv /opt/runner/.venv
+COPY --from=builder /opt/torch_cache /opt/torch_cache
+COPY packages/python-sdk/radstudio ./radstudio
+ENV PATH="/opt/runner/.venv/bin:$PATH" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
+    OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 RADSTUDIO_USER_OPERATORS=1 \
+    TORCH_HOME=/opt/torch_cache
+EXPOSE 8080
+USER 65532:65532
+ENTRYPOINT ["python", "-m", "radstudio.user_serve", "--host", "0.0.0.0", "--port", "8080"]

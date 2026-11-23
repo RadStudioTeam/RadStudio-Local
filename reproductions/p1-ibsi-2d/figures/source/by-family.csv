@@ -1,0 +1,5 @@
+family,comparableRows,notComparableRows,meanRelativeDeviation,maxRelativeDeviation,meanAbsoluteDeviation,maxAbsoluteDeviation
+Grey level size zone based features,16,0,0.001387750401544825,0.004235145385587856,0.036964877498188026,0.47857142857142776
+Grey level distance zone based features,0,16,,,,
+Neighbourhood grey tone difference based features,5,0,0.001201442732341502,0.0040450024484138735,0.0011448887316938328,0.0036340826210583543
+Neighbouring grey level dependence based features,14,3,0.0010560201190421572,0.004547002839663599,0.008345161391217952,0.0463794289645687

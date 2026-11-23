@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "2",
+  "name": "乳腺超声影像组学默认工作流",
+  "description": "Patient-grouped five-fold OOF evaluation",
+  "nodes": [
+    {
+      "id": "data_input",
+      "type": "ReadImages",
+      "name": "数据输入",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "imageRole": "image",
+        "roiRole": "roi",
+        "requireRoi": true,
+        "roiNameContains": "_mask",
+        "labelField": "labelValue",
+        "positiveValue": "1",
+        "negativeValue": "0"
+      }
+    },
+    {
+      "id": "image_conversion",
+      "type": "ImageFormatConversion",
+      "name": "影像格式转换",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "imageMode": "grayscale",
+        "roiMode": "binary"
+      }
+    },
+    {
+      "id": "quality_control",
+      "type": "QualityControl",
+      "name": "数据质控",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "excludeFailed": true
+      }
+    },
+    {
+      "id": "roi_validation",
+      "type": "ROIValidation",
+      "name": "ROI 校验",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "previewOverlay": true
+      }
+    },
+    {
+      "id": "preprocessing",
+      "type": "Preprocessing2D",
+      "name": "2D 预处理",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "binWidth": 25
+      }
+    },
+    {
+      "id": "feature_extraction",
+      "type": "IBSI2DFeatureExtraction",
+      "name": "2D 特征提取",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "featureFamilies": [
+          "first_order",
+          "shape_2d",
+          "glcm",
+          "glrlm",
+          "glszm",
+          "gldm",
+          "ngtdm"
+        ],
+        "engine": "pyradiomics",
+        "imageTypes": [
+          "original",
+          "wavelet"
+        ],
+        "binWidth": 25
+      }
+    },
+    {
+      "id": "data_split",
+      "type": "DataSplit",
+      "name": "分组交叉验证",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "folds": 5,
+        "randomSeed": 42
+      }
+    },
+    {
+      "id": "feature_filter",
+      "type": "FeatureFilter",
+      "name": "折内特征筛选",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "missingRateThreshold": 0.2,
+        "varianceThreshold": 0.01,
+        "correlationThreshold": 0.95
+      }
+    },
+    {
+      "id": "logistic_regression",
+      "type": "LogisticRegression",
+      "name": "逻辑回归",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "C": 1.0,
+        "maxIterations": 1000
+      }
+    },
+    {
+      "id": "evaluation",
+      "type": "Evaluation",
+      "name": "OOF 模型评估",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "threshold": 0.5
+      }
+    },
+    {
+      "id": "report",
+      "type": "Report",
+      "name": "报告与复现包",
+      "operatorVersion": "1.0.0",
+      "parameters": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "data_input",
+      "target": "image_conversion",
+      "sourceOutput": "samples",
+      "targetInput": "samples"
+    },
+    {
+      "source": "image_conversion",
+      "target": "quality_control",
+      "sourceOutput": "samples",
+      "targetInput": "samples"
+    },
+    {
+      "source": "quality_control",
+      "target": "roi_validation",
+      "sourceOutput": "samples",
+      "targetInput": "samples"
+    },
+    {
+      "source": "roi_validation",
+      "target": "preprocessing",
+      "sourceOutput": "samples",
+      "targetInput": "samples"
+    },
+    {
+      "source": "preprocessing",
+      "target": "feature_extraction",
+      "sourceOutput": "samples",
+      "targetInput": "samples"
+    },
+    {
+      "source": "feature_extraction",
+      "target": "data_split",
+      "sourceOutput": "features",
+      "targetInput": "features"
+    },
+    {
+      "source": "feature_extraction",
+      "target": "logistic_regression",
+      "sourceOutput": "features",
+      "targetInput": "features"
+    },
+    {
+      "source": "data_split",
+      "target": "logistic_regression",
+      "sourceOutput": "split",
+      "targetInput": "split"
+    },
+    {
+      "source": "feature_filter",
+      "target": "logistic_regression",
+      "sourceOutput": "strategy",
+      "targetInput": "strategy"
+    },
+    {
+      "source": "logistic_regression",
+      "target": "evaluation",
+      "sourceOutput": "predictions",
+      "targetInput": "predictions"
+    },
+    {
+      "source": "feature_extraction",
+      "target": "report",
+      "sourceOutput": "features",
+      "targetInput": "features"
+    },
+    {
+      "source": "feature_extraction",
+      "target": "report",
+      "sourceOutput": "report",
+      "targetInput": "report"
+    },
+    {
+      "source": "logistic_regression",
+      "target": "report",
+      "sourceOutput": "model",
+      "targetInput": "model"
+    },
+    {
+      "source": "evaluation",
+      "target": "report",
+      "sourceOutput": "metrics",
+      "targetInput": "metrics"
+    },
+    {
+      "source": "evaluation",
+      "target": "report",
+      "sourceOutput": "roc",
+      "targetInput": "roc"
+    },
+    {
+      "source": "evaluation",
+      "target": "report",
+      "sourceOutput": "confusion",
+      "targetInput": "confusion"
+    }
+  ]
+}

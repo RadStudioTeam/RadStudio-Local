@@ -1,0 +1,6109 @@
+[
+  {
+    "type": "ImageFormatConversion",
+    "version": "1.0.0",
+    "name": "影像格式转换",
+    "category": "data",
+    "description": "将彩色影像转换为二维灰度、并将 ROI 转换为二维二值掩膜",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "imageMode": {
+          "type": "string",
+          "enum": [
+            "grayscale",
+            "keep"
+          ]
+        },
+        "roiMode": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "keep"
+          ]
+        }
+      },
+      "required": [
+        "imageMode",
+        "roiMode"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "imageMode": "grayscale",
+      "roiMode": "binary"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      }
+    ],
+    "entrypoint": "radstudio.runner:ImageFormatConversion",
+    "tags": [
+      "image",
+      "2d",
+      "format",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "ImageFilterBank",
+    "version": "1.0.0",
+    "name": "影像滤波库",
+    "category": "features",
+    "description": "对每个样本生成滤波派生图像（LoG/小波/平方/开方/对数/指数/梯度），样本按 (原图, 派生) 展开",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "square",
+              "squareroot",
+              "logarithm",
+              "exponential",
+              "gradient",
+              "log",
+              "wavelet"
+            ]
+          }
+        },
+        "includeOriginal": {
+          "type": "boolean"
+        },
+        "logSigma": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10
+        },
+        "wavelet": {
+          "type": "string",
+          "enum": [
+            "haar",
+            "db2",
+            "sym2",
+            "coif1"
+          ]
+        }
+      },
+      "required": [
+        "filters"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "filters": [
+        "square",
+        "logarithm"
+      ],
+      "includeOriginal": true,
+      "logSigma": 1.0,
+      "wavelet": "haar"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:ImageFilterBank",
+    "tags": [
+      "image",
+      "2d",
+      "radiomics",
+      "filter",
+      "feature-derivation"
+    ]
+  },
+  {
+    "type": "QualityControl",
+    "version": "1.0.0",
+    "name": "数据质控",
+    "category": "data",
+    "description": "数据质控",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "excludeFailed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "excludeFailed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "excludeFailed": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.runner:QualityControl",
+    "tags": [
+      "image",
+      "2d",
+      "qc",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "ROIValidation",
+    "version": "1.0.0",
+    "name": "ROI 校验",
+    "category": "data",
+    "description": "ROI 校验",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "previewOverlay": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "previewOverlay"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "previewOverlay": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.runner:ROIValidation",
+    "tags": [
+      "image",
+      "2d",
+      "roi",
+      "qc",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "Preprocessing2D",
+    "version": "1.0.0",
+    "name": "2D 预处理",
+    "category": "features",
+    "description": "2D 预处理",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "binWidth": {
+          "type": "number",
+          "minimum": 1e-06
+        }
+      },
+      "required": [
+        "binWidth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "binWidth": 25
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      }
+    ],
+    "entrypoint": "radstudio.runner:Preprocessing2D",
+    "tags": [
+      "image",
+      "2d",
+      "radiomics",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "IBSI2DFeatureExtraction",
+    "version": "1.0.0",
+    "name": "2D 特征提取",
+    "category": "features",
+    "description": "Implemented 2D features; reference validation not performed.",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "featureFamilies": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "first_order",
+              "shape_2d",
+              "glcm",
+              "glrlm",
+              "glszm",
+              "gldm",
+              "ngtdm"
+            ]
+          }
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "custom",
+            "pyradiomics"
+          ]
+        },
+        "imageTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "original",
+              "wavelet",
+              "square",
+              "squareroot",
+              "logarithm",
+              "exponential",
+              "gradient"
+            ]
+          }
+        },
+        "binWidth": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "featureFamilies"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "featureFamilies": [
+        "first_order",
+        "shape_2d",
+        "glcm"
+      ],
+      "engine": "custom",
+      "imageTypes": [
+        "original"
+      ],
+      "binWidth": 25
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "features",
+        "type": "feature_table"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.runner:IBSI2DFeatureExtraction",
+    "resourceRequirements": {
+      "timeoutSeconds": 14400
+    },
+    "tags": [
+      "image",
+      "2d",
+      "radiomics",
+      "ibsi",
+      "feature-extraction"
+    ]
+  },
+  {
+    "type": "DataSplit",
+    "version": "1.0.0",
+    "name": "分组交叉验证",
+    "category": "model",
+    "description": "分组交叉验证",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "folds": {
+          "type": "integer",
+          "enum": [
+            5
+          ]
+        },
+        "randomSeed": {
+          "type": "integer",
+          "enum": [
+            42
+          ]
+        }
+      },
+      "required": [
+        "folds",
+        "randomSeed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "folds": 5,
+      "randomSeed": 42
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan"
+      }
+    ],
+    "entrypoint": "radstudio.runner:DataSplit",
+    "tags": [
+      "tabular",
+      "split",
+      "cross-validation",
+      "patient-group"
+    ]
+  },
+  {
+    "type": "FeatureFilter",
+    "version": "1.0.0",
+    "name": "折内特征筛选",
+    "category": "model",
+    "description": "折内特征筛选",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "missingRateThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "varianceThreshold": {
+          "type": "number",
+          "minimum": 0
+        },
+        "correlationThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "missingRateThreshold",
+        "varianceThreshold",
+        "correlationThreshold"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "missingRateThreshold": 0.2,
+      "varianceThreshold": 0.01,
+      "correlationThreshold": 0.95
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "strategy",
+        "type": "filter_strategy"
+      }
+    ],
+    "entrypoint": "radstudio.runner:FeatureFilter",
+    "tags": [
+      "tabular",
+      "feature",
+      "filter",
+      "selection"
+    ]
+  },
+  {
+    "type": "LogisticRegression",
+    "version": "1.0.0",
+    "name": "逻辑回归",
+    "category": "model",
+    "description": "逻辑回归",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "maxIterations": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "C",
+        "maxIterations"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "maxIterations": 1000
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.runner:LogisticRegression",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "linear"
+    ]
+  },
+  {
+    "type": "RandomForestClassifier",
+    "version": "1.0.0",
+    "name": "随机森林",
+    "category": "model",
+    "description": "随机森林：折内训练五折集成，输出 OOF 预测与模型",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "required": [
+        "nEstimators",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 200,
+      "maxDepth": 12
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:RandomForestClassifier",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "tree"
+    ]
+  },
+  {
+    "type": "SVMClassifier",
+    "version": "1.0.0",
+    "name": "支持向量机",
+    "category": "model",
+    "description": "支持向量机：折内训练五折集成，输出 OOF 预测与模型",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "kernel": {
+          "type": "string",
+          "enum": [
+            "linear",
+            "poly",
+            "rbf",
+            "sigmoid"
+          ]
+        },
+        "gamma": {
+          "type": "string",
+          "enum": [
+            "scale",
+            "auto"
+          ]
+        }
+      },
+      "required": [
+        "C",
+        "kernel",
+        "gamma"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "kernel": "rbf",
+      "gamma": "scale"
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:SVMClassifier",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "kernel"
+    ]
+  },
+  {
+    "type": "GradientBoostingClassifier",
+    "version": "1.0.0",
+    "name": "梯度提升树",
+    "category": "model",
+    "description": "梯度提升树：折内训练五折集成，输出 OOF 预测与模型",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 1
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "nEstimators",
+        "learningRate",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 100,
+      "learningRate": 0.1,
+      "maxDepth": 3
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:GradientBoostingClassifier",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "boosting"
+    ]
+  },
+  {
+    "type": "DLCNNTraining",
+    "version": "1.0.0",
+    "name": "CNN 训练",
+    "category": "model",
+    "description": "PyTorch/MONAI CNN 骨干（resnet18/34/50、efficientnet_b0、densenet121）按 split_plan 分组交叉验证训练，支持 MONAI 医学增强、FocalLoss 与类别平衡，输出 OOF 预测、AUC 指标与五折 checkpoint；无 GPU 时自动回退 CPU",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "backbone": {
+          "type": "string",
+          "enum": [
+            "resnet18",
+            "resnet34",
+            "resnet50",
+            "efficientnet_b0",
+            "densenet121"
+          ]
+        },
+        "pretrained": {
+          "type": "boolean"
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 1
+        },
+        "earlyStopping": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "imageSize": {
+          "type": "integer",
+          "enum": [
+            64,
+            128,
+            224
+          ]
+        },
+        "augmentation": {
+          "type": "string",
+          "title": "医学影像增强",
+          "description": "MONAI 增强预设：none 保持原行为；light/standard 逐样本随机翻转、旋转、缩放、噪声",
+          "enum": [
+            "none",
+            "light",
+            "standard"
+          ]
+        },
+        "loss": {
+          "type": "string",
+          "title": "损失函数",
+          "description": "bce 为二分类交叉熵；focal 使用 MONAI FocalLoss，缓解类别不平衡",
+          "enum": [
+            "bce",
+            "focal"
+          ]
+        },
+        "focalGamma": {
+          "type": "number",
+          "title": "FocalLoss gamma",
+          "minimum": 0.1,
+          "maximum": 10
+        },
+        "balanceClasses": {
+          "type": "boolean",
+          "title": "BCE 类别平衡",
+          "description": "按训练折正负样本比例设置 pos_weight；仅 loss=bce 时生效"
+        }
+      },
+      "required": [
+        "backbone",
+        "pretrained",
+        "epochs",
+        "batchSize",
+        "learningRate",
+        "earlyStopping",
+        "imageSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "backbone": "resnet18",
+      "pretrained": true,
+      "epochs": 5,
+      "batchSize": 16,
+      "learningRate": 0.001,
+      "earlyStopping": 3,
+      "imageSize": 64,
+      "augmentation": "none",
+      "loss": "bce",
+      "focalGamma": 2,
+      "balanceClasses": false
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNTraining",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 8192,
+      "gpu": 1,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "training",
+      "classification",
+      "deep-learning"
+    ]
+  },
+  {
+    "type": "DLCNNInference",
+    "version": "1.0.0",
+    "name": "CNN 推理",
+    "category": "results",
+    "description": "加载 CNN 五折 checkpoint（按 checkpoint 的 library 自动选择 torchvision/MONAI 骨干），对样本集做集成推理输出 prediction_table；无 GPU 时自动回退 CPU",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        }
+      },
+      "required": [
+        "batchSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "batchSize": 32
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      },
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNInference",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "inference",
+      "classification"
+    ]
+  },
+  {
+    "type": "Evaluation",
+    "version": "1.0.0",
+    "name": "OOF 模型评估",
+    "category": "results",
+    "description": "OOF 模型评估",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "threshold"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5
+    },
+    "inputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "roc",
+        "type": "chart"
+      },
+      {
+        "name": "confusion",
+        "type": "chart"
+      }
+    ],
+    "entrypoint": "radstudio.runner:Evaluation",
+    "tags": [
+      "metrics",
+      "auc",
+      "pr-auc",
+      "calibration",
+      "decision-curve"
+    ]
+  },
+  {
+    "type": "Report",
+    "version": "1.0.0",
+    "name": "报告与复现包",
+    "category": "results",
+    "description": "报告与复现包",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {},
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "metrics",
+        "type": "metrics",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      },
+      {
+        "name": "report",
+        "type": "report",
+        "required": false
+      },
+      {
+        "name": "roc",
+        "type": "chart",
+        "required": false
+      },
+      {
+        "name": "confusion",
+        "type": "chart",
+        "required": false
+      }
+    ],
+    "outputs": [
+      {
+        "name": "report",
+        "type": "report"
+      },
+      {
+        "name": "reproduction",
+        "type": "archive"
+      }
+    ],
+    "entrypoint": "radstudio.runner:Report",
+    "tags": [
+      "report",
+      "publication",
+      "reproducibility",
+      "manifest"
+    ]
+  },
+  {
+    "type": "DataSplit",
+    "version": "1.1.0",
+    "name": "分组交叉验证（可配置）",
+    "category": "model",
+    "description": "患者级分组交叉验证，折数（2-10）与随机种子可配置；输出 split_plan 供训练节点使用",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "folds": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 10
+        },
+        "randomSeed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "folds",
+        "randomSeed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "folds": 5,
+      "randomSeed": 42
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan"
+      }
+    ],
+    "entrypoint": "radstudio.runner:DataSplit",
+    "tags": [
+      "tabular",
+      "split",
+      "cross-validation",
+      "patient-group"
+    ]
+  },
+  {
+    "type": "FeatureFilter",
+    "version": "1.1.0",
+    "name": "折内特征筛选（多策略）",
+    "category": "model",
+    "description": "生成折内筛选策略：方差/相关性、单变量 F 检验或 LASSO；策略仅在训练折内拟合，避免验证泄漏",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "missingRateThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "varianceThreshold": {
+          "type": "number",
+          "minimum": 0
+        },
+        "correlationThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "method": {
+          "type": "string",
+          "title": "筛选方法",
+          "description": "variance_correlation 保持原有行为；univariate 按 F 检验保留前 K 个；lasso 使用 L1 逻辑回归",
+          "enum": [
+            "variance_correlation",
+            "univariate",
+            "lasso"
+          ]
+        },
+        "univariateTopK": {
+          "type": "integer",
+          "title": "单变量保留特征数",
+          "description": "0 表示保留全部",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "lassoAlpha": {
+          "type": "number",
+          "title": "LASSO 正则强度",
+          "minimum": 1e-08,
+          "maximum": 1000
+        },
+        "lassoMaxIter": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "missingRateThreshold",
+        "varianceThreshold",
+        "correlationThreshold"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "missingRateThreshold": 0.2,
+      "varianceThreshold": 0.01,
+      "correlationThreshold": 0.95,
+      "method": "variance_correlation",
+      "univariateTopK": 20,
+      "lassoAlpha": 0.01,
+      "lassoMaxIter": 1000
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "strategy",
+        "type": "filter_strategy"
+      }
+    ],
+    "entrypoint": "radstudio.runner:FeatureFilter",
+    "tags": [
+      "tabular",
+      "feature",
+      "filter",
+      "selection"
+    ]
+  },
+  {
+    "type": "HoldoutSplit",
+    "version": "1.0.0",
+    "name": "留出集划分",
+    "category": "model",
+    "description": "按患者分层划分训练/验证/测试集，输出三张特征表；测试集可用于外部验证与论文报告",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "validationRatio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.5
+        },
+        "testRatio": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 0.8
+        },
+        "randomSeed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "stratify": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "validationRatio",
+        "testRatio",
+        "randomSeed",
+        "stratify"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "validationRatio": 0.15,
+      "testRatio": 0.2,
+      "randomSeed": 42,
+      "stratify": true
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan"
+      },
+      {
+        "name": "train",
+        "type": "feature_table"
+      },
+      {
+        "name": "validation",
+        "type": "feature_table"
+      },
+      {
+        "name": "test",
+        "type": "feature_table"
+      }
+    ],
+    "entrypoint": "radstudio.runner:HoldoutSplit",
+    "tags": [
+      "tabular",
+      "split",
+      "holdout"
+    ]
+  },
+  {
+    "type": "ModelApply",
+    "version": "1.0.0",
+    "name": "模型外部应用",
+    "category": "results",
+    "description": "将折集成 pipeline 应用到外部/留出特征表，输出 evaluation=external 的预测表供外部验证评估",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {},
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      },
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.runner:ModelApply",
+    "tags": [
+      "tabular-model",
+      "inference",
+      "external-validation"
+    ]
+  },
+  {
+    "type": "DLCNNInference",
+    "version": "1.1.0",
+    "name": "CNN 推理（支持外部验证）",
+    "category": "results",
+    "description": "加载 CNN checkpoint（按 library 自动选择 torchvision/MONAI 骨干）做集成推理；evaluationRole 可标记 inference/external/validation，便于外部验证评估与报告",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "evaluationRole": {
+          "type": "string",
+          "title": "预测角色",
+          "description": "inference 新数据推理；external 外部验证；validation 内部留出验证",
+          "enum": [
+            "inference",
+            "external",
+            "validation"
+          ]
+        }
+      },
+      "required": [
+        "batchSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "batchSize": 32,
+      "evaluationRole": "inference"
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      },
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNInference",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "inference",
+      "classification"
+    ]
+  },
+  {
+    "type": "Evaluation",
+    "version": "1.1.0",
+    "name": "OOF/外部验证评估",
+    "category": "results",
+    "description": "支持 OOF、外部、留出与推理预测；输出 AUC/PR-AUC、准确率、敏感度/特异度、Brier、校准、决策曲线、Bootstrap 置信区间与混淆矩阵",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "thresholdMode": {
+          "type": "string",
+          "title": "阈值选择",
+          "description": "fixed 使用给定阈值；youden 按约登指数自动选择",
+          "enum": [
+            "fixed",
+            "youden"
+          ]
+        },
+        "bootstrap": {
+          "type": "integer",
+          "title": "Bootstrap 次数",
+          "description": "0 表示不计算置信区间",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "ciLevel": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 0.999
+        },
+        "calibrationBins": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "threshold"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5,
+      "thresholdMode": "fixed",
+      "bootstrap": 2000,
+      "ciLevel": 0.95,
+      "calibrationBins": 10,
+      "seed": 42
+    },
+    "inputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "roc",
+        "type": "chart"
+      },
+      {
+        "name": "pr",
+        "type": "chart"
+      },
+      {
+        "name": "calibration",
+        "type": "chart"
+      },
+      {
+        "name": "decisionCurve",
+        "type": "chart"
+      },
+      {
+        "name": "confusion",
+        "type": "chart"
+      }
+    ],
+    "entrypoint": "radstudio.runner:Evaluation",
+    "tags": [
+      "metrics",
+      "auc",
+      "pr-auc",
+      "calibration",
+      "decision-curve"
+    ]
+  },
+  {
+    "type": "PaperFigures",
+    "version": "1.0.0",
+    "name": "出版级图表",
+    "category": "results",
+    "description": "由评估指标生成 ROC、PR、校准、决策曲线、混淆矩阵与性能汇总图；输出多格式图包、PDF 预览、图注与源数据表",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "figures": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "roc",
+              "pr",
+              "calibration",
+              "decisionCurve",
+              "confusion",
+              "forest"
+            ]
+          }
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "png",
+              "pdf",
+              "svg",
+              "tiff"
+            ]
+          }
+        },
+        "dpi": {
+          "type": "integer",
+          "minimum": 72,
+          "maximum": 600
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "default",
+            "nature",
+            "ieee"
+          ]
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "figures",
+        "formats",
+        "dpi",
+        "style"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "figures": [
+        "roc",
+        "calibration",
+        "decisionCurve",
+        "confusion"
+      ],
+      "formats": [
+        "png",
+        "pdf"
+      ],
+      "dpi": 300,
+      "style": "default",
+      "title": ""
+    },
+    "inputs": [
+      {
+        "name": "metrics",
+        "type": "metrics",
+        "required": true
+      },
+      {
+        "name": "roc",
+        "type": "chart"
+      },
+      {
+        "name": "pr",
+        "type": "chart"
+      },
+      {
+        "name": "calibration",
+        "type": "chart"
+      },
+      {
+        "name": "decisionCurve",
+        "type": "chart"
+      },
+      {
+        "name": "confusion",
+        "type": "chart"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "figures",
+        "type": "figure_bundle"
+      },
+      {
+        "name": "preview",
+        "type": "figure_bundle"
+      },
+      {
+        "name": "captions",
+        "type": "report"
+      },
+      {
+        "name": "sourceData",
+        "type": "table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_figures:PaperFigures",
+    "tags": [
+      "visualization",
+      "plot",
+      "publication",
+      "figure"
+    ]
+  },
+  {
+    "type": "Report",
+    "version": "1.1.0",
+    "name": "论文报告（无复现包）",
+    "category": "results",
+    "description": "汇总指标、模型、图表与质控生成自包含 HTML、Markdown 摘要与投稿检查清单；不依赖单体 runner 复现上下文，可在云函数执行",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "en",
+            "zh"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "title": "",
+      "language": "en"
+    },
+    "inputs": [
+      {
+        "name": "metrics",
+        "type": "metrics",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      },
+      {
+        "name": "figures",
+        "type": "figure_bundle"
+      },
+      {
+        "name": "captions",
+        "type": "report"
+      },
+      {
+        "name": "decisionCurve",
+        "type": "chart"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "report",
+        "type": "report"
+      },
+      {
+        "name": "summary",
+        "type": "report"
+      },
+      {
+        "name": "checklist",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_figures:Report",
+    "tags": [
+      "report",
+      "publication",
+      "reproducibility",
+      "manifest"
+    ]
+  },
+  {
+    "type": "DataSplit",
+    "version": "1.2.0",
+    "name": "分组交叉验证（来源绑定）",
+    "category": "model",
+    "description": "验证特征表并按患者分组划分；输出绑定来源引用与样本摘要，校验样本覆盖和患者隔离。旧特征表须先接入显式特征表验证节点。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "folds": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 10
+        },
+        "randomSeed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "folds",
+        "randomSeed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "folds": 5,
+      "randomSeed": 42
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true,
+        "contract": {
+          "id": "radstudio/split-plan",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:DataSplitOperatorV12",
+    "tags": [
+      "tabular",
+      "split",
+      "cross-validation",
+      "patient-group"
+    ]
+  },
+  {
+    "type": "HoldoutSplit",
+    "version": "1.2.0",
+    "name": "留出集划分（来源绑定）",
+    "category": "model",
+    "description": "验证特征表并按患者分组划分；输出绑定来源引用与样本摘要，校验样本覆盖和患者隔离。旧特征表须先接入显式特征表验证节点。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "validationRatio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.5
+        },
+        "testRatio": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 0.8
+        },
+        "randomSeed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "stratify": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "validationRatio",
+        "testRatio",
+        "randomSeed",
+        "stratify"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "validationRatio": 0.15,
+      "testRatio": 0.2,
+      "randomSeed": 42,
+      "stratify": true
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true,
+        "contract": {
+          "id": "radstudio/split-plan",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "train",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "validation",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "test",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:HoldoutSplitOperatorV12",
+    "tags": [
+      "tabular",
+      "split",
+      "holdout"
+    ]
+  },
+  {
+    "type": "ValidateFeatureTable",
+    "version": "1.0.0",
+    "name": "特征表验证",
+    "category": "model",
+    "description": "显式验证旧特征表的字段、样本键、行宽和缺失值；通过后原样透传为radstudio/feature-table@1。不重编码、补零或证明特征单位/拟合来源。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "defaults": {},
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:ValidateFeatureTableOperator",
+    "tags": [
+      "tabular",
+      "feature",
+      "validation",
+      "contract"
+    ]
+  },
+  {
+    "type": "FeatureTableJoin",
+    "version": "1.0.0",
+    "name": "特征表合并",
+    "category": "features",
+    "description": "按稳定键 imageId 合并多张特征表：第一张为锚，inner 取交集、left 保留锚全集并以空值补齐；列名冲突可报错或按输入序号加前缀；重复 imageId、标签或患者不一致直接拒绝。报告保留、丢弃、缺失与重复计数，禁止按行号拼接。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "joinKey": {
+          "type": "string",
+          "enum": [
+            "imageId"
+          ]
+        },
+        "join": {
+          "type": "string",
+          "enum": [
+            "inner",
+            "left"
+          ]
+        },
+        "conflict": {
+          "type": "string",
+          "enum": [
+            "error",
+            "prefix"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "defaults": {
+      "joinKey": "imageId",
+      "join": "inner",
+      "conflict": "error"
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true,
+        "cardinality": "many",
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true,
+        "contract": {
+          "id": "radstudio/feature-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "report",
+        "type": "report",
+        "required": true
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:FeatureTableJoinOperator",
+    "tags": [
+      "tabular",
+      "feature",
+      "join",
+      "merge"
+    ]
+  },
+  {
+    "type": "ImageFormatConversion",
+    "version": "1.1.0",
+    "name": "影像格式转换（样本契约声明）",
+    "category": "data",
+    "description": "输出按 radstudio/sample-collection@1 声明并逐条核对：影像身份非空且全局唯一、患者身份非空、同一患者标签不冲突、影像与掩膜路径形态可用。实现与 1.0.0 逐字节一致，只在目录里把 samples 输出声明 radstudio/sample-collection@1。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "imageMode": {
+          "type": "string",
+          "enum": [
+            "grayscale",
+            "keep"
+          ]
+        },
+        "roiMode": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "keep"
+          ]
+        }
+      },
+      "required": [
+        "imageMode",
+        "roiMode"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "imageMode": "grayscale",
+      "roiMode": "binary"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "contract": {
+          "id": "radstudio/sample-collection",
+          "version": "1"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:ImageFormatConversionOperatorV11",
+    "tags": [
+      "image",
+      "2d",
+      "format",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "ImageFilterBank",
+    "version": "1.1.0",
+    "name": "影像滤波库（样本契约声明）",
+    "category": "features",
+    "description": "输出按 radstudio/sample-collection@1 声明并逐条核对：影像身份非空且全局唯一、患者身份非空、同一患者标签不冲突、影像与掩膜路径形态可用。实现与 1.0.0 逐字节一致，只在目录里把 samples 输出声明 radstudio/sample-collection@1。派生样本以 #滤波名 后缀展开，影像身份保持唯一；契约不核对影像与掩膜的几何与像素一致性。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "square",
+              "squareroot",
+              "logarithm",
+              "exponential",
+              "gradient",
+              "log",
+              "wavelet"
+            ]
+          }
+        },
+        "includeOriginal": {
+          "type": "boolean"
+        },
+        "logSigma": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10
+        },
+        "wavelet": {
+          "type": "string",
+          "enum": [
+            "haar",
+            "db2",
+            "sym2",
+            "coif1"
+          ]
+        }
+      },
+      "required": [
+        "filters"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "filters": [
+        "square",
+        "logarithm"
+      ],
+      "includeOriginal": true,
+      "logSigma": 1.0,
+      "wavelet": "haar"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "contract": {
+          "id": "radstudio/sample-collection",
+          "version": "1"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:ImageFilterBankOperatorV11",
+    "tags": [
+      "image",
+      "2d",
+      "radiomics",
+      "filter",
+      "feature-derivation"
+    ]
+  },
+  {
+    "type": "QualityControl",
+    "version": "1.1.0",
+    "name": "数据质控（样本契约声明）",
+    "category": "data",
+    "description": "输出按 radstudio/sample-collection@1 声明并逐条核对：影像身份非空且全局唯一、患者身份非空、同一患者标签不冲突、影像与掩膜路径形态可用。实现与 1.0.0 逐字节一致，只在目录里把 samples 输出声明 radstudio/sample-collection@1。report 输出端口未绑定契约；qcStatus 只核对取值域，不核对它与来源数据集当时的真实质控状态。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "excludeFailed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "excludeFailed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "excludeFailed": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "contract": {
+          "id": "radstudio/sample-collection",
+          "version": "1"
+        }
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:QualityControlOperatorV11",
+    "tags": [
+      "image",
+      "2d",
+      "qc",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "ROIValidation",
+    "version": "1.1.0",
+    "name": "ROI 校验（样本契约声明）",
+    "category": "data",
+    "description": "输出按 radstudio/sample-collection@1 声明并逐条核对：影像身份非空且全局唯一、患者身份非空、同一患者标签不冲突、影像与掩膜路径形态可用。实现与 1.0.0 逐字节一致，只在目录里把 samples 输出声明 radstudio/sample-collection@1。report 输出端口未绑定契约；掩膜与影像的形状、间距与归属仍未核对。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "previewOverlay": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "previewOverlay"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "previewOverlay": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "contract": {
+          "id": "radstudio/sample-collection",
+          "version": "1"
+        }
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:ROIValidationOperatorV11",
+    "tags": [
+      "image",
+      "2d",
+      "roi",
+      "qc",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "Preprocessing2D",
+    "version": "1.1.0",
+    "name": "2D 预处理（样本契约声明）",
+    "category": "features",
+    "description": "输出按 radstudio/sample-collection@1 声明并逐条核对：影像身份非空且全局唯一、患者身份非空、同一患者标签不冲突、影像与掩膜路径形态可用。实现与 1.0.0 逐字节一致，只在目录里把 samples 输出声明 radstudio/sample-collection@1。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "binWidth": {
+          "type": "number",
+          "minimum": 1e-06
+        }
+      },
+      "required": [
+        "binWidth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "binWidth": 25
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "contract": {
+          "id": "radstudio/sample-collection",
+          "version": "1"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:Preprocessing2DOperatorV11",
+    "tags": [
+      "image",
+      "2d",
+      "radiomics",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "LogisticRegression",
+    "version": "1.1.0",
+    "name": "逻辑回归（模型契约声明）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@1 声明并逐条核对：任务与维度固定为二分类/表格、模型家族为 logistic_regression、特征名与血缘特征表一致、训练影像身份取自交叉验证训练折且逐份带标签、折内 pipeline 载荷以 sha256 与字节数绑定；折外预测按 radstudio/prediction-table@1 核对标签、概率与折号语义。血缘里的 features 与 split 引用必须指向本次运行实际消费的产物。相对 1.0.0 只新增信封字段，训练与预测数值不变；契约不解释 preprocess 步骤名的真实语义，也不解析 joblib 载荷内容。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "maxIterations": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "C",
+        "maxIterations"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "maxIterations": 1000
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "logistic_regression"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:LogisticRegressionOperatorV11",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "linear"
+    ]
+  },
+  {
+    "type": "LogisticRegression",
+    "version": "1.2.0",
+    "name": "逻辑回归（折内模型血缘）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@2 逐折核对血缘：fit 不给一份全集训练清单，而是每一折各自声明 trainedImageIds 与该折自己的权重载荷（sha256 与字节数绑定）；折内训练集必须与划分方案该折训练集完全一致（多一个样本也算不一致），折权重不得指向集成载荷、不得共用路径，也不得声明同一份字节，划分方案必须是交叉验证（留出法声明 @2 直接拒绝）。模型家族 logistic_regression、任务与维度仍为二分类/表格，predictions 沿用 radstudio/prediction-table@1。集成载荷 pipelines.joblib 与 pipelineArtifact 和 1.1.0 完全一致，读取模型的 ModelApply / Report 不必跟着改版；训练与预测数值不变，代价是每一折另存一份单折载荷。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "maxIterations": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "C",
+        "maxIterations"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "maxIterations": 1000
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "logistic_regression"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:LogisticRegressionOperatorV12",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "linear"
+    ]
+  },
+  {
+    "type": "RandomForestClassifier",
+    "version": "1.1.0",
+    "name": "随机森林（模型契约声明）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@1 声明并逐条核对：任务与维度固定为二分类/表格、模型家族为 random_forest、特征名与血缘特征表一致、训练影像身份取自交叉验证训练折且逐份带标签、折内 pipeline 载荷以 sha256 与字节数绑定；折外预测按 radstudio/prediction-table@1 核对标签、概率与折号语义。血缘里的 features 与 split 引用必须指向本次运行实际消费的产物。相对 1.0.0 只新增信封字段，训练与预测数值不变；契约不解释 preprocess 步骤名的真实语义，也不解析 joblib 载荷内容。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "required": [
+        "nEstimators",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 200,
+      "maxDepth": 12
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "random_forest"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:RandomForestClassifierOperatorV11",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "tree"
+    ]
+  },
+  {
+    "type": "RandomForestClassifier",
+    "version": "1.2.0",
+    "name": "随机森林（折内模型血缘）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@2 逐折核对血缘：fit 不给一份全集训练清单，而是每一折各自声明 trainedImageIds 与该折自己的权重载荷（sha256 与字节数绑定）；折内训练集必须与划分方案该折训练集完全一致（多一个样本也算不一致），折权重不得指向集成载荷、不得共用路径，也不得声明同一份字节，划分方案必须是交叉验证（留出法声明 @2 直接拒绝）。模型家族 random_forest、任务与维度仍为二分类/表格，predictions 沿用 radstudio/prediction-table@1。集成载荷 pipelines.joblib 与 pipelineArtifact 和 1.1.0 完全一致，读取模型的 ModelApply / Report 不必跟着改版；训练与预测数值不变，代价是每一折另存一份单折载荷。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "required": [
+        "nEstimators",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 200,
+      "maxDepth": 12
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "random_forest"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:RandomForestClassifierOperatorV12",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "tree"
+    ]
+  },
+  {
+    "type": "SVMClassifier",
+    "version": "1.1.0",
+    "name": "支持向量机（模型契约声明）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@1 声明并逐条核对：任务与维度固定为二分类/表格、模型家族为 svm、特征名与血缘特征表一致、训练影像身份取自交叉验证训练折且逐份带标签、折内 pipeline 载荷以 sha256 与字节数绑定；折外预测按 radstudio/prediction-table@1 核对标签、概率与折号语义。血缘里的 features 与 split 引用必须指向本次运行实际消费的产物。相对 1.0.0 只新增信封字段，训练与预测数值不变；契约不解释 preprocess 步骤名的真实语义，也不解析 joblib 载荷内容。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "kernel": {
+          "type": "string",
+          "enum": [
+            "linear",
+            "poly",
+            "rbf",
+            "sigmoid"
+          ]
+        },
+        "gamma": {
+          "type": "string",
+          "enum": [
+            "scale",
+            "auto"
+          ]
+        }
+      },
+      "required": [
+        "C",
+        "kernel",
+        "gamma"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "kernel": "rbf",
+      "gamma": "scale"
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "svm"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:SVMClassifierOperatorV11",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "kernel"
+    ]
+  },
+  {
+    "type": "SVMClassifier",
+    "version": "1.2.0",
+    "name": "支持向量机（折内模型血缘）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@2 逐折核对血缘：fit 不给一份全集训练清单，而是每一折各自声明 trainedImageIds 与该折自己的权重载荷（sha256 与字节数绑定）；折内训练集必须与划分方案该折训练集完全一致（多一个样本也算不一致），折权重不得指向集成载荷、不得共用路径，也不得声明同一份字节，划分方案必须是交叉验证（留出法声明 @2 直接拒绝）。模型家族 svm、任务与维度仍为二分类/表格，predictions 沿用 radstudio/prediction-table@1。集成载荷 pipelines.joblib 与 pipelineArtifact 和 1.1.0 完全一致，读取模型的 ModelApply / Report 不必跟着改版；训练与预测数值不变，代价是每一折另存一份单折载荷。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "C": {
+          "type": "number",
+          "minimum": 1e-06
+        },
+        "kernel": {
+          "type": "string",
+          "enum": [
+            "linear",
+            "poly",
+            "rbf",
+            "sigmoid"
+          ]
+        },
+        "gamma": {
+          "type": "string",
+          "enum": [
+            "scale",
+            "auto"
+          ]
+        }
+      },
+      "required": [
+        "C",
+        "kernel",
+        "gamma"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "C": 1.0,
+      "kernel": "rbf",
+      "gamma": "scale"
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "svm"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:SVMClassifierOperatorV12",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "kernel"
+    ]
+  },
+  {
+    "type": "GradientBoostingClassifier",
+    "version": "1.1.0",
+    "name": "梯度提升树（模型契约声明）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@1 声明并逐条核对：任务与维度固定为二分类/表格、模型家族为 gradient_boosting、特征名与血缘特征表一致、训练影像身份取自交叉验证训练折且逐份带标签、折内 pipeline 载荷以 sha256 与字节数绑定；折外预测按 radstudio/prediction-table@1 核对标签、概率与折号语义。血缘里的 features 与 split 引用必须指向本次运行实际消费的产物。相对 1.0.0 只新增信封字段，训练与预测数值不变；契约不解释 preprocess 步骤名的真实语义，也不解析 joblib 载荷内容。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 1
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "nEstimators",
+        "learningRate",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 100,
+      "learningRate": 0.1,
+      "maxDepth": 3
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "gradient_boosting"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:GradientBoostingClassifierOperatorV11",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "boosting"
+    ]
+  },
+  {
+    "type": "GradientBoostingClassifier",
+    "version": "1.2.0",
+    "name": "梯度提升树（折内模型血缘）",
+    "category": "model",
+    "description": "模型输出按 radstudio/model@2 逐折核对血缘：fit 不给一份全集训练清单，而是每一折各自声明 trainedImageIds 与该折自己的权重载荷（sha256 与字节数绑定）；折内训练集必须与划分方案该折训练集完全一致（多一个样本也算不一致），折权重不得指向集成载荷、不得共用路径，也不得声明同一份字节，划分方案必须是交叉验证（留出法声明 @2 直接拒绝）。模型家族 gradient_boosting、任务与维度仍为二分类/表格，predictions 沿用 radstudio/prediction-table@1。集成载荷 pipelines.joblib 与 pipelineArtifact 和 1.1.0 完全一致，读取模型的 ModelApply / Report 不必跟着改版；训练与预测数值不变，代价是每一折另存一份单折载荷。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nEstimators": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 1000
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 0.001,
+          "maximum": 1
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "nEstimators",
+        "learningRate",
+        "maxDepth"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nEstimators": 100,
+      "learningRate": 0.1,
+      "maxDepth": 3
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      },
+      {
+        "name": "strategy",
+        "type": "filter_strategy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular",
+          "modelFamily": "gradient_boosting"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "contract": {
+          "id": "radstudio/prediction-table",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "entrypoint": "radstudio.operators_radiomics:GradientBoostingClassifierOperatorV12",
+    "tags": [
+      "tabular-model",
+      "classification",
+      "cv",
+      "binary",
+      "ensemble",
+      "boosting"
+    ]
+  },
+  {
+    "type": "ModelApply",
+    "version": "1.1.0",
+    "name": "模型外部应用（折内模型血缘）",
+    "category": "results",
+    "description": "model 输入按 radstudio/model@2 声明血缘闸门：只有逐折血缘的分类器（LogisticRegression / RandomForestClassifier / SVMClassifier / GradientBoostingClassifier 的 1.2.0）产出接得上，同一批分类器的 1.0.0（无信封）与 1.1.0（整包血缘）以及深度学习模型在建图阶段即被判不兼容；需要沿用它们请把节点钉回 ModelApply 1.0.0。端口、参数与 predictions 产出和 1.0.0 完全一致——本算子读的是 pipelineArtifact 指向的折集成 pipelines.joblib 与 featureNames，这两个键在 @1 与 @2 同一位置，应用与预测数值不因改版而变。不声明 modelFamily：外部验证集该接受任一分类器，写上家族就成了只认逻辑回归的应用节点。predictions 保持不绑契约：产出内容在生产端已校验，这里补声明只会给已在运行的工作流新增违规。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {},
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true,
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:ModelApplyOperatorV11",
+    "tags": [
+      "tabular-model",
+      "inference",
+      "external-validation"
+    ]
+  },
+  {
+    "type": "Report",
+    "version": "1.2.0",
+    "name": "论文报告（折内模型血缘）",
+    "category": "results",
+    "description": "model 输入按 radstudio/model@2 声明血缘闸门，端口、参数与三项产出和 1.1.0 完全一致：论文报告只把收到的模型信封原样印进正文的 Model 段落，不读取其中任何键，因此这一版加的是声明闸门，报告内容逐字节不变。model 仍是选填——只连 metrics 的报告照旧通过校验，真接上模型才判血缘，要在报告里出模型档案就得把分类器升到 1.2.0；历史工作流可把该节点钉回 1.0.0 或 1.1.0 绕开闸门。不声明 modelFamily：报告该接受任一分类器，写上家族就成了只认逻辑回归的报告。注意本版沿用论文报告的端口集合，与 1.0.0 的经典报告不同（没有 features 输入，也没有 reproduction 产出），换版本前先看端口与参数差异。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "en",
+            "zh"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "title": "",
+      "language": "en"
+    },
+    "inputs": [
+      {
+        "name": "metrics",
+        "type": "metrics",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "2",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      },
+      {
+        "name": "report",
+        "type": "report"
+      },
+      {
+        "name": "figures",
+        "type": "figure_bundle"
+      },
+      {
+        "name": "captions",
+        "type": "report"
+      },
+      {
+        "name": "decisionCurve",
+        "type": "chart"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "report",
+        "type": "report"
+      },
+      {
+        "name": "summary",
+        "type": "report"
+      },
+      {
+        "name": "checklist",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_figures:ReportOperatorV12",
+    "tags": [
+      "report",
+      "publication",
+      "reproducibility",
+      "manifest"
+    ]
+  },
+  {
+    "type": "DLCNNTraining",
+    "version": "1.1.0",
+    "name": "CNN 训练（影像模型血缘）",
+    "category": "model",
+    "description": "model 产出按 radstudio/model@3 声明逐折影像血缘：family 记录骨干、fit.features 指向划分的来源特征表、fit.split 指向划分本身、fit.folds 逐折列出训练影像 ID 与训练/测试计数，weights 记录合并 checkpoint 的路径、摘要与字节数；split 输入同时按 radstudio/split-plan@1 声明源绑定划分，因此只有携带来源特征表引用的 DataSplit / HoldoutSplit 1.2.0 产出接得上。参数、predictions 产出与 1.0.0 完全一致——训练口径不因改版而变。DLCNNInference 1.2.0 是配套消费端；已发布的 1.0.0 行保持未绑定，历史工作流继续按钉版运行。holdout 划分能通过声明校验，但 @3 内容校验只认逐折交叉验证，CNN 训练仍须 CV 划分。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "backbone": {
+          "type": "string",
+          "enum": [
+            "resnet18",
+            "resnet34",
+            "resnet50",
+            "efficientnet_b0",
+            "densenet121"
+          ]
+        },
+        "pretrained": {
+          "type": "boolean"
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 1
+        },
+        "earlyStopping": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "imageSize": {
+          "type": "integer",
+          "enum": [
+            64,
+            128,
+            224
+          ]
+        },
+        "augmentation": {
+          "type": "string",
+          "title": "医学影像增强",
+          "description": "MONAI 增强预设：none 保持原行为；light/standard 逐样本随机翻转、旋转、缩放、噪声",
+          "enum": [
+            "none",
+            "light",
+            "standard"
+          ]
+        },
+        "loss": {
+          "type": "string",
+          "title": "损失函数",
+          "description": "bce 为二分类交叉熵；focal 使用 MONAI FocalLoss，缓解类别不平衡",
+          "enum": [
+            "bce",
+            "focal"
+          ]
+        },
+        "focalGamma": {
+          "type": "number",
+          "title": "FocalLoss gamma",
+          "minimum": 0.1,
+          "maximum": 10
+        },
+        "balanceClasses": {
+          "type": "boolean",
+          "title": "BCE 类别平衡",
+          "description": "按训练折正负样本比例设置 pos_weight；仅 loss=bce 时生效"
+        }
+      },
+      "required": [
+        "backbone",
+        "pretrained",
+        "epochs",
+        "batchSize",
+        "learningRate",
+        "earlyStopping",
+        "imageSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "backbone": "resnet18",
+      "pretrained": true,
+      "epochs": 5,
+      "batchSize": 16,
+      "learningRate": 0.001,
+      "earlyStopping": 3,
+      "imageSize": 64,
+      "augmentation": "none",
+      "loss": "bce",
+      "focalGamma": 2,
+      "balanceClasses": false
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true,
+        "contract": {
+          "id": "radstudio/split-plan",
+          "version": "1",
+          "task": "binary_classification",
+          "dimension": "tabular"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "contract": {
+          "id": "radstudio/model",
+          "version": "3",
+          "task": "binary_classification",
+          "dimension": "2d"
+        }
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNTraining",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 8192,
+      "gpu": 1,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "training",
+      "classification",
+      "deep-learning"
+    ]
+  },
+  {
+    "type": "DLCNNTraining",
+    "version": "1.2.0",
+    "name": "CNN 训练（固定划分 + 多分类）",
+    "category": "model",
+    "description": "两个新增能力共用这次改版：classMode=multiclass 时损失切交叉熵、分类头输出 numClasses 维，predictions 的 probability 改为 probabilities + predictedClass，metrics 给出 macro/weighted AUC、宏 F1、混淆矩阵与逐类指标；划分自带 validationIds 时用它做早停验证集（官方验证集），缺失才退回折内患者分组留出 20%——测试集因此不参与任何选择。backbone 增加 inception_v3（预训练时同步改写 AuxLogits 并关闭辅助头前向）。split 输入不绑契约：固定划分按样本集切分、不携带来源特征表。model 输出回到不绑契约的清单（与 1.0.0 一致）：model@3 影像血缘要求划分带来源特征表，固定划分无从核对；需要血缘闸门的随机交叉验证流程继续钉 1.1.0。二分类且未传新参数时产物与 1.0.0 一致。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "backbone": {
+          "type": "string",
+          "enum": [
+            "resnet18",
+            "resnet34",
+            "resnet50",
+            "efficientnet_b0",
+            "densenet121",
+            "inception_v3"
+          ]
+        },
+        "pretrained": {
+          "type": "boolean"
+        },
+        "classMode": {
+          "type": "string",
+          "title": "分类口径",
+          "description": "binary 输出单 logit；multiclass 输出 numClasses 维 logits",
+          "enum": [
+            "binary",
+            "multiclass"
+          ]
+        },
+        "numClasses": {
+          "type": "integer",
+          "title": "类别数",
+          "description": "classMode=multiclass 时必填，标签须为 0..numClasses-1",
+          "minimum": 2,
+          "maximum": 32
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 1
+        },
+        "earlyStopping": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "imageSize": {
+          "type": "integer",
+          "enum": [
+            64,
+            128,
+            224
+          ]
+        },
+        "augmentation": {
+          "type": "string",
+          "title": "医学影像增强",
+          "description": "MONAI 增强预设：none 保持原行为；light/standard 逐样本随机翻转、旋转、缩放、噪声",
+          "enum": [
+            "none",
+            "light",
+            "standard"
+          ]
+        },
+        "loss": {
+          "type": "string",
+          "title": "损失函数",
+          "description": "bce 为二分类交叉熵；focal 使用 MONAI FocalLoss；多分类固定交叉熵",
+          "enum": [
+            "bce",
+            "focal"
+          ]
+        },
+        "focalGamma": {
+          "type": "number",
+          "title": "FocalLoss gamma",
+          "minimum": 0.1,
+          "maximum": 10
+        },
+        "balanceClasses": {
+          "type": "boolean",
+          "title": "类别平衡",
+          "description": "二分类按正负比例设置 pos_weight；多分类按逆频率设置交叉熵类别权重"
+        }
+      },
+      "required": [
+        "backbone",
+        "pretrained",
+        "epochs",
+        "batchSize",
+        "learningRate",
+        "earlyStopping",
+        "imageSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "backbone": "resnet18",
+      "pretrained": true,
+      "classMode": "binary",
+      "numClasses": 3,
+      "epochs": 5,
+      "batchSize": 16,
+      "learningRate": 0.001,
+      "earlyStopping": 3,
+      "imageSize": 64,
+      "augmentation": "none",
+      "loss": "bce",
+      "focalGamma": 2,
+      "balanceClasses": false
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "model"
+      },
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNTrainingOperatorV12",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 8192,
+      "gpu": 1,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "training",
+      "classification",
+      "deep-learning"
+    ]
+  },
+  {
+    "type": "DLCNNInference",
+    "version": "1.2.0",
+    "name": "CNN 推理（影像模型血缘）",
+    "category": "results",
+    "description": "model 输入按 radstudio/model@3 声明影像血缘闸门：只有逐折影像血缘的 CNN 训练产出（DLCNNTraining 1.1.0）接得上，DLCNNTraining 1.0.0 的无信封产出与表格分类器的 @1/@2 产出在建图阶段即被判不兼容；需要沿用它们请把节点钉回 1.1.0。端口、参数（batchSize / evaluationRole）与 predictions 产出和 1.1.0 完全一致——推理仍按信封里的 checkpointArtifact 读 checkpoint，不因加声明而改口径。不声明 modelFamily：骨干由 checkpoint 自带，推理端该接受任一 CNN 骨干。predictions 保持不绑契约：产出内容在生产端已校验，这里补声明只会给已在运行的工作流新增违规。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "evaluationRole": {
+          "type": "string",
+          "title": "预测角色",
+          "description": "inference 新数据推理；external 外部验证；validation 内部留出验证",
+          "enum": [
+            "inference",
+            "external",
+            "validation"
+          ]
+        }
+      },
+      "required": [
+        "batchSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "batchSize": 32,
+      "evaluationRole": "inference"
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true,
+        "contract": {
+          "id": "radstudio/model",
+          "version": "3",
+          "task": "binary_classification",
+          "dimension": "2d"
+        }
+      },
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNInference",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "inference",
+      "classification"
+    ]
+  },
+  {
+    "type": "DLCNNInference",
+    "version": "1.3.0",
+    "name": "CNN 推理（多分类）",
+    "category": "results",
+    "description": "checkpoint 带 classMode=multiclass 时按 numClasses 维 softmax 输出 probabilities + predictedClass，metrics 给出 macro/weighted AUC、宏 F1 与混淆矩阵；二分类 checkpoint 仍输出 probability，口径与 1.1.0 完全一致。model 输入不绑契约：接收 DLCNNTraining 1.2.0 固定划分产出的模型清单（该清单没有 model@3 影像血缘）；需要 model@3 闸门的流程继续钉 1.2.0。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "evaluationRole": {
+          "type": "string",
+          "title": "预测角色",
+          "description": "inference 新数据推理；external 外部验证；validation 内部留出验证",
+          "enum": [
+            "inference",
+            "external",
+            "validation"
+          ]
+        }
+      },
+      "required": [
+        "batchSize"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "batchSize": 32,
+      "evaluationRole": "inference"
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      },
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:DLCNNInferenceOperatorV13",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "inference",
+      "classification"
+    ]
+  },
+  {
+    "type": "ScQualityControl",
+    "version": "1.0.3",
+    "name": "单细胞质量控制",
+    "category": "single-cell",
+    "description": "计算每细胞基因数、计数总数与线粒体基因占比（基因名 MT-/mt- 前缀识别），按阈值过滤低质量细胞（minGenes）、高线粒体占比细胞（maxMitoPercent）与低表达基因（minCells）。excludeFailed=false 时只计算并标注 QC 指标（obs.sc_qc_pass）不移除细胞。报告保留过滤前后细胞/基因数与各阈值剔除计数，过滤后无剩余细胞时拒绝。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "minGenes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minCells": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxMitoPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "excludeFailed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "minGenes",
+        "minCells",
+        "maxMitoPercent",
+        "excludeFailed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "minGenes": 200,
+      "minCells": 3,
+      "maxMitoPercent": 20.0,
+      "excludeFailed": true
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScQualityControlOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "qc",
+      "filter"
+    ]
+  },
+  {
+    "type": "ScQualityControl",
+    "version": "1.0.4",
+    "name": "单细胞质量控制（含基因数上限）",
+    "category": "single-cell",
+    "description": "计算每细胞基因数、计数总数与线粒体基因占比（按 var_names 的 MT-/mt- 基因符号前缀识别），按阈值过滤低质量细胞：minGenes 下限、maxGenes 上限（0 表示不启用）、maxMitoPercent 线粒体占比上限，以及低表达基因（minCells）。excludeFailed=false 时只计算并标注 QC 指标（obs.sc_qc_pass）不移除细胞。报告保留过滤前后细胞/基因数与各阈值剔除计数，过滤后无剩余细胞时拒绝。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "minGenes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxGenes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000,
+          "default": 0
+        },
+        "minCells": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxMitoPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "excludeFailed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "minGenes",
+        "maxGenes",
+        "minCells",
+        "maxMitoPercent",
+        "excludeFailed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "minGenes": 200,
+      "maxGenes": 0,
+      "minCells": 3,
+      "maxMitoPercent": 20.0,
+      "excludeFailed": true
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScQualityControlOperatorV104",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "qc",
+      "filter"
+    ]
+  },
+  {
+    "type": "ScNormalize",
+    "version": "1.0.3",
+    "name": "单细胞归一化",
+    "category": "single-cell",
+    "description": "文库深度归一到统一总量（targetSum，默认 1e4）并做 log1p 变换，随后按 seurat/cell_ranger flavor 标注高变基因（hvgCount，0 跳过）。高变基因以 var.highly_variable 标注，不子集化基因矩阵，下游降维自动收敛到高变子集。输入应为 QC 后的 Anndata。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "targetSum": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "log1p": {
+          "type": "boolean"
+        },
+        "hvgCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "flavor": {
+          "type": "string",
+          "enum": [
+            "seurat",
+            "cell_ranger"
+          ]
+        }
+      },
+      "required": [
+        "targetSum",
+        "log1p",
+        "hvgCount",
+        "flavor"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "targetSum": 10000.0,
+      "log1p": true,
+      "hvgCount": 2000,
+      "flavor": "seurat"
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScNormalizeOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "normalization",
+      "hvg"
+    ]
+  },
+  {
+    "type": "ScDimReduction",
+    "version": "1.0.3",
+    "name": "单细胞降维",
+    "category": "single-cell",
+    "description": "PCA 主成分分析（存在高变基因标注时自动收敛到高变子集）→ k 近邻邻接图 → UMAP 或 t-SNE 二维嵌入。输出嵌入坐标 CSV（cellId/dim1/dim2，附带 library/patientId 元数据列）、嵌入散点图 PNG 与降维报告；固定随机种子保证可复现。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "nComps": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "embedding": {
+          "type": "string",
+          "enum": [
+            "umap",
+            "tsne"
+          ]
+        },
+        "neighborsK": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "nComps",
+        "embedding",
+        "neighborsK"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "nComps": 50,
+      "embedding": "umap",
+      "neighborsK": 15
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "embedding",
+        "type": "table"
+      },
+      {
+        "name": "plot",
+        "type": "image"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScDimReductionOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "pca",
+      "umap",
+      "tsne",
+      "dim-reduction"
+    ]
+  },
+  {
+    "type": "ScClustering",
+    "version": "1.0.3",
+    "name": "单细胞聚类",
+    "category": "single-cell",
+    "description": "Leiden 社区检测（igraph flavor、无向图、固定随机种子）：在邻接图上按 resolution 划分社区，结果写入 obs.cluster。邻接图缺失时自动回退执行 PCA + k 近邻。输出聚类归属 CSV（cellId/cluster，附带 library/patientId）与聚类报告（簇数与各簇规模）。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "flavor": {
+          "type": "string",
+          "enum": [
+            "leiden"
+          ]
+        }
+      },
+      "required": [
+        "resolution",
+        "flavor"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "resolution": 1.0,
+      "flavor": "leiden"
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "cluster_assignments",
+        "type": "table"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScClusteringOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "leiden",
+      "clustering"
+    ]
+  },
+  {
+    "type": "ScClustering",
+    "version": "1.0.4",
+    "name": "单细胞聚类（可配置随机种子）",
+    "category": "single-cell",
+    "description": "Leiden 社区检测（igraph flavor、无向图）：在邻接图上按 resolution 划分社区，结果写入 obs.cluster；在 1.0.3 基础上增加 seed（默认 42，uint32 范围），用于不同随机种子的聚类稳定性扫描。邻接图缺失时自动回退执行 PCA + k 近邻。输出聚类归属 CSV（cellId/cluster，附带 library/patientId）与聚类报告（簇数、各簇规模与 seed）。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "flavor": {
+          "type": "string",
+          "enum": [
+            "leiden"
+          ]
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "default": 42
+        }
+      },
+      "required": [
+        "resolution",
+        "flavor",
+        "seed"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "resolution": 1.0,
+      "flavor": "leiden",
+      "seed": 42
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "cluster_assignments",
+        "type": "table"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScClusteringOperatorV104",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "leiden",
+      "clustering",
+      "stability"
+    ]
+  },
+  {
+    "type": "ScDifferentialExpression",
+    "version": "1.0.3",
+    "name": "单细胞差异表达",
+    "category": "single-cell",
+    "description": "按分组列（默认聚类结果 obs.cluster，可绑定自定义 obs 列）逐组做基因排名（wilcoxon 或 t-test），输出每组 topN 差异基因 CSV（score/logFoldChange/pValue/pAdj）、marker 点图 PNG（点大小=表达细胞占比、颜色=平均表达）与逐组 top 基因摘要（可接 Report）。输入应为 log1p 归一化且含分组列的 Anndata。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "groupby": {
+          "type": "string"
+        },
+        "topN": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "wilcoxon",
+            "t-test"
+          ]
+        }
+      },
+      "required": [
+        "groupby",
+        "topN",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "groupby": "cluster",
+      "topN": 20,
+      "method": "wilcoxon"
+    },
+    "inputs": [
+      {
+        "name": "adata",
+        "type": "adata",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "markers",
+        "type": "table"
+      },
+      {
+        "name": "dot_plot",
+        "type": "image"
+      },
+      {
+        "name": "summary",
+        "type": "metrics"
+      }
+    ],
+    "entrypoint": "radstudio.operators_sc:ScDifferentialExpressionOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 0,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "single-cell",
+      "deg",
+      "wilcoxon",
+      "marker"
+    ]
+  },
+  {
+    "type": "FixedSplit",
+    "version": "1.0.0",
+    "name": "固定划分（官方 train/val/test）",
+    "category": "data",
+    "description": "按样本字段的取值切分数据集自带的官方划分，输出单折（fold=0）的训练/验证/测试 ID，供论文复现沿用原始评估协议：不做随机重排，seed 记为 null，不产生交叉验证折。三类取值必须互不相交且 train/test 非空；任何样本的取值没有被覆盖就报错并列出样本，禁止静默丢弃。输出不绑 radstudio/split-plan@1：该契约要求 source 指向特征表并按特征表身份摘要校验，而固定划分的来源是样本集，没有特征表可引用；identityHash 复用样本身份摘要，下游 DLCNNTraining 1.2.0 据此核对，并可用 validationIds 做早停而不污染测试集。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "partitionField": {
+          "type": "string",
+          "title": "划分列",
+          "description": "样本字段名，其取值决定样本落在哪个分区（如官方拆分目录）"
+        },
+        "trainValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "训练集取值"
+        },
+        "validationValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "验证集取值"
+        },
+        "testValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "测试集取值"
+        }
+      },
+      "required": [
+        "partitionField",
+        "trainValues",
+        "testValues"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "partitionField": "",
+      "trainValues": [],
+      "validationValues": [],
+      "testValues": []
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "split",
+        "type": "split_plan"
+      }
+    ],
+    "entrypoint": "radstudio.operators_builtin:FixedSplitOperator",
+    "resourceRequirements": {
+      "cpu": 1,
+      "memoryMb": 1024,
+      "timeoutSeconds": 600
+    },
+    "tags": [
+      "image",
+      "2d",
+      "reproduction",
+      "split"
+    ]
+  },
+  {
+    "type": "GradCAM",
+    "version": "1.0.0",
+    "name": "Grad-CAM 热力图归因",
+    "category": "results",
+    "description": "对训练好的 CNN 集成逐折计算 Grad-CAM 并逐像素取平均，避免只展示单折结果造成误导；按集成置信度排序取前 sampleCount 个样本，输出叠加热力图 PNG、索引与报告。热力图说明模型关注区域，是定性证据，不能当作病灶定位准确性的定量指标。二分类可用 targetClass 指定正类/负类，多分类只解释预测类；归因层取骨干最后一个 2D 卷积层。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "sampleCount": {
+          "type": "integer",
+          "title": "出图样本数",
+          "description": "按集成置信度从高到低取前 N 个样本",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "targetClass": {
+          "type": "string",
+          "title": "解释目标",
+          "description": "predicted 解释预测类；positive/negative 只适用于二分类",
+          "enum": [
+            "predicted",
+            "positive",
+            "negative"
+          ]
+        },
+        "alpha": {
+          "type": "number",
+          "title": "叠加透明度",
+          "minimum": 0.2,
+          "maximum": 0.8
+        },
+        "colormap": {
+          "type": "string",
+          "enum": [
+            "jet",
+            "viridis"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "sampleCount": 16,
+      "targetClass": "predicted",
+      "alpha": 0.45,
+      "colormap": "jet"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "heatmaps",
+        "type": "plot_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_dl:GradCAMOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "interp",
+      "gradcam",
+      "heatmap",
+      "explainability"
+    ]
+  },
+  {
+    "type": "SegUNetTraining",
+    "version": "1.0.0",
+    "name": "UNet 分割训练",
+    "category": "model",
+    "description": "MONAI UNet 逐折训练二值分割模型，输出 seg-checkpoint.pt（逐折权重）与逐样本 Dice/IoU 表。split 输入的 identityHash 必须与样本身份摘要一致，且训练折与测试折不得有患者重叠；早停验证集从训练折内按患者分组划出，测试集不参与任何选择。imageSize 训练固定，推理从 checkpoint 读回，避免两侧不一致。检查点格式 radstudio.seg.checkpoint.v1，不属于分类模型，不能接分类推理或报告节点。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "backbone": {
+          "type": "string",
+          "title": "骨干",
+          "description": "当前只提供 unet；unet++/attention_unet 预留",
+          "enum": [
+            "unet"
+          ]
+        },
+        "imageSize": {
+          "type": "integer",
+          "title": "训练尺寸",
+          "description": "影像与掩膜统一缩放到的边长；推理时从 checkpoint 读回同一值",
+          "enum": [
+            64,
+            128,
+            256,
+            512
+          ]
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "batchSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "learningRate": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 1
+        },
+        "earlyStopping": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "loss": {
+          "type": "string",
+          "title": "损失函数",
+          "description": "dice 为 MONAI DiceLoss；bce 为二分类交叉熵；dice_bce 为两者相加",
+          "enum": [
+            "dice",
+            "bce",
+            "dice_bce"
+          ]
+        },
+        "augmentation": {
+          "type": "string",
+          "title": "同步增强",
+          "description": "none 不增强；light 随机翻转；standard 再加 90° 旋转与缩放，影像与掩膜同步变换",
+          "enum": [
+            "none",
+            "light",
+            "standard"
+          ]
+        },
+        "threshold": {
+          "type": "number",
+          "title": "评估阈值",
+          "description": "计算测试折 Dice/IoU 时把概率二值化的阈值",
+          "minimum": 0.1,
+          "maximum": 0.9
+        },
+        "foldIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "title": "训练折",
+          "description": "留空表示训练全部折；指定时只训练所列折"
+        }
+      },
+      "required": [
+        "backbone",
+        "imageSize",
+        "epochs",
+        "batchSize",
+        "learningRate",
+        "earlyStopping"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "backbone": "unet",
+      "imageSize": 128,
+      "epochs": 20,
+      "batchSize": 4,
+      "learningRate": 0.001,
+      "earlyStopping": 3,
+      "loss": "dice_bce",
+      "augmentation": "none",
+      "threshold": 0.5,
+      "foldIndices": []
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "split",
+        "type": "split_plan",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "model",
+        "type": "seg_model"
+      },
+      {
+        "name": "predictions",
+        "type": "seg_prediction_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:SegUNetTrainingOperator",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 8192,
+      "gpu": 1,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "image",
+      "unet",
+      "segmentation",
+      "training",
+      "deep-learning"
+    ]
+  },
+  {
+    "type": "SegUNetInference",
+    "version": "1.0.0",
+    "name": "UNet 分割推理",
+    "category": "results",
+    "description": "逐样本预测：样本落在某个测试折时只用该折模型（OOF），没有覆盖时取未见该样本的折平均，最后按阈值二值化并把掩膜最近邻还原到原图尺寸，避免下游 ROI 校验因形状不符失败。输出 masks/{imageId}.png 与 mask-index.json（样本、患者、文件、前景像素占比、OOF 覆盖数）。imageSize 从 checkpoint 读回，不接受手填。本算子只接收分割模型，接分类模型会因缺少 checkpointArtifact 直接报错。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "title": "二值化阈值",
+          "description": "概率大于等于该值记为前景",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5
+    },
+    "inputs": [
+      {
+        "name": "model",
+        "type": "seg_model",
+        "required": true
+      },
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "masks",
+        "type": "mask_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:SegUNetInferenceOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 4096,
+      "gpu": 1,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "unet",
+      "segmentation",
+      "inference"
+    ]
+  },
+  {
+    "type": "SegMaskApply",
+    "version": "1.0.0",
+    "name": "预测掩膜写回样本",
+    "category": "data",
+    "description": "把预测掩膜写成样本的新 roiPath，让影像组学分支直接复用现有实现。keepOriginalRoi 时把原真值掩膜路径保留到 groundTruthRoiPath，供两阶段对照。掩膜缺失、文件不存在或全空时该样本标记 qcStatus=blocked 与 roiSource=predicted，交给下游质控拦截，不静默当作有效 ROI。输出另附 report 记录 applied/blocked 计数。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "keepOriginalRoi": {
+          "type": "boolean",
+          "title": "保留真值掩膜",
+          "description": "开启时把原 roiPath 写入 groundTruthRoiPath 字段"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "keepOriginalRoi": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "masks",
+        "type": "mask_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:SegMaskApplyOperator",
+    "resourceRequirements": {
+      "cpu": 1,
+      "memoryMb": 1024,
+      "timeoutSeconds": 600
+    },
+    "tags": [
+      "image",
+      "2d",
+      "segmentation",
+      "bridge",
+      "mask"
+    ]
+  },
+  {
+    "type": "SegmentationEvaluation",
+    "version": "1.0.0",
+    "name": "分割质量评估",
+    "category": "results",
+    "description": "逐样本计算预测掩膜对真值掩膜的 Dice、IoU、精确率、召回率与 HD95（2D 欧氏距离、边界点双向 95 分位），汇总给均值/中位数/IQR 与 bootstrap 95% CI。空真值掩膜的样本单独计数并从均值中排除，避免被当成 Dice=0 拉低统计；缺掩膜的样本单独记录。输出报告写明 2D 单层口径，与 3D 体积分割指标不可直接比较。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "title": "评估阈值",
+          "description": "仅记录进报告，掩膜二值化在推理端完成",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "bootstrap": {
+          "type": "integer",
+          "title": "Bootstrap 次数",
+          "description": "95% 置信区间的重采样次数",
+          "minimum": 100,
+          "maximum": 10000
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5,
+      "bootstrap": 1000
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "masks",
+        "type": "mask_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:SegmentationEvaluationOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "segmentation",
+      "metrics",
+      "dice",
+      "iou",
+      "hd95"
+    ]
+  },
+  {
+    "type": "ReadImages",
+    "version": "1.0.0",
+    "name": "二维图片读取",
+    "category": "data",
+    "description": "从数据集合或项目资源目录读取二维图片（PNG/JPEG/TIFF/BMP/NPY）生成 sample_collection：集合按样本表行映射角色，资源目录按文件清单合成样本（主目录名作为 labelValue/patientId，掩膜按 roiNameContains 标记配对）；只做路径映射与声明校验，不修改文件内容。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "imageRole": {
+          "type": "string",
+          "default": "image"
+        },
+        "roiRole": {
+          "type": "string",
+          "default": ""
+        },
+        "requireRoi": {
+          "type": "boolean",
+          "default": false
+        },
+        "patientField": {
+          "type": "string",
+          "default": "patientId"
+        },
+        "roiNameContains": {
+          "type": "string",
+          "default": "",
+          "description": "资源目录模式下用于识别掩膜文件名的共同片段（如 _mask）"
+        },
+        "labelField": {
+          "type": "string",
+          "default": "",
+          "description": "标签所在字段；集合取样本表列，资源目录可用 labelValue（主目录名）"
+        },
+        "positiveValue": {
+          "type": "string",
+          "default": ""
+        },
+        "negativeValue": {
+          "type": "string",
+          "default": ""
+        },
+        "classLabels": {
+          "type": "object",
+          "default": {},
+          "description": "多分类映射（原始值 -> 0..n-1）；设置后忽略 positiveValue/negativeValue"
+        }
+      },
+      "required": [
+        "imageRole",
+        "roiRole",
+        "requireRoi",
+        "patientField"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "imageRole": "image",
+      "roiRole": "",
+      "requireRoi": false,
+      "patientField": "patientId",
+      "roiNameContains": "",
+      "labelField": "",
+      "positiveValue": "",
+      "negativeValue": "",
+      "classLabels": {}
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadImagesOperator",
+    "tags": [
+      "workbench",
+      "reader",
+      "image",
+      "2d"
+    ]
+  },
+  {
+    "type": "ReadTable",
+    "version": "1.0.0",
+    "name": "临床表读取",
+    "category": "data",
+    "description": "从数据集合读取临床表 CSV/TSV：按声明的编码、分隔符、主键列与缺失值解析；重复主键与缺失列显式报错，不静默丢行。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "tableRole": {
+          "type": "string",
+          "default": "table"
+        },
+        "delimiter": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "comma",
+            "tab",
+            "semicolon"
+          ],
+          "default": "auto"
+        },
+        "encoding": {
+          "type": "string",
+          "enum": [
+            "utf-8",
+            "utf-8-sig",
+            "gbk"
+          ],
+          "default": "utf-8"
+        },
+        "primaryKeyField": {
+          "type": "string",
+          "default": ""
+        },
+        "missingValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "",
+            "NA",
+            "N/A",
+            "null"
+          ]
+        },
+        "onDuplicateKey": {
+          "type": "string",
+          "enum": [
+            "error",
+            "keep_first"
+          ],
+          "default": "error"
+        }
+      },
+      "required": [
+        "tableRole",
+        "delimiter",
+        "encoding",
+        "primaryKeyField",
+        "missingValues",
+        "onDuplicateKey"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "tableRole": "table",
+      "delimiter": "auto",
+      "encoding": "utf-8",
+      "primaryKeyField": "",
+      "missingValues": [
+        "",
+        "NA",
+        "N/A",
+        "null"
+      ],
+      "onDuplicateKey": "error"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "records",
+        "type": "table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadTableOperator",
+    "tags": [
+      "workbench",
+      "reader",
+      "table",
+      "clinical"
+    ]
+  },
+  {
+    "type": "ReadSingleCell",
+    "version": "1.0.0",
+    "name": "单细胞文库读取",
+    "category": "data",
+    "description": "从数据集合读取单细胞文库（10x MEX 三件套或 H5AD）并拼接为 AnnData：文库分组、矩阵方向与维度一致性显式校验；缺件与维度错误定位到样本行和文件角色。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "sourceFormat": {
+          "type": "string",
+          "enum": [
+            "10x_mex",
+            "h5ad"
+          ]
+        },
+        "matrixRole": {
+          "type": "string",
+          "default": "matrix"
+        },
+        "barcodesRole": {
+          "type": "string",
+          "default": "barcodes"
+        },
+        "featuresRole": {
+          "type": "string",
+          "default": "features"
+        },
+        "layerSource": {
+          "type": "string",
+          "enum": [
+            "X",
+            "raw",
+            "layer"
+          ],
+          "default": "X"
+        },
+        "layerName": {
+          "type": "string",
+          "default": ""
+        },
+        "maxCellsPerLibrary": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 50000
+        }
+      },
+      "required": [
+        "sourceFormat",
+        "matrixRole",
+        "barcodesRole",
+        "featuresRole",
+        "layerSource",
+        "layerName",
+        "maxCellsPerLibrary"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "sourceFormat": "10x_mex",
+      "matrixRole": "matrix",
+      "barcodesRole": "barcodes",
+      "featuresRole": "features",
+      "layerSource": "X",
+      "layerName": "",
+      "maxCellsPerLibrary": 50000
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "qc_summary",
+        "type": "metrics"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadSingleCellOperator",
+    "tags": [
+      "workbench",
+      "reader",
+      "single-cell",
+      "10x",
+      "h5ad"
+    ]
+  },
+  {
+    "type": "ReadSingleCell",
+    "version": "1.1.0",
+    "name": "单细胞文库读取（基因符号）",
+    "category": "data",
+    "description": "从数据集合读取单细胞文库（10x MEX 三件套或 H5AD）并拼接为 AnnData：10x MEX 的 var_names 使用 genes/features.tsv 第二列基因符号，Ensembl ID 存入 var.gene_ids；文库分组、矩阵方向与维度一致性显式校验；缺件与维度错误定位到样本行和文件角色。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "sourceFormat": {
+          "type": "string",
+          "enum": [
+            "10x_mex",
+            "h5ad"
+          ]
+        },
+        "matrixRole": {
+          "type": "string",
+          "default": "matrix"
+        },
+        "barcodesRole": {
+          "type": "string",
+          "default": "barcodes"
+        },
+        "featuresRole": {
+          "type": "string",
+          "default": "features"
+        },
+        "layerSource": {
+          "type": "string",
+          "enum": [
+            "X",
+            "raw",
+            "layer"
+          ],
+          "default": "X"
+        },
+        "layerName": {
+          "type": "string",
+          "default": ""
+        },
+        "maxCellsPerLibrary": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 50000
+        }
+      },
+      "required": [
+        "sourceFormat",
+        "matrixRole",
+        "barcodesRole",
+        "featuresRole",
+        "layerSource",
+        "layerName",
+        "maxCellsPerLibrary"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "sourceFormat": "10x_mex",
+      "matrixRole": "matrix",
+      "barcodesRole": "barcodes",
+      "featuresRole": "features",
+      "layerSource": "X",
+      "layerName": "",
+      "maxCellsPerLibrary": 50000
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "adata",
+        "type": "adata"
+      },
+      {
+        "name": "qc_summary",
+        "type": "metrics"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadSingleCellOperatorV11",
+    "tags": [
+      "workbench",
+      "reader",
+      "single-cell",
+      "10x",
+      "h5ad"
+    ]
+  },
+  {
+    "type": "ReadDicom",
+    "version": "1.0.0",
+    "name": "DICOM 序列读取",
+    "category": "data",
+    "description": "从数据集合读取 DICOM 切片序列生成 volume_collection：按显式序列分组规则校验混序列、缺片、切片顺序与空间几何（行/列、层间距、方向）；缺片策略与排序规则必须显式声明，不静默丢行。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "dicomRole": {
+          "type": "string",
+          "default": "dicom"
+        },
+        "seriesGrouping": {
+          "type": "string",
+          "enum": [
+            "series_instance_uid",
+            "study_instance_uid"
+          ],
+          "default": "series_instance_uid"
+        },
+        "requireSingleSeries": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortBy": {
+          "type": "string",
+          "enum": [
+            "image_position",
+            "instance_number"
+          ],
+          "default": "image_position"
+        },
+        "onMissingSlices": {
+          "type": "string",
+          "enum": [
+            "error",
+            "report"
+          ],
+          "default": "error"
+        },
+        "maxSlicesPerSeries": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2000,
+          "default": 500
+        },
+        "patientField": {
+          "type": "string",
+          "default": "patientId"
+        }
+      },
+      "required": [
+        "dicomRole",
+        "seriesGrouping",
+        "requireSingleSeries",
+        "sortBy",
+        "onMissingSlices",
+        "maxSlicesPerSeries",
+        "patientField"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "dicomRole": "dicom",
+      "seriesGrouping": "series_instance_uid",
+      "requireSingleSeries": true,
+      "sortBy": "image_position",
+      "onMissingSlices": "error",
+      "maxSlicesPerSeries": 500,
+      "patientField": "patientId"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadDicomOperator",
+    "tags": [
+      "workbench",
+      "reader",
+      "dicom",
+      "3d",
+      "volume"
+    ]
+  },
+  {
+    "type": "ReadNifti",
+    "version": "1.0.0",
+    "name": "NIfTI 读取",
+    "category": "data",
+    "description": "从数据集合读取 NIfTI（.nii/.nii.gz）生成 volume_collection：显式声明是否允许四维与选取体积序号；维度、空间方向与数据范围校验失败即报错。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "niftiRole": {
+          "type": "string",
+          "default": "nifti"
+        },
+        "allow4D": {
+          "type": "boolean",
+          "default": false
+        },
+        "volumeIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "patientField": {
+          "type": "string",
+          "default": "patientId"
+        }
+      },
+      "required": [
+        "niftiRole",
+        "allow4D",
+        "volumeIndex",
+        "patientField"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "niftiRole": "nifti",
+      "allow4D": false,
+      "volumeIndex": 0,
+      "patientField": "patientId"
+    },
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_readers:ReadNiftiOperator",
+    "tags": [
+      "workbench",
+      "reader",
+      "nifti",
+      "3d",
+      "volume"
+    ]
+  },
+  {
+    "type": "VolumeConversion",
+    "version": "1.0.0",
+    "name": "体数据转换",
+    "category": "data",
+    "description": "对 volume_collection 显式转换数值类型与缩放方式；不做隐式重采样，输出记录转换参数，几何信息保持不变。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "enum": [
+            "float32",
+            "int16",
+            "uint8"
+          ],
+          "default": "float32"
+        },
+        "scaling": {
+          "type": "string",
+          "enum": [
+            "none",
+            "minmax",
+            "zscore"
+          ],
+          "default": "none"
+        }
+      },
+      "required": [
+        "targetType",
+        "scaling"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "targetType": "float32",
+      "scaling": "none"
+    },
+    "inputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_volumes:VolumeConversionOperator",
+    "tags": [
+      "volume",
+      "conversion",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "VolumeFilter",
+    "version": "1.0.0",
+    "name": "体数据筛选",
+    "category": "data",
+    "description": "按切片数、模态与掩膜存在性筛选 volume_collection；被排除的样本必须写入诊断清单，onExcluded=error 时直接失败，不静默丢行。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "minSlices": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "maxSlices": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "modalities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "requireMask": {
+          "type": "boolean",
+          "default": false
+        },
+        "onExcluded": {
+          "type": "string",
+          "enum": [
+            "error",
+            "report"
+          ],
+          "default": "error"
+        }
+      },
+      "required": [
+        "minSlices",
+        "maxSlices",
+        "modalities",
+        "requireMask",
+        "onExcluded"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "minSlices": 0,
+      "maxSlices": 0,
+      "modalities": [],
+      "requireMask": false,
+      "onExcluded": "error"
+    },
+    "inputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_volumes:VolumeFilterOperator",
+    "tags": [
+      "volume",
+      "filter",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "VolumeMerge",
+    "version": "1.0.0",
+    "name": "体数据合并",
+    "category": "data",
+    "description": "合并多个 volume_collection；重复 sampleId 必须按 onDuplicateSampleId 显式处理并记录，禁止静默覆盖。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "onDuplicateSampleId": {
+          "type": "string",
+          "enum": [
+            "error",
+            "keep_first"
+          ],
+          "default": "error"
+        },
+        "requireSameGeometry": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "onDuplicateSampleId",
+        "requireSameGeometry"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "onDuplicateSampleId": "error",
+      "requireSameGeometry": false
+    },
+    "inputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection",
+        "required": true,
+        "cardinality": "many"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_volumes:VolumeMergeOperator",
+    "tags": [
+      "volume",
+      "merge",
+      "cohort"
+    ]
+  },
+  {
+    "type": "PairMasks",
+    "version": "1.0.0",
+    "name": "影像掩膜配对",
+    "category": "data",
+    "description": "按稳定主键配对影像与掩膜体数据；几何校验比较尺寸、层间距、原点与方向，不只比较数组大小；缺掩膜与多余掩膜必须按显式策略报告。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "pairBy": {
+          "type": "string",
+          "enum": [
+            "sampleId",
+            "patientId"
+          ],
+          "default": "sampleId"
+        },
+        "requireGeometryMatch": {
+          "type": "boolean",
+          "default": true
+        },
+        "geometryTolerance": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0.01
+        },
+        "onMissingMask": {
+          "type": "string",
+          "enum": [
+            "error",
+            "report"
+          ],
+          "default": "error"
+        },
+        "onExtraMask": {
+          "type": "string",
+          "enum": [
+            "error",
+            "ignore_report"
+          ],
+          "default": "ignore_report"
+        }
+      },
+      "required": [
+        "pairBy",
+        "requireGeometryMatch",
+        "geometryTolerance",
+        "onMissingMask",
+        "onExtraMask"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "pairBy": "sampleId",
+      "requireGeometryMatch": true,
+      "geometryTolerance": 0.01,
+      "onMissingMask": "error",
+      "onExtraMask": "ignore_report"
+    },
+    "inputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection",
+        "required": true
+      },
+      {
+        "name": "masks",
+        "type": "volume_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_volumes:PairMasksOperator",
+    "tags": [
+      "volume",
+      "mask",
+      "pairing",
+      "geometry"
+    ]
+  },
+  {
+    "type": "LabelAssociation",
+    "version": "1.0.0",
+    "name": "标签关联",
+    "category": "data",
+    "description": "按稳定主键把临床表标签关联到 volume_collection；重复主键、缺失标签与未命中行均按显式策略处理并记录，禁止静默丢行。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "volumeKeyField": {
+          "type": "string",
+          "default": "patientId"
+        },
+        "tableKeyField": {
+          "type": "string",
+          "default": "patientId"
+        },
+        "labelField": {
+          "type": "string",
+          "default": "label"
+        },
+        "onDuplicateKey": {
+          "type": "string",
+          "enum": [
+            "error",
+            "keep_first"
+          ],
+          "default": "error"
+        },
+        "onMissingLabel": {
+          "type": "string",
+          "enum": [
+            "error",
+            "report"
+          ],
+          "default": "error"
+        },
+        "onUnmatchedRow": {
+          "type": "string",
+          "enum": [
+            "error",
+            "report"
+          ],
+          "default": "error"
+        }
+      },
+      "required": [
+        "volumeKeyField",
+        "tableKeyField",
+        "labelField",
+        "onDuplicateKey",
+        "onMissingLabel",
+        "onUnmatchedRow"
+      ],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "volumeKeyField": "patientId",
+      "tableKeyField": "patientId",
+      "labelField": "label",
+      "onDuplicateKey": "error",
+      "onMissingLabel": "error",
+      "onUnmatchedRow": "error"
+    },
+    "inputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "volumes",
+        "type": "volume_collection"
+      }
+    ],
+    "entrypoint": "radstudio.operators_volumes:LabelAssociationOperator",
+    "tags": [
+      "volume",
+      "table",
+      "label",
+      "join"
+    ]
+  },
+  {
+    "type": "PerceptualHashDedup",
+    "version": "1.0.0",
+    "name": "感知哈希近重复去重",
+    "category": "data",
+    "description": "对样本库内（可跨数据集）的影像自实现感知哈希：灰度化后缩放到 32×32，做二维 DCT 取左上 hashSize×hashSize 系数、丢弃直流项并按中位数二值化，得到对亮度与压缩不敏感的位串。以汉明距离不超过 maxDistance 判定近重复，用并查集聚簇，只保留输入顺序中的第一张代表样本（追加 perceptualHash 与 dedupClusterId 字段）；报告给出输入/保留/近重复计数、簇内成员、簇内最大距离与涉及的数据集，并按代表样本所在数据集区分库内重复与跨库重复。imagePath 缺失或读图失败的样本原样保留并列入报告 unreadable，不中断整库去重；空输入返回空样本集与全零报告。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "hashSize": {
+          "type": "integer",
+          "title": "哈希边长",
+          "description": "DCT 低频系数块边长，位串长度为 hashSize²-1；8 约等于标准 pHash 口径且对噪声最稳，越大区分力越强但对高频差异越敏感",
+          "minimum": 4,
+          "maximum": 32,
+          "default": 8
+        },
+        "maxDistance": {
+          "type": "integer",
+          "title": "近重复汉明距离阈值",
+          "description": "两张影像感知哈希的汉明距离不超过该值即判为近重复并合入同一簇",
+          "minimum": 0,
+          "maximum": 64,
+          "default": 6
+        },
+        "crossDataset": {
+          "type": "boolean",
+          "title": "启用跨数据集比对",
+          "description": "开启时不同 datasetId 的样本也互相比较；关闭时只在同一 datasetId 内比较，datasetId 缺失视为同一数据集",
+          "default": true
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "hashSize": 8,
+      "maxDistance": 6,
+      "crossDataset": true
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_prep:PerceptualHashDedupOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "2d",
+      "dedup",
+      "perceptual-hash",
+      "quality"
+    ]
+  },
+  {
+    "type": "ROICrop",
+    "version": "1.0.0",
+    "name": "ROI 区域裁剪",
+    "category": "data",
+    "description": "按样本掩膜的前景包围盒裁剪影像与 ROI：以 bbox 长边乘 margin 作为四边统一外扩量，外扩后的裁剪框夹回图像边界；裁剪边长小于 minSize 时以 bbox 中心扩到 minSize，图像本身更小时取全图，保证裁剪框永远落在图像内。裁剪结果写成 crops/{imageId}-image.png 与 crops/{imageId}-roi.png，样本的 imagePath/roiPath 指向裁剪文件，原路径保留到 originalImagePath/originalRoiPath 并记录 cropBox 与 cropStatus=cropped。无 roiPath、ROI 文件不存在或掩膜全空时该样本标记 qcStatus=blocked、cropStatus=missing_roi 或 empty_roi，保留原路径且不写裁剪文件；报告给出裁剪/阻断计数、阻断原因与全部裁剪框，便于「全图 vs ROI」对照实验。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "margin": {
+          "type": "number",
+          "title": "外扩比例",
+          "description": "按 bbox 长边计算的外扩比例，四边各外扩 margin×长边 像素；0 表示紧贴 bbox",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.2
+        },
+        "minSize": {
+          "type": "integer",
+          "title": "裁剪框最小边长",
+          "description": "裁剪框任一边小于该值时以 bbox 中心扩到该边长（仍限制在图像内，图像更小则取全图）",
+          "minimum": 2,
+          "maximum": 64,
+          "default": 4
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "margin": 0.2,
+      "minSize": 4
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_prep:ROICropOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "image",
+      "2d",
+      "roi",
+      "crop",
+      "preprocessing"
+    ]
+  },
+  {
+    "type": "TemperatureScaling",
+    "version": "1.0.0",
+    "name": "概率温度校准",
+    "category": "results",
+    "description": "对二分类 prediction_table 做单参数温度缩放：把概率裁剪到 [1e-6, 1-1e-6] 后取 logit，在 T∈[0.05, 20] 上最小化二分类 NLL 拟合温度。输出表保留原 probability 并逐条追加 calibratedProbability，顶层保留 evaluation 等字段并写入 calibration 元信息；metrics 给出校准前后的 ECE（等宽分箱）、Brier 与 NLL，calibration 图产物按分箱给出校准前/后的平均预测与观测阳性率。单类标签直接报错（需要两个类别），全 0/全 1 概率经裁剪后仍可求解。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "calibrationBins": {
+          "type": "integer",
+          "title": "校准分箱数",
+          "description": "计算 ECE 与可靠度曲线的等宽分箱数量",
+          "minimum": 2,
+          "maximum": 50
+        },
+        "seed": {
+          "type": "integer",
+          "title": "随机种子",
+          "description": "写入校准元信息，保证同一输入的复现口径一致",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "calibrationBins": 10,
+      "seed": 42
+    },
+    "inputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      },
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "calibration",
+        "type": "chart"
+      }
+    ],
+    "entrypoint": "radstudio.operators_bench:TemperatureScalingOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "metrics",
+      "calibration",
+      "temperature-scaling",
+      "probability"
+    ]
+  },
+  {
+    "type": "EnsembleFusion",
+    "version": "1.0.0",
+    "name": "双模型概率融合",
+    "category": "results",
+    "description": "按 imageId 对齐两个模型的 prediction_table 后融合。二分类支持 mean（概率均值）、product（概率乘积）、sum（概率求和，不归一化）与 vote（各自按 threshold 二值化后多数投票，平票时用均值概率再按 threshold 判定，输出 probability 取均值）；多分类要求两侧都提供 classProbabilities，mean/product/sum 按向量逐元素融合（product 与 sum 融合后归一化），vote 按各自 argmax 多数。输出表写入 evaluation 与 fusedModels=2，记录含 imageId/patientId/label/probability/fusedBy。任一侧空表、缺样本或标签不一致直接报错并给出具体 imageId；报告记录 count、agreement、missing 与局限性（仅支持两模型两两融合；sum 为概率直接相加，二分类可能超过 1）。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "fusionMethod": {
+          "type": "string",
+          "title": "融合方式",
+          "description": "mean 概率均值；product 概率乘积；sum 概率求和（二分类不归一化，多分类归一化）；vote 阈值二值化后多数投票",
+          "enum": [
+            "mean",
+            "product",
+            "sum",
+            "vote"
+          ]
+        },
+        "threshold": {
+          "type": "number",
+          "title": "判定阈值",
+          "description": "vote 二值化与平票判定使用的概率阈值",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "fusionMethod": "mean",
+      "threshold": 0.5
+    },
+    "inputs": [
+      {
+        "name": "predictionsA",
+        "type": "prediction_table",
+        "required": true
+      },
+      {
+        "name": "predictionsB",
+        "type": "prediction_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predictions",
+        "type": "prediction_table"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_bench:EnsembleFusionOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "metrics",
+      "ensemble",
+      "fusion",
+      "probability"
+    ]
+  },
+  {
+    "type": "BenchmarkSummary",
+    "version": "1.0.0",
+    "name": "配对模型基准汇总",
+    "category": "results",
+    "description": "在同一测试集上对两个二分类模型做配对比较：逐模型给出 n、AUC、accuracy、sensitivity、specificity、F1、Brier 与 ECE（10 箱），并用配对 bootstrap 百分位法给出 AUC 与 accuracy 的 95% CI。对比部分实现 DeLong 检验（基于 placement value 的协方差，处理 ties，z 检验双侧 p 值）、连续性校正的 McNemar 检验（b+c=0 时 p=1）与 accuracy 差值及不一致对数。报告输出 forest 图源数据与局限性（配对样本、同一测试集、bootstrap 为百分位法）。多分类或单类标签直接报错，本算子仅支持二分类配对比较。同时输出决策曲线分析（DCA）：在阈值 0.10–0.90（步长 0.01）上对模型 A、模型 B、treat-all 与 treat-none 计算净获益 NB = TP/N - FP/N × pt/(1-pt)，报告给出 dcaSource 与 A-B 在阈值区间的净获益均值差 netBenefitDifference。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "title": "判定阈值",
+          "description": "accuracy/sensitivity/specificity/F1 与 McNemar 使用的概率阈值",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "bootstrap": {
+          "type": "integer",
+          "title": "Bootstrap 次数",
+          "description": "AUC 与 accuracy 的 95% 置信区间重采样次数（百分位法）",
+          "minimum": 100,
+          "maximum": 10000
+        },
+        "seed": {
+          "type": "integer",
+          "title": "随机种子",
+          "description": "配对 bootstrap 的重采样随机种子",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5,
+      "bootstrap": 1000,
+      "seed": 42
+    },
+    "inputs": [
+      {
+        "name": "predictionsA",
+        "type": "prediction_table",
+        "required": true
+      },
+      {
+        "name": "predictionsB",
+        "type": "prediction_table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_bench:BenchmarkSummaryOperator",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "metrics",
+      "benchmark",
+      "delong",
+      "mcnemar",
+      "bootstrap"
+    ]
+  },
+  {
+    "type": "CNNFeatureExtraction",
+    "version": "1.0.0",
+    "name": "CNN 特征提取",
+    "category": "features",
+    "description": "加载 DLCNNTraining 产出的五折 checkpoint（按 checkpoint 的 library 自动选择 torchvision/MONAI 骨干），逐折在分类头（最后一个全连接层）前截取倒数第二层特征并按折平均，输出 feature_table；不输出概率、不做分类，供 FeatureFilter/LogisticRegression 等传统分类器构建 CNN 特征 + 传统分类器的混合模型。无 GPU 时自动回退 CPU。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "title": "批大小",
+          "description": "特征提取时每次前向的样本数",
+          "minimum": 1,
+          "maximum": 256
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "batchSize": 32
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "model",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "features",
+        "type": "feature_table"
+      }
+    ],
+    "entrypoint": "radstudio.operators_hybrid:CNNFeatureExtractionOperator",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 4096,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "image",
+      "cnn",
+      "feature-extraction",
+      "embedding",
+      "deep-learning"
+    ]
+  },
+  {
+    "type": "SegmentationEvaluation",
+    "version": "1.1.0",
+    "name": "分割质量评估",
+    "category": "results",
+    "description": "逐样本计算预测掩膜对真值掩膜的 Dice、IoU、精确率、召回率与 HD95（2D 欧氏距离、边界点双向 95 分位），汇总给均值/中位数/IQR 与 bootstrap 95% CI。1.1.0 增加 NSD（Normalized Surface Dice，容差内对称边界重合率）：预测与真值各自取表面，边界点到对方表面的距离不超过 nsdTolerance 视为重合，按双向边界点总数归一。空真值掩膜的样本单独计数并从均值中排除，避免被当成 Dice=0 拉低统计；缺掩膜的样本单独记录。输出报告写明 2D 单层口径，与 3D 体积分割指标不可直接比较。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "title": "评估阈值",
+          "description": "仅记录进报告，掩膜二值化在推理端完成",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "bootstrap": {
+          "type": "integer",
+          "title": "Bootstrap 次数",
+          "description": "95% 置信区间的重采样次数",
+          "minimum": 100,
+          "maximum": 10000
+        },
+        "nsdTolerance": {
+          "type": "number",
+          "title": "NSD 容差（像素）",
+          "description": "边界点到对方边界的距离不超过该值即视为重合；容差越大 NSD 越宽松，跨容差数值不可直接比较",
+          "minimum": 0.5,
+          "maximum": 20
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "threshold": 0.5,
+      "bootstrap": 1000,
+      "nsdTolerance": 2.0
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      },
+      {
+        "name": "masks",
+        "type": "mask_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "metrics",
+        "type": "metrics"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:SegmentationEvaluationOperatorV11",
+    "resourceRequirements": {
+      "cpu": 2,
+      "memoryMb": 2048,
+      "timeoutSeconds": 1800
+    },
+    "tags": [
+      "segmentation",
+      "metrics",
+      "dice",
+      "iou",
+      "hd95",
+      "nsd"
+    ]
+  },
+  {
+    "type": "MedSAMInference",
+    "version": "1.0.0",
+    "name": "MedSAM 零样本分割推理",
+    "category": "model",
+    "description": "用 MedSAM（SAM ViT-B）权重做零样本 box-prompt 推理：从真值掩膜 >0 区域取最小外接框，按 boxMargin 沿长边外扩并裁剪到图像边界作为 box prompt；图像灰度转三通道 uint8 并缩放到 imageSize，模型输出的概率/logits 图缩回原尺寸后按 threshold 二值化写出 PNG。这是零样本推理协议而非 MedSAM 训练复现，box 来自真值掩膜，结果属于带提示的上界参考，不代表全自动分割性能。缺 roiPath、掩膜文件缺失或真值全空的样本记入 report 的 blocked 列表且不产出掩膜；图像与掩膜尺寸不一致显式失败。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "checkpointPath": {
+          "type": "string",
+          "title": "模型权重路径",
+          "description": "MedSAM 权重（medsam_vit_b.pth）在工作区内的相对路径；为空时推理报错并提示下载地址"
+        },
+        "imageSize": {
+          "type": "integer",
+          "title": "输入尺寸",
+          "description": "图像缩放到该边长后送入模型，输出再缩放回原图尺寸",
+          "enum": [
+            512,
+            1024
+          ]
+        },
+        "boxMargin": {
+          "type": "number",
+          "title": "框外扩比例",
+          "description": "按真值外接框长边比例外扩 prompt box，并裁剪到图像边界",
+          "minimum": 0,
+          "maximum": 0.5
+        },
+        "threshold": {
+          "type": "number",
+          "title": "二值化阈值",
+          "description": "作用于模型输出 logits/概率图，大于等于该值记为前景",
+          "minimum": -10,
+          "maximum": 10
+        },
+        "device": {
+          "type": "string",
+          "title": "推理设备",
+          "description": "auto 优先使用 CUDA，不可用时回退 CPU",
+          "enum": [
+            "auto",
+            "cpu",
+            "cuda"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "checkpointPath": "",
+      "imageSize": 1024,
+      "boxMargin": 0,
+      "threshold": 0,
+      "device": "auto"
+    },
+    "inputs": [
+      {
+        "name": "samples",
+        "type": "sample_collection",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "masks",
+        "type": "mask_collection"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_seg:MedSAMInferenceOperator",
+    "resourceRequirements": {
+      "cpu": 4,
+      "memoryMb": 8192,
+      "timeoutSeconds": 3600
+    },
+    "tags": [
+      "medsam",
+      "segmentation",
+      "foundation-model"
+    ]
+  },
+  {
+    "type": "IBSIReferenceComparison",
+    "version": "1.0.0",
+    "name": "IBSI 2D 参考值比对",
+    "category": "results",
+    "description": "把特征表与 IBSI 官方 2D 参考值逐行对照，输出逐特征比对表。reference 为参考值表（code/name/family/dataset/aggregation/value/tolerance/consensus），mapping 为 IBSI 特征代码到 PyRadiomics 类名与特征名的映射表。比对规则预注册且不可配置：有容差的行按 |computed - reference| <= tolerance 判定 pass/fail；参考手册未给出容差的行只报告绝对与相对偏差并标记 no_tolerance，不计入一致率分母，算子不提供自设阈值参数。recordAggregation=mean 会先把同一特征的逐层记录求均值，只允许与 aggregation=2D 搭配；IBSI 的 2D, averaged 与 2D, slice-merged 需要矩阵级聚合，逐层特征均值不能重建。输出 summary 给出按特征族分组的结论计数与一致率，report 明确标注 PyRadiomics 为 IBSI 参与软件，结果不是独立第三方验证。",
+    "status": "available",
+    "parametersSchema": {
+      "type": "object",
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "title": "参考数据集",
+          "description": "参考表中 dataset 列的取值，默认数字体模"
+        },
+        "aggregation": {
+          "type": "string",
+          "title": "聚合方式",
+          "description": "参考表中 aggregation 列的取值；2D, averaged 与 2D, slice-merged 需要提取端做矩阵级聚合",
+          "enum": [
+            "2D",
+            "2D, averaged",
+            "2D, slice-merged"
+          ]
+        },
+        "recordAggregation": {
+          "type": "string",
+          "title": "记录聚合",
+          "description": "per_slice_mean 对同一特征的逐层记录求均值（仅限 aggregation=2D）；single_record 要求恰好 1 条记录",
+          "enum": [
+            "per_slice_mean",
+            "single_record"
+          ]
+        },
+        "imageType": {
+          "type": "string",
+          "title": "图像类型前缀",
+          "description": "特征键前缀，如 original 或 wavelet-LLH"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "defaults": {
+      "dataset": "dig. phantom",
+      "aggregation": "2D",
+      "recordAggregation": "per_slice_mean",
+      "imageType": "original"
+    },
+    "inputs": [
+      {
+        "name": "features",
+        "type": "feature_table",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "type": "table",
+        "required": true
+      },
+      {
+        "name": "mapping",
+        "type": "table",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "comparison",
+        "type": "table"
+      },
+      {
+        "name": "summary",
+        "type": "metrics"
+      },
+      {
+        "name": "report",
+        "type": "report"
+      }
+    ],
+    "entrypoint": "radstudio.operators_ibsi:IBSIReferenceComparisonOperator",
+    "resourceRequirements": {
+      "cpu": 1,
+      "memoryMb": 1024,
+      "timeoutSeconds": 900
+    },
+    "tags": [
+      "ibsi",
+      "radiomics",
+      "reference",
+      "comparison",
+      "tolerance"
+    ]
+  }
+]

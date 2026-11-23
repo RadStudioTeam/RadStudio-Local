@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:radstudio:schema:run-operator-snapshot-v2.json",
+  "title": "Run Operator Snapshot v2",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 2
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "parameterDialect": {
+          "const": "radstudio-parameters/1"
+        },
+        "parameterExecution": {
+          "const": 1
+        },
+        "implementationSelection": {
+          "const": "exact-v1"
+        },
+        "orchestrator": {
+          "const": "node-orchestrator/1"
+        },
+        "portSemantics": {
+          "const": "legacy-semantic/1"
+        },
+        "artifactBoundary": {
+          "type": "integer",
+          "const": 1
+        },
+        "contentContracts": {
+          "const": 1
+        },
+        "artifactExecution": {
+          "const": 1
+        },
+        "invocationExecution": {
+          "const": 1
+        },
+        "shardPartition": {
+          "const": "balanced-contiguous/1"
+        },
+        "shardSources": {
+          "const": 1
+        }
+      },
+      "required": [
+        "parameterDialect",
+        "parameterExecution",
+        "implementationSelection",
+        "orchestrator",
+        "portSemantics"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "artifactExecution": [
+          "contentContracts"
+        ],
+        "contentContracts": [
+          "artifactBoundary"
+        ],
+        "invocationExecution": [
+          "artifactExecution"
+        ],
+        "shardPartition": [
+          "invocationExecution"
+        ],
+        "shardSources": [
+          "invocationExecution"
+        ]
+      }
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "runnerImage": {
+          "type": "string",
+          "pattern": "^$|^([a-zA-Z0-9._:/-]+@)?sha256:[a-f0-9]{64}$"
+        },
+        "featureShards": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "featureWorkers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "featureCheckpointEvery": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "featureProgressSeconds": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 600
+        },
+        "dlTrainingShards": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "dlInferenceShards": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "cpu": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disk": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "networkEnabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "runnerImage",
+        "featureShards",
+        "featureWorkers",
+        "featureCheckpointEvery",
+        "featureProgressSeconds",
+        "dlTrainingShards",
+        "dlInferenceShards",
+        "cpu",
+        "memory",
+        "disk",
+        "timeoutSeconds",
+        "networkEnabled"
+      ],
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "object",
+      "maxProperties": 500,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "runtimeEvidence": {
+            "enum": [
+              "unconfigured",
+              "declared-image-digest",
+              "endpoint-only",
+              "unverified"
+            ]
+          },
+          "requestedType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requestedVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operator": {
+            "type": "object",
+            "required": [
+              "type",
+              "version",
+              "runtime"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "runtime": {
+                "type": "object"
+              },
+              "parametersSchema": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "runtimeEvidence",
+          "requestedType",
+          "requestedVersion",
+          "operator"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "canonicalization": {
+      "const": "radstudio-cjson/1"
+    }
+  },
+  "required": [
+    "version",
+    "rules",
+    "policy",
+    "nodes",
+    "digest",
+    "canonicalization"
+  ],
+  "additionalProperties": false
+}

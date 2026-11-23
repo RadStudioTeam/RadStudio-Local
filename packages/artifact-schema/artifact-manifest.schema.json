@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:radstudio:schema:artifact-manifest.json",
+  "title": "Artifact Manifest",
+  "description": "Artifact 清单",
+  "type": "object",
+  "required": ["artifactId", "runId", "projectId", "type", "storagePath", "fileHash", "fileSize"],
+  "properties": {
+    "artifactId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "projectId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "feature_table",
+        "feature_table_xlsx",
+        "model_metrics",
+        "ibsi_report",
+        "run_log",
+        "python_code",
+        "roc_curve",
+        "confusion_matrix",
+        "dataset_snapshot"
+      ]
+    },
+    "storagePath": {
+      "type": "string"
+    },
+    "fileHash": {
+      "type": "string",
+      "description": "SHA-256 文件哈希"
+    },
+    "fileSize": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "workflowVersionId": { "type": "string", "format": "uuid" },
+        "nodeId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string", "format": "uuid" }
+      }
+    }
+  }
+}

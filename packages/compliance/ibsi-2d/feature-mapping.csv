@@ -1,0 +1,96 @@
+code,name,family,tableIndex,status,pyradiomicsClass,pyradiomicsFeature,note
+GYBY,Joint maximum,GLCM,77,renamed,glcm,MaximumProbability,PyRadiomics 文档：Defined by IBSI as Joint maximum。
+60VM,Joint average,GLCM,78,exact,glcm,JointAverage,大小写与空格差异。
+UR99,Joint variance,GLCM,79,renamed,glcm,SumSquares,PyRadiomics 文档：Defined by IBSI as Joint Variance。
+TU9B,Joint entropy,GLCM,80,exact,glcm,JointEntropy,大小写与空格差异。
+TF7R,Difference average,GLCM,81,exact,glcm,DifferenceAverage,大小写与空格差异。
+D3YU,Difference variance,GLCM,82,exact,glcm,DifferenceVariance,大小写与空格差异。
+NTRS,Difference entropy,GLCM,83,exact,glcm,DifferenceEntropy,大小写与空格差异。
+ZGXS,Sum average,GLCM,84,exact,glcm,SumAverage,大小写与空格差异。
+OEEB,Sum variance,GLCM,85,missing,,,PyRadiomics glcm.SumVariance 已弃用，默认不启用
+P6QZ,Sum entropy,GLCM,86,exact,glcm,SumEntropy,大小写与空格差异。
+8ZQL,Angular second moment,GLCM,87,renamed,glcm,JointEnergy,PyRadiomics 文档：Defined by IBSI as Angular Second Moment。
+ACUI,Contrast,GLCM,88,exact,glcm,Contrast,同名。
+8S9J,Dissimilarity,GLCM,89,missing,,,PyRadiomics glcm.Dissimilarity 已弃用，默认不启用
+IB1Z,Inverse difference,GLCM,90,renamed,glcm,Id,PyRadiomics 缩写 Id = Inverse Difference。
+NDRX,Normalised inverse difference,GLCM,91,renamed,glcm,Idn,PyRadiomics 缩写 Idn = Inverse Difference Normalized。
+WF0Z,Inverse difference moment,GLCM,92,renamed,glcm,Idm,PyRadiomics 缩写 Idm = Inverse Difference Moment。
+1QCO,Normalised inverse difference moment,GLCM,93,renamed,glcm,Idmn,PyRadiomics 缩写 Idmn = Inverse Difference Moment Normalized。
+E8JP,Inverse variance,GLCM,94,exact,glcm,InverseVariance,大小写与空格差异。
+NI2N,Correlation,GLCM,95,exact,glcm,Correlation,同名。
+QWB0,Autocorrelation,GLCM,96,exact,glcm,Autocorrelation,同名。
+DG8W,Cluster tendency,GLCM,97,exact,glcm,ClusterTendency,大小写与空格差异。
+7NFM,Cluster shade,GLCM,98,exact,glcm,ClusterShade,大小写与空格差异。
+AE86,Cluster prominence,GLCM,99,exact,glcm,ClusterProminence,大小写与空格差异。
+R8DG,Information correlation 1,GLCM,100,renamed,glcm,Imc1,PyRadiomics 缩写 Imc1 = Information Correlation 1。
+JN9H,Information correlation 2,GLCM,101,renamed,glcm,Imc2,PyRadiomics 缩写 Imc2 = Information Correlation 2。
+22OV,Short runs emphasis,GLRLM,102,renamed,glrlm,ShortRunEmphasis,IBSI 复数 runs，PyRadiomics 用 run。
+W4KF,Long runs emphasis,GLRLM,103,renamed,glrlm,LongRunEmphasis,IBSI 复数 runs，PyRadiomics 用 run。
+V3SW,Low grey level run emphasis,GLRLM,104,exact,glrlm,LowGrayLevelRunEmphasis,Grey/Gray 拼写差异。
+G3QZ,High grey level run emphasis,GLRLM,105,exact,glrlm,HighGrayLevelRunEmphasis,Grey/Gray 拼写差异。
+HTZT,Short run low grey level emphasis,GLRLM,106,exact,glrlm,ShortRunLowGrayLevelEmphasis,大小写与 Grey/Gray 差异。
+GD3A,Short run high grey level emphasis,GLRLM,107,exact,glrlm,ShortRunHighGrayLevelEmphasis,大小写与 Grey/Gray 差异。
+IVPO,Long run low grey level emphasis,GLRLM,108,exact,glrlm,LongRunLowGrayLevelEmphasis,大小写与 Grey/Gray 差异。
+3KUM,Long run high grey level emphasis,GLRLM,109,exact,glrlm,LongRunHighGrayLevelEmphasis,大小写与 Grey/Gray 差异。
+R5YN,Grey level non-uniformity,GLRLM,110,exact,glrlm,GrayLevelNonUniformity,Grey/Gray 拼写差异。
+OVBL,Normalised grey level non-uniformity,GLRLM,111,renamed,glrlm,GrayLevelNonUniformityNormalized,Grey/Gray 与 Normalised/Normalized 差异。
+W92Y,Run length non-uniformity,GLRLM,112,exact,glrlm,RunLengthNonUniformity,大小写与空格差异。
+IC23,Normalised run length non-uniformity,GLRLM,113,renamed,glrlm,RunLengthNonUniformityNormalized,Normalised/Normalized 差异。
+9ZK5,Run percentage,GLRLM,114,exact,glrlm,RunPercentage,大小写与空格差异。
+8CE5,Grey level variance,GLRLM,115,exact,glrlm,GrayLevelVariance,Grey/Gray 拼写差异。
+SXLW,Run length variance,GLRLM,116,renamed,glrlm,RunVariance,IBSI 写 Run length variance，PyRadiomics 省略 length。
+HJ9O,Run entropy,GLRLM,117,exact,glrlm,RunEntropy,大小写与空格差异。
+9SAK,Small zone emphasis,GLSZM,118,renamed,glszm,SmallAreaEmphasis,IBSI zone，PyRadiomics 用 area。
+48P8,Large zone emphasis,GLSZM,119,renamed,glszm,LargeAreaEmphasis,IBSI zone，PyRadiomics 用 area。
+XMSY,Low grey level zone emphasis,GLSZM,120,exact,glszm,LowGrayLevelZoneEmphasis,Grey/Gray 拼写差异。
+5GN9,High grey level zone emphasis,GLSZM,121,exact,glszm,HighGrayLevelZoneEmphasis,Grey/Gray 拼写差异。
+5RAI,Small zone low grey level emphasis,GLSZM,122,renamed,glszm,SmallAreaLowGrayLevelEmphasis,IBSI zone，PyRadiomics 用 area。
+HW1V,Small zone high grey level emphasis,GLSZM,123,renamed,glszm,SmallAreaHighGrayLevelEmphasis,IBSI zone，PyRadiomics 用 area。
+YH51,Large zone low grey level emphasis,GLSZM,124,renamed,glszm,LargeAreaLowGrayLevelEmphasis,IBSI zone，PyRadiomics 用 area。
+J17V,Large zone high grey level emphasis,GLSZM,125,renamed,glszm,LargeAreaHighGrayLevelEmphasis,IBSI zone，PyRadiomics 用 area。
+JNSA,Grey level non-uniformity,GLSZM,126,exact,glszm,GrayLevelNonUniformity,Grey/Gray 拼写差异。
+Y1RO,Normalised grey level non-uniformity,GLSZM,127,renamed,glszm,GrayLevelNonUniformityNormalized,Grey/Gray 与 Normalised/Normalized 差异。
+4JP3,Zone size non-uniformity,GLSZM,128,renamed,glszm,SizeZoneNonUniformity,IBSI 写 Zone size，PyRadiomics 写 SizeZone。
+VB3A,Normalised zone size non-uniformity,GLSZM,129,renamed,glszm,SizeZoneNonUniformityNormalized,IBSI 写 Zone size，PyRadiomics 写 SizeZone。
+P30P,Zone percentage,GLSZM,130,exact,glszm,ZonePercentage,大小写与空格差异。
+BYLV,Grey level variance,GLSZM,131,exact,glszm,GrayLevelVariance,Grey/Gray 拼写差异。
+3NSA,Zone size variance,GLSZM,132,renamed,glszm,ZoneVariance,IBSI 写 Zone size variance，PyRadiomics 省略 size。
+GU8N,Zone size entropy,GLSZM,133,renamed,glszm,ZoneEntropy,IBSI 写 Zone size entropy，PyRadiomics 省略 size。
+0GBI,Small distance emphasis,GLDZM,134,missing,,,家族缺失
+MB4I,Large distance emphasis,GLDZM,135,missing,,,家族缺失
+S1RA,Low grey level zone emphasis,GLDZM,136,missing,,,家族缺失
+K26C,High grey level zone emphasis,GLDZM,137,missing,,,家族缺失
+RUVG,Small distance low grey level emphasis,GLDZM,138,missing,,,家族缺失
+DKNJ,Small distance high grey level emphasis,GLDZM,139,missing,,,家族缺失
+A7WM,Large distance low grey level emphasis,GLDZM,140,missing,,,家族缺失
+KLTH,Large distance high grey level emphasis,GLDZM,141,missing,,,家族缺失
+VFT7,Grey level non-uniformity,GLDZM,142,missing,,,家族缺失
+7HP3,Normalised grey level non-uniformity,GLDZM,143,missing,,,家族缺失
+V294,Zone distance non-uniformity,GLDZM,144,missing,,,家族缺失
+IATH,Normalised zone distance non-uniformity,GLDZM,145,missing,,,家族缺失
+VIWW,Zone percentage,GLDZM,146,missing,,,家族缺失
+QK93,Grey level variance,GLDZM,147,missing,,,家族缺失
+7WT1,Zone distance variance,GLDZM,148,missing,,,家族缺失
+GBDU,Zone distance entropy,GLDZM,149,missing,,,家族缺失
+QCDE,Coarseness,NGTDM,150,exact,ngtdm,Coarseness,同名。
+65HE,Contrast,NGTDM,151,exact,ngtdm,Contrast,同名。
+NQ30,Busyness,NGTDM,152,exact,ngtdm,Busyness,同名。
+HDEZ,Complexity,NGTDM,153,exact,ngtdm,Complexity,同名。
+1X9X,Strength,NGTDM,154,exact,ngtdm,Strength,同名。
+SODN,Low dependence emphasis,NGLDM,155,renamed,gldm,SmallDependenceEmphasis,IBSI low dependence，PyRadiomics 用 small。
+IMOQ,High dependence emphasis,NGLDM,156,renamed,gldm,LargeDependenceEmphasis,IBSI high dependence，PyRadiomics 用 large。
+TL9H,Low grey level count emphasis,NGLDM,157,renamed,gldm,LowGrayLevelEmphasis,IBSI grey level count，PyRadiomics 省略 count。
+OAE7,High grey level count emphasis,NGLDM,158,renamed,gldm,HighGrayLevelEmphasis,IBSI grey level count，PyRadiomics 省略 count。
+EQ3F,Low dependence low grey level emphasis,NGLDM,159,renamed,gldm,SmallDependenceLowGrayLevelEmphasis,IBSI low dependence，PyRadiomics 用 small。
+JA6D,Low dependence high grey level emphasis,NGLDM,160,renamed,gldm,SmallDependenceHighGrayLevelEmphasis,IBSI low dependence，PyRadiomics 用 small。
+NBZI,High dependence low grey level emphasis,NGLDM,161,renamed,gldm,LargeDependenceLowGrayLevelEmphasis,IBSI high dependence，PyRadiomics 用 large。
+9QMG,High dependence high grey level emphasis,NGLDM,162,renamed,gldm,LargeDependenceHighGrayLevelEmphasis,IBSI high dependence，PyRadiomics 用 large。
+FP8K,Grey level non-uniformity,NGLDM,163,exact,gldm,GrayLevelNonUniformity,Grey/Gray 拼写差异。
+5SPA,Normalised grey level non-uniformity,NGLDM,164,missing,,,PyRadiomics gldm.GrayLevelNonUniformityNormalized 已弃用（Nz=Np 时与 GLNU 等价）
+Z87G,Dependence count non-uniformity,NGLDM,165,renamed,gldm,DependenceNonUniformity,IBSI 写 Dependence count，PyRadiomics 省略 count。
+OKJI,Normalised dependence count non-uniformity,NGLDM,166,renamed,gldm,DependenceNonUniformityNormalized,IBSI 写 Dependence count，PyRadiomics 省略 count。
+6XV8,Dependence count percentage,NGLDM,167,missing,,,PyRadiomics gldm.DependencePercentage 已弃用（恒为 1）
+1PFV,Grey level variance,NGLDM,168,exact,gldm,GrayLevelVariance,Grey/Gray 拼写差异。
+DNX2,Dependence count variance,NGLDM,169,renamed,gldm,DependenceVariance,IBSI 写 Dependence count variance，PyRadiomics 省略 count。
+FCBV,Dependence count entropy,NGLDM,170,renamed,gldm,DependenceEntropy,IBSI 写 Dependence count entropy，PyRadiomics 省略 count。
+CAS9,Dependence count energy,NGLDM,171,missing,,,PyRadiomics gldm 无能量特征

@@ -1,0 +1,273 @@
+{
+  "runId": "p1-ibsi-clean-rerun",
+  "generatedAt": "2026-11-22T16:40:46.653693+00:00",
+  "spec": "reproductions/p1-ibsi-2d",
+  "tasks": [
+    "1.1.3",
+    "1.2.3",
+    "1.2.4",
+    "1.3.1",
+    "1.3.2",
+    "1.3.3",
+    "1.4.1"
+  ],
+  "executionEnvironment": {
+    "kind": "local-python-sdk",
+    "note": "本轮通过本地 Python SDK 运行与平台相同的算子实现；未使用容器 worker，因此没有镜像摘要。RadStudio 平台运行留待 worker 镜像包含新算子后再做。",
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "gitCommit": "",
+    "gitDirty": false
+  },
+  "pyradiomics": {
+    "version": "3.1.1.dev111+g8ed57938",
+    "commit": "8ed579383b44806651c463d5e691f3b2b57522ab",
+    "requirement": "pyradiomics @ https://github.com/AIM-Harvard/pyradiomics/archive/8ed579383b44806651c463d5e691f3b2b57522ab.tar.gz"
+  },
+  "operatorVersions": {
+    "ReadImages": "1.0.0",
+    "ImageFormatConversion": "1.1.0",
+    "Preprocessing2D": "1.1.0",
+    "IBSI2DFeatureExtraction": "1.0.0",
+    "ReadTable": "1.0.0",
+    "IBSIReferenceComparison": "1.0.0"
+  },
+  "parameters": {
+    "dataset": "dig. phantom",
+    "aggregation": "2D",
+    "recordAggregation": "per_slice_mean",
+    "imageType": "original",
+    "binWidth": 1,
+    "featureFamilies": [
+      "glszm",
+      "gldm",
+      "ngtdm"
+    ],
+    "randomSeed": null
+  },
+  "inputs": {
+    "phantom": {
+      "path": "packages/compliance/ibsi-2d/phantom.nii.gz",
+      "sha256": "83773ac2a288aa93cf819a98eaf301c18d35d5876182ec9c18733184e2b7a83a"
+    },
+    "mask": {
+      "path": "packages/compliance/ibsi-2d/mask.nii.gz",
+      "sha256": "3032d340944b577b83bc559ea7ae9a6034b84633a840eff39570ec17aa1d6281"
+    },
+    "slicesIndex": {
+      "path": "packages/compliance/ibsi-2d/slices/index.json",
+      "sha256": "0f09548443cc76493961f95ffef8fb57e38d1ce4aa6c9f7bc52f6a4d60e6c7fc"
+    },
+    "referenceValues": {
+      "path": "packages/compliance/ibsi-2d/reference-values.csv",
+      "sha256": "4a4fc6c67d7b107bb14dfa63f4e2cbc626b17f7ff064b9e39dc124c608c9e1eb"
+    },
+    "featureMapping": {
+      "path": "packages/compliance/ibsi-2d/feature-mapping.csv",
+      "sha256": "e712662532913a8c6453d14ae17ede2dc07d118210674bcffe8cd1b8312d7043"
+    }
+  },
+  "featureTable": {
+    "records": 4,
+    "featureCount": 35,
+    "imageIds": [
+      "phantom-slice-0",
+      "phantom-slice-1",
+      "phantom-slice-2",
+      "phantom-slice-3"
+    ]
+  },
+  "nodes": [
+    {
+      "nodeId": "01-read-images",
+      "operatorType": "ReadImages",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 55,
+      "outputs": {
+        "samples": "file:samples.json#sha256=86395f18d92aa347c59303d49ff19c587007f5155d7100c9df3a56953ff0b4eb;type=sample_collection"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "02-format-conversion",
+      "operatorType": "ImageFormatConversion",
+      "operatorVersion": "1.1.0",
+      "parameters": {
+        "imageMode": "grayscale",
+        "roiMode": "binary"
+      },
+      "status": "completed",
+      "durationMs": 111,
+      "outputs": {
+        "samples": "file:samples.json#sha256=86395f18d92aa347c59303d49ff19c587007f5155d7100c9df3a56953ff0b4eb;type=sample_collection"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "03-preprocessing2d",
+      "operatorType": "Preprocessing2D",
+      "operatorVersion": "1.1.0",
+      "parameters": {
+        "binWidth": 1
+      },
+      "status": "completed",
+      "durationMs": 97,
+      "outputs": {
+        "samples": "file:samples.json#sha256=8f6398c5ad7671a3bbc531c7b2240f191a675b3f004d6292cc8d2a62803c4c85;type=sample_collection"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "04-ibsi-features",
+      "operatorType": "IBSI2DFeatureExtraction",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "engine": "pyradiomics",
+        "featureFamilies": [
+          "glszm",
+          "gldm",
+          "ngtdm"
+        ],
+        "imageTypes": [
+          "original"
+        ],
+        "binWidth": 1
+      },
+      "status": "completed",
+      "durationMs": 1603,
+      "outputs": {
+        "features": "file:features.json#sha256=3fca83ce07e2cb7fec5376361fce30adfd327a6848b04577a18ce7395ed1ff62;type=feature_table",
+        "report": "file:report.json#sha256=ba0e9c011dd511d53f3f7128b346087a553fe21a357a8c7ea9338b194ff41115;type=report"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "05-read-reference",
+      "operatorType": "ReadTable",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 31,
+      "outputs": {
+        "records": "file:table.json#sha256=51ae632c55b0c84733d071fe88168c5ee791b09cb0468208248fa59d1d5bc160;type=table"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "06-read-mapping",
+      "operatorType": "ReadTable",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 23,
+      "outputs": {
+        "records": "file:table.json#sha256=2ad4a87e9c4d4ffaf4386682fb02669c663e342c81b31fa910a98e8cd38de92a;type=table"
+      },
+      "metrics": {}
+    },
+    {
+      "nodeId": "07-ibsi-comparison",
+      "operatorType": "IBSIReferenceComparison",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "dataset": "dig. phantom",
+        "aggregation": "2D",
+        "recordAggregation": "per_slice_mean",
+        "imageType": "original"
+      },
+      "status": "completed",
+      "durationMs": 96,
+      "outputs": {
+        "comparison": "file:comparison.json#sha256=42b3c86a942cde060ce950e2560910e8259870da18dbd7b72eb290efdef5944c;type=table",
+        "summary": "file:summary.json#sha256=c9d74eb5d4f424513d99a926e406630c9ee0a8ecc5eb07af2ba630c0dcff6575;type=metrics",
+        "report": "file:report.json#sha256=c902bb533f33b60d4aa74e779abcbab5ea449c4841596ca67ad05aa0f0d46073;type=report"
+      },
+      "metrics": {}
+    }
+  ],
+  "outcome": {
+    "referenceRowsSelected": 54,
+    "noTolerance": 35,
+    "notComparable": 19,
+    "pass": 0,
+    "fail": 0,
+    "byFamily": {
+      "Grey level distance zone based features": {
+        "fail": 0,
+        "feature_missing": 0,
+        "no_tolerance": 0,
+        "not_comparable": 16,
+        "pass": 0
+      },
+      "Grey level size zone based features": {
+        "fail": 0,
+        "feature_missing": 0,
+        "no_tolerance": 16,
+        "not_comparable": 0,
+        "pass": 0
+      },
+      "Neighbourhood grey tone difference based features": {
+        "fail": 0,
+        "feature_missing": 0,
+        "no_tolerance": 5,
+        "not_comparable": 0,
+        "pass": 0
+      },
+      "Neighbouring grey level dependence based features": {
+        "fail": 0,
+        "feature_missing": 0,
+        "no_tolerance": 14,
+        "not_comparable": 3,
+        "pass": 0
+      }
+    },
+    "byFamilyDeviation": {
+      "Grey level size zone based features": {
+        "comparableRows": 16,
+        "notComparableRows": 0,
+        "meanRelativeDeviation": 0.001387750401544825,
+        "maxRelativeDeviation": 0.004235145385587856,
+        "meanAbsoluteDeviation": 0.036964877498188026,
+        "maxAbsoluteDeviation": 0.47857142857142776
+      },
+      "Grey level distance zone based features": {
+        "comparableRows": 0,
+        "notComparableRows": 16,
+        "meanRelativeDeviation": null,
+        "maxRelativeDeviation": null,
+        "meanAbsoluteDeviation": null,
+        "maxAbsoluteDeviation": null
+      },
+      "Neighbourhood grey tone difference based features": {
+        "comparableRows": 5,
+        "notComparableRows": 0,
+        "meanRelativeDeviation": 0.001201442732341502,
+        "maxRelativeDeviation": 0.0040450024484138735,
+        "meanAbsoluteDeviation": 0.0011448887316938328,
+        "maxAbsoluteDeviation": 0.0036340826210583543
+      },
+      "Neighbouring grey level dependence based features": {
+        "comparableRows": 14,
+        "notComparableRows": 3,
+        "meanRelativeDeviation": 0.0010560201190421572,
+        "maxRelativeDeviation": 0.004547002839663599,
+        "meanAbsoluteDeviation": 0.008345161391217952,
+        "maxAbsoluteDeviation": 0.0463794289645687
+      }
+    },
+    "notComparableReasons": {
+      "家族缺失": 16,
+      "PyRadiomics gldm.GrayLevelNonUniformityNormalized 已弃用（Nz=Np 时与 GLNU 等价）": 1,
+      "PyRadiomics gldm.DependencePercentage 已弃用（恒为 1）": 1,
+      "PyRadiomics gldm 无能量特征": 1
+    }
+  },
+  "limitations": [
+    "数字体模参考值没有公布容差，本轮只报告偏差；不计算一致率、不判定 pass/fail。",
+    "只覆盖 2D 数字体模；GLDZM 整族、4 个 PyRadiomics 弃用方法与 NGLDM 能量特征无法比对。",
+    "GLCM / GLRLM 在数字体模只有 2D, averaged 与 2D, slice-merged 参考值，需要矩阵级跨层聚合，本轮未计算。",
+    "PyRadiomics 是 IBSI 参与软件之一，本结果只用于链路一致性检查，不作为独立第三方验证。"
+  ]
+}

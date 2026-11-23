@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IBSI 2D Feature Baseline",
+  "description": "IBSI 2D 特征基线配置",
+  "version": "1.0",
+  "referenceStandard": "IBSI 1",
+  "featureFamilies": [
+    {
+      "name": "First Order",
+      "description": "一阶统计特征",
+      "status": "baseline_pending_execution",
+      "features": [
+        {
+          "id": "fo_energy",
+          "name": "Energy",
+          "referenceSource": "IBSI 1 Digital Phantom",
+          "tolerance": { "type": "absolute", "value": 0.001 }
+        },
+        {
+          "id": "fo_entropy",
+          "name": "Entropy",
+          "referenceSource": "IBSI 1 Digital Phantom",
+          "tolerance": { "type": "relative", "value": 0.01 }
+        }
+      ]
+    },
+    {
+      "name": "2D Shape",
+      "description": "2D 形状特征",
+      "status": "baseline_pending_execution",
+      "features": []
+    },
+    {
+      "name": "2D GLCM",
+      "description": "2D 灰度共生矩阵",
+      "status": "baseline_pending_execution",
+      "features": []
+    },
+    {
+      "name": "2D GLRLM",
+      "description": "2D 灰度游程长度矩阵",
+      "status": "baseline_pending_execution",
+      "features": []
+    },
+    {
+      "name": "2D GLSZM",
+      "description": "2D 灰度大小区域矩阵",
+      "status": "baseline_pending_execution",
+      "features": []
+    },
+    {
+      "name": "2D GLDM",
+      "description": "2D 灰度依赖矩阵",
+      "status": "baseline_pending_execution",
+      "features": []
+    },
+    {
+      "name": "2D NGTDM",
+      "description": "2D 邻域灰度差矩阵",
+      "status": "baseline_pending_execution",
+      "features": []
+    }
+  ],
+  "validationRules": {
+    "validated": "所有必需特征在指定配置下通过参考测试",
+    "supported_not_validated": "特征已实现但未完成参考验证",
+    "not_supported": "特征未实现"
+  }
+}

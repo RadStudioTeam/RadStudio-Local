@@ -1,0 +1,49 @@
+{
+  "aggregation": "2D",
+  "byFamily": {
+    "Grey level distance zone based features": {
+      "fail": 0,
+      "feature_missing": 0,
+      "no_tolerance": 0,
+      "not_comparable": 16,
+      "pass": 0
+    },
+    "Grey level size zone based features": {
+      "fail": 0,
+      "feature_missing": 0,
+      "no_tolerance": 16,
+      "not_comparable": 0,
+      "pass": 0
+    },
+    "Neighbourhood grey tone difference based features": {
+      "fail": 0,
+      "feature_missing": 0,
+      "no_tolerance": 5,
+      "not_comparable": 0,
+      "pass": 0
+    },
+    "Neighbouring grey level dependence based features": {
+      "fail": 0,
+      "feature_missing": 0,
+      "no_tolerance": 14,
+      "not_comparable": 3,
+      "pass": 0
+    }
+  },
+  "conclusionCounts": {
+    "fail": 0,
+    "feature_missing": 0,
+    "no_tolerance": 35,
+    "not_comparable": 19,
+    "pass": 0
+  },
+  "dataset": "dig. phantom",
+  "featureRecords": 4,
+  "imageType": "original",
+  "noSelfInventedThresholds": true,
+  "passRate": null,
+  "passRateDenominator": 0,
+  "recordAggregation": "per_slice_mean",
+  "referenceRows": 54,
+  "tolerancePolicy": "有容差行：|computed - reference| <= tolerance 判 pass；无容差行：只报告偏差，标记 no_tolerance，不计入一致率。"
+}

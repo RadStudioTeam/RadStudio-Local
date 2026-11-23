@@ -1,0 +1,915 @@
+[
+  {
+    "name": "bound cv",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": true,
+    "missingSource": false
+  },
+  {
+    "name": "bound holdout",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": true,
+    "missingSource": false
+  },
+  {
+    "name": "cv patient leakage",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=a3a34fe2b9be43e4e53c92a95ea54c417feb8de246d7aece8ce1a8fe76dd33c1;type=feature_table",
+      "identityHash": "b2f65087ce94763eb2af2a9277f9175f0ebeefb13b8290e3c7d1cc839ecbd817"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/folds/0"
+  },
+  {
+    "name": "holdout patient leakage",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=a3a34fe2b9be43e4e53c92a95ea54c417feb8de246d7aece8ce1a8fe76dd33c1;type=feature_table",
+      "identityHash": "b2f65087ce94763eb2af2a9277f9175f0ebeefb13b8290e3c7d1cc839ecbd817"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/partitions/test"
+  },
+  {
+    "name": "wrong identity",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/identityHash"
+  },
+  {
+    "name": "unknown sample",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "missing"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "missing"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "unknown training label",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": null,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=3a54b216237c089d624786e47effbc8e467a8efd42b98aec17b3e9ba69a6e4b6;type=feature_table",
+      "identityHash": "2d287ce920a7e78d36d9a1bb8b8227946bd518f758d446f7afea4c1f2dce7b7d"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "row order identity",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=cb51d159a38e34b1997d4d8d44885f29d515f689cb302157c8f6fb5b99bb1e99;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/identityHash"
+  },
+  {
+    "name": "wrong source hash",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=0000000000000000000000000000000000000000000000000000000000000000;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "missing source",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "missingSource": true,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "same patient contradictory labels within partition",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p0",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=30bd4942d1238b54e436c8259bc49ea3263dd70c19fa9514b17965afa483637c;type=feature_table",
+      "identityHash": "d5a01a9c28d03decab78ff175fb002ec126a7343f6e4943e10121352fe27f7ed"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "blank source patientId",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "i0",
+          "patientId": " ",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=8775b7ba050b8d45b04817916f3107b977bee4fdfa20fd6d39d7029b5251c039;type=feature_table",
+      "identityHash": "3e438edfcb83d4d3fef00f67285952b65ed8775da5eee1e204ee01d9cf4d3bf8"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "blank source imageId",
+    "table": {
+      "featureNames": [
+        "x"
+      ],
+      "records": [
+        {
+          "imageId": "\u001c",
+          "patientId": "p0",
+          "label": 0,
+          "values": [
+            0
+          ]
+        },
+        {
+          "imageId": "i1",
+          "patientId": "p1",
+          "label": 1,
+          "values": [
+            1
+          ]
+        },
+        {
+          "imageId": "i2",
+          "patientId": "p2",
+          "label": 0,
+          "values": [
+            2
+          ]
+        },
+        {
+          "imageId": "i3",
+          "patientId": "p3",
+          "label": 1,
+          "values": [
+            3
+          ]
+        }
+      ]
+    },
+    "plan": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "\u001c",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=926a7ff2b532e0bb77efcf778ad6560bc4417edf6aba6812e80c1e73606d182f;type=feature_table",
+      "identityHash": "5748e04936b78caf5435218d50ffa2edcd9a8dddce5240cd82d98f78777e6c25"
+    },
+    "valid": false,
+    "missingSource": false,
+    "fieldPath": "/source"
+  }
+]

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-11-22T16:40:17.907251+00:00",
+  "description": "IBSI 1 数字体模逐层 PNG 与掩膜；每行一个切片，两个文件角色",
+  "config": {
+    "imageRole": "image",
+    "roiRole": "roi",
+    "requireRoi": true
+  },
+  "files": {
+    "image-z0": {
+      "path": "packages/compliance/ibsi-2d/slices/phantom_z0.png",
+      "sha256": "c2e7172621a68da00bdacb52b4e6169fccb65a04476d25b3fd250d1e59eea13d",
+      "sizeBytes": 85,
+      "role": "image"
+    },
+    "mask-z0": {
+      "path": "packages/compliance/ibsi-2d/slices/mask_z0.png",
+      "sha256": "16dcd0ac5c733666505291e81a14db1d2d79f4c21c51253fb71a7a2da670c90b",
+      "sizeBytes": 75,
+      "role": "roi"
+    },
+    "image-z1": {
+      "path": "packages/compliance/ibsi-2d/slices/phantom_z1.png",
+      "sha256": "0535d74b11989a9edc3c1e10b696afa53b61755d2e75408860d881d61c96d6ce",
+      "sizeBytes": 86,
+      "role": "image"
+    },
+    "mask-z1": {
+      "path": "packages/compliance/ibsi-2d/slices/mask_z1.png",
+      "sha256": "1ad1d8caa96564c24a35e96fb8b9e3bd39194f6e74f6838ce185b446cc09bc98",
+      "sizeBytes": 80,
+      "role": "roi"
+    },
+    "image-z2": {
+      "path": "packages/compliance/ibsi-2d/slices/phantom_z2.png",
+      "sha256": "2f3ec054ef70d39b985f789932e2d16a9ee8a9d94d11b7e57ed1027b633faf5a",
+      "sizeBytes": 86,
+      "role": "image"
+    },
+    "mask-z2": {
+      "path": "packages/compliance/ibsi-2d/slices/mask_z2.png",
+      "sha256": "01a067046259552b43f6c513a62fa7875c2cffbd1fdfa9c0ea1c9e60a2ee27f7",
+      "sizeBytes": 84,
+      "role": "roi"
+    },
+    "image-z3": {
+      "path": "packages/compliance/ibsi-2d/slices/phantom_z3.png",
+      "sha256": "207fd89bbf748496fda79d49a06c789eb9a51813cfafb5068081fc87ce8978ee",
+      "sizeBytes": 84,
+      "role": "image"
+    },
+    "mask-z3": {
+      "path": "packages/compliance/ibsi-2d/slices/mask_z3.png",
+      "sha256": "b38d0cc69201558270d667a0971f1b143ed54a5542f15313a426ea7e090486c7",
+      "sizeBytes": 81,
+      "role": "roi"
+    }
+  },
+  "rows": [
+    {
+      "sampleId": "phantom-slice-0",
+      "fields": {
+        "sliceIndex": 0,
+        "roiVoxels": 20
+      },
+      "assets": [
+        {
+          "role": "image",
+          "fileId": "image-z0"
+        },
+        {
+          "role": "roi",
+          "fileId": "mask-z0"
+        }
+      ]
+    },
+    {
+      "sampleId": "phantom-slice-1",
+      "fields": {
+        "sliceIndex": 1,
+        "roiVoxels": 19
+      },
+      "assets": [
+        {
+          "role": "image",
+          "fileId": "image-z1"
+        },
+        {
+          "role": "roi",
+          "fileId": "mask-z1"
+        }
+      ]
+    },
+    {
+      "sampleId": "phantom-slice-2",
+      "fields": {
+        "sliceIndex": 2,
+        "roiVoxels": 17
+      },
+      "assets": [
+        {
+          "role": "image",
+          "fileId": "image-z2"
+        },
+        {
+          "role": "roi",
+          "fileId": "mask-z2"
+        }
+      ]
+    },
+    {
+      "sampleId": "phantom-slice-3",
+      "fields": {
+        "sliceIndex": 3,
+        "roiVoxels": 18
+      },
+      "assets": [
+        {
+          "role": "image",
+          "fileId": "image-z3"
+        },
+        {
+          "role": "roi",
+          "fileId": "mask-z3"
+        }
+      ]
+    }
+  ]
+}

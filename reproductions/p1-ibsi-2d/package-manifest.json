@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-11-22T16:40:19.614354+00:00",
+  "package": "p1-ibsi-2d",
+  "runId": "p1-ibsi-phantom-selfcheck",
+  "fileCount": 41,
+  "files": [
+    {
+      "path": "environment/image.txt",
+      "sha256": "a9e5d2f5e888f7b75b0b130b90e3254406c68592d770736b66fa870008abb0c8",
+      "sizeBytes": 98
+    },
+    {
+      "path": "environment/pyradiomics.json",
+      "sha256": "3edca1ce45fbe0324b2d777a786490a6fd1c09e0dccdd4d6d5546f5080c595fb",
+      "sizeBytes": 443
+    },
+    {
+      "path": "environment/python.txt",
+      "sha256": "2dc0d5541cf70196cb92df8ad4223b66b7c62eb932b290936086e003b1e6f76e",
+      "sizeBytes": 16
+    },
+    {
+      "path": "environment/README.md",
+      "sha256": "cd3b262ae5d6dae6d87e066cd355aca167968bcb1cd076784a3cd4778a0d21ee",
+      "sizeBytes": 365
+    },
+    {
+      "path": "environment/requirements.lock",
+      "sha256": "ad6415c17027f279e0d476459fc769d2b2f9d35fe85fedd07f50712546cf473f",
+      "sizeBytes": 1834
+    },
+    {
+      "path": "environment/runtime.md",
+      "sha256": "ac0c5dc7e9df946316dbdb071ffd66cbadea35dc92848dfa2d77ac8faa784fca",
+      "sizeBytes": 507
+    },
+    {
+      "path": "environment/seeds.json",
+      "sha256": "eb60d6f3e9a7b51c31f99ee6b9fcdbc759ea82b7922864dc1a5386f917f50eb4",
+      "sizeBytes": 97
+    },
+    {
+      "path": "figures/p1-ibsi-2d-by-family.svg",
+      "sha256": "77436f72de1d458da590636f8eb6f102cd4903af79867d6face7be9727638138",
+      "sizeBytes": 3707
+    },
+    {
+      "path": "figures/p1-ibsi-2d-per-feature.svg",
+      "sha256": "1db47cfa6f614e450ee68315a84c4ed546d4781a3de9c09a30f7b843a435bcbf",
+      "sizeBytes": 10901
+    },
+    {
+      "path": "figures/README.md",
+      "sha256": "dcec20126ff27f1ebf79a6d1d0839cc6e024ef03910584aebe91019848c74859",
+      "sizeBytes": 511
+    },
+    {
+      "path": "figures/source/by-family.csv",
+      "sha256": "7162cab182650d6a9e747c8ab59e155eb950d0b58efeb8843ef389283dc13e92",
+      "sizeBytes": 578
+    },
+    {
+      "path": "figures/source/by-feature.csv",
+      "sha256": "483023d8ebb84b7dbab95d34a24ecca750dd476f1badcf30e4bb585cb0459a6a",
+      "sizeBytes": 6421
+    },
+    {
+      "path": "manifests/images.json",
+      "sha256": "1fe671a5e3212b8d984453debc911c813dae213de4f0d94512a6e9382bca4214",
+      "sizeBytes": 3403
+    },
+    {
+      "path": "manifests/input-hash.txt",
+      "sha256": "f426cefb6afa276b46db2b7e8c7a76d12ca77effc2c2996f1701e8a5a526011e",
+      "sizeBytes": 126
+    },
+    {
+      "path": "manifests/inputs.json",
+      "sha256": "b1c657239642a1f77e24e7686bc8774792046b83a632b5da5dbe7859d1d52e99",
+      "sizeBytes": 1132
+    },
+    {
+      "path": "manifests/README.md",
+      "sha256": "57e1e676e9392099c12e966ce096889ca5eb92c84fdc3cfbf9f6266408bef70f",
+      "sizeBytes": 405
+    },
+    {
+      "path": "metrics/by-family.csv",
+      "sha256": "7162cab182650d6a9e747c8ab59e155eb950d0b58efeb8843ef389283dc13e92",
+      "sizeBytes": 578
+    },
+    {
+      "path": "metrics/comparison-report.json",
+      "sha256": "344f40f3c2bd0e3fc70265a83331ebeafcb12ec5d0fbe12eff91142af152c6a2",
+      "sizeBytes": 821
+    },
+    {
+      "path": "metrics/comparison-summary.json",
+      "sha256": "81a3e2b32f291b3ba9d0476e7c7543d5f662a7094a15c99b76d17196ff7ec62c",
+      "sizeBytes": 1314
+    },
+    {
+      "path": "metrics/comparison.csv",
+      "sha256": "194bea14bf079fcefeb5b50755f37f67e7f5450ffee8fd128ce00769f0ec02b8",
+      "sizeBytes": 12881
+    },
+    {
+      "path": "metrics/not-comparable-reasons.json",
+      "sha256": "a3e0a1c3cd708409a3ca67ca69377139d83e42e9f8f7c4857f1a680156f0bd35",
+      "sizeBytes": 240
+    },
+    {
+      "path": "metrics/README.md",
+      "sha256": "cb546a677c4ff6bbda0f5aae578586e9d634865786953ca1dc33648d7bca2715",
+      "sizeBytes": 537
+    },
+    {
+      "path": "metrics/run-summary.json",
+      "sha256": "4682ca4c92bdf2c3354a2fd191a17c17ed98c9bdddd20fa26477cd26ae71ab08",
+      "sizeBytes": 9328
+    },
+    {
+      "path": "predictions/feature-table.json",
+      "sha256": "7e7ab70b85010ec1f0b494843537402269ab4134abf2b0cb3569e4d8e928d038",
+      "sizeBytes": 5908
+    },
+    {
+      "path": "predictions/README.md",
+      "sha256": "29fdfa31bd98c650ad43c87eb4358b743f79b22a247371a2649ec29c0c971028",
+      "sizeBytes": 193
+    },
+    {
+      "path": "README.md",
+      "sha256": "91741dba591dd365c52fb57cdd558a6be425f92e515ce8b258b6b9559b05342b",
+      "sizeBytes": 2026
+    },
+    {
+      "path": "reproduction/clean-rerun/07-comparison.csv",
+      "sha256": "194bea14bf079fcefeb5b50755f37f67e7f5450ffee8fd128ce00769f0ec02b8",
+      "sizeBytes": 12881
+    },
+    {
+      "path": "reproduction/clean-rerun/07-comparison_by-family.csv",
+      "sha256": "7162cab182650d6a9e747c8ab59e155eb950d0b58efeb8843ef389283dc13e92",
+      "sizeBytes": 578
+    },
+    {
+      "path": "reproduction/clean-rerun/07-comparison_summary.json",
+      "sha256": "81a3e2b32f291b3ba9d0476e7c7543d5f662a7094a15c99b76d17196ff7ec62c",
+      "sizeBytes": 1314
+    },
+    {
+      "path": "reproduction/clean-rerun/run-summary.json",
+      "sha256": "55a08f5b7fc59680dc4b6138751414570718c03095685cba05b9749147bb7ce6",
+      "sizeBytes": 9285
+    },
+    {
+      "path": "reproduction/clean-rerun.json",
+      "sha256": "7480104338ee87722ab541f1e37a219963a5c5844027809252dfdd66b2e71bda",
+      "sizeBytes": 2027
+    },
+    {
+      "path": "reproduction/expected-artifacts.json",
+      "sha256": "b4a75c09ce07408a9f18980c8f0a5a72bbb7408f97019f71c736fa82921b71c9",
+      "sizeBytes": 2046
+    },
+    {
+      "path": "reproduction/known-variation.md",
+      "sha256": "28e53f677b5b9a4bb2860cb0a540e88f099969eb45909e68f241f41d5311e66b",
+      "sizeBytes": 613
+    },
+    {
+      "path": "reproduction/operator-snapshot.json",
+      "sha256": "da68ef709031e92983039d86fddc5e3396e15b19df0171696fef6ae59331f932",
+      "sizeBytes": 369
+    },
+    {
+      "path": "reproduction/README.md",
+      "sha256": "d4be7c8c857fc00f5fba74470e9392465692ea3a80074685d50d0380cf257eb0",
+      "sizeBytes": 1352
+    },
+    {
+      "path": "reproduction/run.ps1",
+      "sha256": "37877734703f00a58b5aff1bcdd4f9645aa3d8d990c1bba4a1199582dabcefe2",
+      "sizeBytes": 554
+    },
+    {
+      "path": "reproduction/run.sh",
+      "sha256": "c576da1f2e907a12e88b065d84e6fcc5c733253dae9907be820c93e879a296d5",
+      "sizeBytes": 441
+    },
+    {
+      "path": "splits/README.md",
+      "sha256": "ce3183aa115b2ac3f2e1007534c41f015d7c04f54f3380cbf96e865552c98faa",
+      "sizeBytes": 121
+    },
+    {
+      "path": "workflows/operators.json",
+      "sha256": "f3011f7e8a1add5ff804caf65f62bf1f449c7a722ae2c497534c35a11015930c",
+      "sizeBytes": 291
+    },
+    {
+      "path": "workflows/README.md",
+      "sha256": "9c75619720c6e4684bbc69aa3b3f93b23c8c36e985bc743d0c75f0f0dab2b7a7",
+      "sizeBytes": 281
+    },
+    {
+      "path": "workflows/workflow.json",
+      "sha256": "c73cf39588bde34426200a573fde0d1b11738d0df486558c560d32928c6fa476",
+      "sizeBytes": 4243
+    }
+  ]
+}

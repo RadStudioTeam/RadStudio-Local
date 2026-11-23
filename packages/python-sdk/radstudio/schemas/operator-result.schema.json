@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:radstudio:schema:operator-result.json",
+  "title": "Operator Result",
+  "description": "算子执行结果",
+  "type": "object",
+  "required": [
+    "requestId",
+    "runId",
+    "nodeId",
+    "status"
+  ],
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "nodeId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArtifactRef"
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "object"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "transfer": {
+      "$ref": "#/$defs/Transfer"
+    },
+    "implementation": {
+      "$ref": "#/$defs/ImplementationIdentity"
+    },
+    "executionContract": {
+      "$ref": "#/$defs/receipt"
+    }
+  },
+  "$defs": {
+    "Transfer": {
+      "type": "object",
+      "description": "带外传输回填。对象模式下算子把输出工作区上传到预签名 PUT URL 后，回填 outputSha256/outputSize 供 worker 下载校验。",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "object"
+          ]
+        },
+        "outputSha256": {
+          "type": "string"
+        },
+        "outputSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "ArtifactRef": {
+      "type": "object",
+      "required": [
+        "artifactId",
+        "type",
+        "storagePath"
+      ],
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "type": "string"
+        },
+        "storagePath": {
+          "type": "string"
+        },
+        "fileHash": {
+          "type": "string"
+        },
+        "fileSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "ImplementationIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatorType",
+        "requestedVersion",
+        "resolvedVersion",
+        "selection"
+      ],
+      "description": "执行端自报身份，不能替代部署镜像/函数版本资格验证。",
+      "properties": {
+        "operatorType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requestedVersion": {
+          "type": "string"
+        },
+        "resolvedVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selection": {
+          "enum": [
+            "exact",
+            "legacy-fc-alias",
+            "legacy-latest"
+          ]
+        }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "parameterDigest": {
+          "type": "string",
+          "pattern": "^([0-9a-f]{64})?$"
+        },
+        "invocationDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "parameterDigest"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "version": {
+                "const": 2
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "invocationDigest"
+            ],
+            "properties": {
+              "parameterDigest": {
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "invocationDigest"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

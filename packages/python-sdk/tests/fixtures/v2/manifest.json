@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-11-23",
+  "generator": "scripts/v2/generate-fixtures.mjs",
+  "license": "synthetic; no real patient data",
+  "files": [
+    {
+      "path": "geo/rnaseq_counts.csv",
+      "bytes": 367,
+      "sha256": "4d1979fb04ca3484a4ca3435c1d5dc7e4964c175e6398efb9e400b6272655966"
+    },
+    {
+      "path": "geo/rnaseq_tpm.csv",
+      "bytes": 1041,
+      "sha256": "a5c99bca551e917ce3ca656d850f140bad6b083feb5193206afc22ed1be07347"
+    },
+    {
+      "path": "geo/rnaseq_samples.csv",
+      "bytes": 251,
+      "sha256": "924278212e4f3a17e45945533246bb7f5e3a1b2777e2605e31358378bb12922d"
+    },
+    {
+      "path": "geo/microarray_matrix.csv",
+      "bytes": 544,
+      "sha256": "7da4514ae351eed4b1cabbabb3dde3cd30333147ad03e1ef10fd825088370f2a"
+    },
+    {
+      "path": "geo/gpl_subset.csv",
+      "bytes": 83,
+      "sha256": "b5711a209ecb0557a93b12ba475cfdffcf3271e1ee08e8197a4fd05551051f2f"
+    },
+    {
+      "path": "bulk/expected_de.json",
+      "bytes": 366,
+      "sha256": "bb4daf575b87d15bd1cdc86ec6db79642d4dba6ed3fcf2de73037b3358b655c3"
+    },
+    {
+      "path": "notebook/input.csv",
+      "bytes": 64,
+      "sha256": "e777b4aa9f29463ac3cf1b3bbfe8b6ce9ff91538eda766594fadd0556c63893c"
+    },
+    {
+      "path": "imaging/2d/image.png",
+      "bytes": 340,
+      "sha256": "630aac496aec2fc5cc9aaf2f60d1ec6c54181f16784bcbf77173cc2066e4cb3f"
+    },
+    {
+      "path": "imaging/2d/mask.png",
+      "bytes": 76,
+      "sha256": "a026c347a0854e4f422de5b8d979d62f2a43afb772022104c3a146137bbfe479"
+    },
+    {
+      "path": "imaging/3d/image.nii",
+      "bytes": 400,
+      "sha256": "3d1b99a01a151048ad4c3482898f1247adc75e25d2f9cbf43adb648bf1658aa3"
+    },
+    {
+      "path": "imaging/3d/image.nii.gz",
+      "bytes": 139,
+      "sha256": "1018a9e9010afbce8b02ff90048f5e5b90f61a89e23389d33e7731fc271bd79a"
+    },
+    {
+      "path": "imaging/3d/mask.nii",
+      "bytes": 400,
+      "sha256": "287cb656d9ace8b7e3f1a15bef4f015ad0ed69afaafb0aef3e372e4d857d827d"
+    },
+    {
+      "path": "imaging/3d/mask.nii.gz",
+      "bytes": 97,
+      "sha256": "33db3311af7f9e4cf4f762e4062423335515f58db01046401fb82ad649f28128"
+    }
+  ]
+}

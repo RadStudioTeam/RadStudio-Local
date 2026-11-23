@@ -1,0 +1,205 @@
+[
+  {
+    "name": "exclusive-positive",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":0.1}",
+    "valid": true,
+    "schemaValid": true
+  },
+  {
+    "name": "exclusive-zero",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":0}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "maximum",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":6}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "required",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "unknown",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":1,\"typo\":true}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "number-string",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":\"1\"}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "number-boolean",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}",
+    "value": "{\"x\":true}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "max-items",
+    "schema": "{\"type\":\"array\",\"maxItems\":2,\"items\":{\"type\":\"integer\"}}",
+    "value": "[1,2,3]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "min-items",
+    "schema": "{\"type\":\"array\",\"minItems\":1,\"items\":{\"type\":\"integer\"}}",
+    "value": "[]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "array-type",
+    "schema": "{\"type\":\"array\",\"items\":{\"type\":\"integer\"}}",
+    "value": "[1,2.5]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "integer-accept-integral",
+    "schema": "{\"type\":\"integer\"}",
+    "value": "1.0",
+    "valid": true,
+    "schemaValid": true
+  },
+  {
+    "name": "integer-reject-fraction",
+    "schema": "{\"type\":\"integer\"}",
+    "value": "1.1",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "unique-numeric",
+    "schema": "{\"type\":\"array\",\"uniqueItems\":true}",
+    "value": "[1,1.0]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "unique-object-order",
+    "schema": "{\"type\":\"array\",\"uniqueItems\":true}",
+    "value": "[{\"a\":1,\"b\":2},{\"b\":2,\"a\":1}]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "enum-typed-bool",
+    "schema": "{\"enum\":[1]}",
+    "value": "true",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "enum-number-equivalent",
+    "schema": "{\"enum\":[1]}",
+    "value": "1.0",
+    "valid": true,
+    "schemaValid": true
+  },
+  {
+    "name": "empty-legacy-schema",
+    "schema": "{}",
+    "value": "{\"legacy\":\"allowed\"}",
+    "valid": true,
+    "schemaValid": true
+  },
+  {
+    "name": "open-legacy-object",
+    "schema": "{\"type\":\"object\"}",
+    "value": "{\"legacy\":\"allowed\"}",
+    "valid": true,
+    "schemaValid": true
+  },
+  {
+    "name": "no-default-injection",
+    "schema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"integer\",\"default\":1}},\"required\":[\"x\"]}",
+    "value": "{}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "nested-required",
+    "schema": "{\"type\":\"object\",\"properties\":{\"group\":{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}}}",
+    "value": "{\"group\":{}}",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "nested-array-object",
+    "schema": "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"exclusiveMinimum\":0,\"maximum\":5}},\"required\":[\"x\"],\"additionalProperties\":false}}",
+    "value": "[{\"x\":1},{}]",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "exclusive-upper",
+    "schema": "{\"type\":\"number\",\"exclusiveMaximum\":1}",
+    "value": "1",
+    "valid": false,
+    "schemaValid": true
+  },
+  {
+    "name": "unsupported-ref",
+    "schema": "{\"$ref\":\"https://example.invalid/schema\"}",
+    "value": "0",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "unsupported-pattern",
+    "schema": "{\"type\":\"string\",\"pattern\":\"a+\"}",
+    "value": "\"aaa\"",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "unsupported-oneof",
+    "schema": "{\"oneOf\":[{\"type\":\"string\"}]}",
+    "value": "\"a\"",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "invalid-type",
+    "schema": "{\"type\":\"nonsense\"}",
+    "value": "1",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "invalid-minimum-type",
+    "schema": "{\"type\":\"number\",\"minimum\":\"1\"}",
+    "value": "2",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "invalid-items",
+    "schema": "{\"type\":\"array\",\"items\":false}",
+    "value": "[]",
+    "valid": false,
+    "schemaValid": false
+  },
+  {
+    "name": "invalid-required-type",
+    "schema": "{\"type\":\"object\",\"required\":[1]}",
+    "value": "{}",
+    "valid": false,
+    "schemaValid": false
+  }
+]

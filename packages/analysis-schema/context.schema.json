@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnalysisContext v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "runId",
+    "projectId",
+    "workflowVersionId",
+    "workflow",
+    "evaluationGroups",
+    "facts",
+    "evidence",
+    "missing",
+    "unsupported",
+    "conflicts",
+    "contextHash",
+    "inputManifest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string" },
+    "projectId": { "type": "string" },
+    "workflowVersionId": { "type": "string" },
+    "workflow": { "type": "array", "items": { "type": "object" } },
+    "evaluationGroups": { "type": "array", "items": { "type": "object" } },
+    "facts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "key", "value", "evidenceIds"]
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "nodeId", "fileHash", "pointer", "rawValue"]
+      }
+    },
+    "missing": { "type": "array" },
+    "unsupported": { "type": "array" },
+    "conflicts": { "type": "array" },
+    "contextHash": { "type": "string" },
+    "inputManifest": { "type": "array" }
+  },
+  "additionalProperties": false
+}

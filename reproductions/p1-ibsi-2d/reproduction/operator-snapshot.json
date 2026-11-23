@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-11-22T16:40:17.907251+00:00",
+  "operators": {
+    "ReadImages": "1.0.0",
+    "ImageFormatConversion": "1.1.0",
+    "Preprocessing2D": "1.1.0",
+    "IBSI2DFeatureExtraction": "1.0.0",
+    "ReadTable": "1.0.0",
+    "IBSIReferenceComparison": "1.0.0"
+  },
+  "note": "运行时的算子版本快照；重跑前请核对版本一致"
+}

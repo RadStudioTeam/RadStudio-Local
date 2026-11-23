@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "aliases": [
+    {
+      "operatorType": "DLCNNInference",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "DLCNNInference",
+      "deploymentVersion": "1.1.0-fc",
+      "implementationVersion": "1.1.0"
+    },
+    {
+      "operatorType": "DLCNNInference",
+      "deploymentVersion": "1.3.0-fc",
+      "implementationVersion": "1.3.0"
+    },
+    {
+      "operatorType": "DLCNNTraining",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "DLCNNTraining",
+      "deploymentVersion": "1.2.0-fc",
+      "implementationVersion": "1.2.0"
+    },
+    {
+      "operatorType": "DataSplit",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "DataSplit",
+      "deploymentVersion": "1.1.0-fc",
+      "implementationVersion": "1.1.0"
+    },
+    {
+      "operatorType": "Evaluation",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "Evaluation",
+      "deploymentVersion": "1.1.0-fc",
+      "implementationVersion": "1.1.0"
+    },
+    {
+      "operatorType": "FeatureFilter",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "FeatureFilter",
+      "deploymentVersion": "1.1.0-fc",
+      "implementationVersion": "1.1.0"
+    },
+    {
+      "operatorType": "GradCAM",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "GradientBoostingClassifier",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "HoldoutSplit",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "IBSI2DFeatureExtraction",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "ImageFilterBank",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "ImageFormatConversion",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "LogisticRegression",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "ModelApply",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "PaperFigures",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "Preprocessing2D",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "QualityControl",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "ROIValidation",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "RandomForestClassifier",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "Report",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "Report",
+      "deploymentVersion": "1.1.0-fc",
+      "implementationVersion": "1.1.0"
+    },
+    {
+      "operatorType": "SVMClassifier",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "ScClustering",
+      "deploymentVersion": "1.0.3-fc",
+      "implementationVersion": "1.0.3"
+    },
+    {
+      "operatorType": "ScDifferentialExpression",
+      "deploymentVersion": "1.0.3-fc",
+      "implementationVersion": "1.0.3"
+    },
+    {
+      "operatorType": "ScDimReduction",
+      "deploymentVersion": "1.0.3-fc",
+      "implementationVersion": "1.0.3"
+    },
+    {
+      "operatorType": "ScNormalize",
+      "deploymentVersion": "1.0.3-fc",
+      "implementationVersion": "1.0.3"
+    },
+    {
+      "operatorType": "ScQualityControl",
+      "deploymentVersion": "1.0.3-fc",
+      "implementationVersion": "1.0.3"
+    },
+    {
+      "operatorType": "SegUNetInference",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    },
+    {
+      "operatorType": "SegUNetTraining",
+      "deploymentVersion": "1.0.0-fc",
+      "implementationVersion": "1.0.0"
+    }
+  ]
+}

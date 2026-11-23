@@ -1,0 +1,23 @@
+{
+  "fixture": "v2/geo",
+  "dataKind": "counts",
+  "comparison": "group B vs A",
+  "expectedUp": [
+    "g1",
+    "g2"
+  ],
+  "expectedDown": [
+    "g3",
+    "g4"
+  ],
+  "expectedNull": [
+    "g6",
+    "g7",
+    "g8",
+    "g9",
+    "g10",
+    "g11",
+    "g12"
+  ],
+  "note": "合成数据；仅用于读取/归一化/DEG 方向性测试，不代表真实效应。"
+}

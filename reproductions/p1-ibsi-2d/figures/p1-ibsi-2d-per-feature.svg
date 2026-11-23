@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="885" viewBox="0 0 980 885" role="img" aria-label="逐特征相对偏差">
+<style>text{font-family:'Inter','Noto Sans SC','Microsoft YaHei',sans-serif;}</style>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="48" y="36" font-size="19" font-weight="700" fill="#1f2430">图 2：逐特征相对偏差（35 个可比特征）</text>
+<text x="48" y="60" font-size="12.5" fill="#5b6472">按特征族着色，族内按相对偏差降序；参考值为 0 的行不参与相对偏差</text>
+<rect x="48" y="76" width="12" height="12" fill="#4c78a8"/>
+<text x="65" y="86" font-size="12" fill="#3c4454">GLSZM</text>
+<rect x="126" y="76" width="12" height="12" fill="#59a14f"/>
+<text x="143" y="86" font-size="12" fill="#3c4454">NGTDM</text>
+<rect x="204" y="76" width="12" height="12" fill="#e08b00"/>
+<text x="221" y="86" font-size="12" fill="#3c4454">NGLDM</text>
+<line x1="292.0" y1="92" x2="292.0" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="292.0" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.0%</text>
+<line x1="410.4" y1="92" x2="410.4" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="410.4" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.1%</text>
+<line x1="528.8" y1="92" x2="528.8" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="528.8" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.2%</text>
+<line x1="647.2" y1="92" x2="647.2" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="647.2" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.3%</text>
+<line x1="765.6" y1="92" x2="765.6" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="765.6" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.4%</text>
+<line x1="884.0" y1="92" x2="884.0" y2="827" stroke="#e6e9ef" stroke-width="1"/>
+<text x="884.0" y="847" font-size="11" fill="#5b6472" text-anchor="middle">0.5%</text>
+<text x="282" y="106" font-size="10.5" fill="#3c4454" text-anchor="end">J17V · Large zone high grey level…</text>
+<rect x="292" y="97" width="501.4" height="11" fill="#4c78a8" rx="2"/>
+<text x="801.4" y="106" font-size="10.5" fill="#3c4454">0.424%</text>
+<text x="282" y="127" font-size="10.5" fill="#3c4454" text-anchor="end">JNSA · Grey level non-uniformity</text>
+<rect x="292" y="118" width="359.9" height="11" fill="#4c78a8" rx="2"/>
+<text x="659.9" y="127" font-size="10.5" fill="#3c4454">0.304%</text>
+<text x="282" y="148" font-size="10.5" fill="#3c4454" text-anchor="end">4JP3 · Zone size non-uniformity</text>
+<rect x="292" y="139" width="340.6" height="11" fill="#4c78a8" rx="2"/>
+<text x="640.6" y="148" font-size="10.5" fill="#3c4454">0.288%</text>
+<text x="282" y="169" font-size="10.5" fill="#3c4454" text-anchor="end">5GN9 · High grey level zone empha…</text>
+<rect x="292" y="160" width="292.2" height="11" fill="#4c78a8" rx="2"/>
+<text x="592.2" y="169" font-size="10.5" fill="#3c4454">0.247%</text>
+<text x="282" y="190" font-size="10.5" fill="#3c4454" text-anchor="end">HW1V · Small zone high grey level…</text>
+<rect x="292" y="181" width="253.0" height="11" fill="#4c78a8" rx="2"/>
+<text x="553.0" y="190" font-size="10.5" fill="#3c4454">0.214%</text>
+<text x="282" y="211" font-size="10.5" fill="#3c4454" text-anchor="end">5RAI · Small zone low grey level …</text>
+<rect x="292" y="202" width="206.7" height="11" fill="#4c78a8" rx="2"/>
+<text x="506.7" y="211" font-size="10.5" fill="#3c4454">0.175%</text>
+<text x="282" y="232" font-size="10.5" fill="#3c4454" text-anchor="end">P30P · Zone percentage</text>
+<rect x="292" y="223" width="192.2" height="11" fill="#4c78a8" rx="2"/>
+<text x="492.2" y="232" font-size="10.5" fill="#3c4454">0.162%</text>
+<text x="282" y="253" font-size="10.5" fill="#3c4454" text-anchor="end">GU8N · Zone size entropy</text>
+<rect x="292" y="244" width="119.3" height="11" fill="#4c78a8" rx="2"/>
+<text x="419.3" y="253" font-size="10.5" fill="#3c4454">0.101%</text>
+<text x="282" y="274" font-size="10.5" fill="#3c4454" text-anchor="end">9SAK · Small zone emphasis</text>
+<rect x="292" y="265" width="100.4" height="11" fill="#4c78a8" rx="2"/>
+<text x="400.4" y="274" font-size="10.5" fill="#3c4454">0.085%</text>
+<text x="282" y="295" font-size="10.5" fill="#3c4454" text-anchor="end">48P8 · Large zone emphasis</text>
+<rect x="292" y="286" width="89.9" height="11" fill="#4c78a8" rx="2"/>
+<text x="389.9" y="295" font-size="10.5" fill="#3c4454">0.076%</text>
+<text x="282" y="316" font-size="10.5" fill="#3c4454" text-anchor="end">VB3A · Normalised zone size non-u…</text>
+<rect x="292" y="307" width="70.1" height="11" fill="#4c78a8" rx="2"/>
+<text x="370.1" y="316" font-size="10.5" fill="#3c4454">0.059%</text>
+<text x="282" y="337" font-size="10.5" fill="#3c4454" text-anchor="end">XMSY · Low grey level zone emphas…</text>
+<rect x="292" y="328" width="62.9" height="11" fill="#4c78a8" rx="2"/>
+<text x="362.9" y="337" font-size="10.5" fill="#3c4454">0.053%</text>
+<text x="282" y="358" font-size="10.5" fill="#3c4454" text-anchor="end">3NSA · Zone size variance</text>
+<rect x="292" y="349" width="16.6" height="11" fill="#4c78a8" rx="2"/>
+<text x="316.6" y="358" font-size="10.5" fill="#3c4454">0.014%</text>
+<text x="282" y="379" font-size="10.5" fill="#3c4454" text-anchor="end">BYLV · Grey level variance</text>
+<rect x="292" y="370" width="15.6" height="11" fill="#4c78a8" rx="2"/>
+<text x="315.6" y="379" font-size="10.5" fill="#3c4454">0.013%</text>
+<text x="282" y="400" font-size="10.5" fill="#3c4454" text-anchor="end">YH51 · Large zone low grey level …</text>
+<rect x="292" y="391" width="5.6" height="11" fill="#4c78a8" rx="2"/>
+<text x="305.6" y="400" font-size="10.5" fill="#3c4454">0.005%</text>
+<text x="282" y="421" font-size="10.5" fill="#3c4454" text-anchor="end">Y1RO · Normalised grey level non-…</text>
+<rect x="292" y="412" width="2.5" height="11" fill="#4c78a8" rx="2"/>
+<text x="302.5" y="421" font-size="10.5" fill="#3c4454">0.002%</text>
+<text x="282" y="442" font-size="10.5" fill="#3c4454" text-anchor="end">QCDE · Coarseness</text>
+<rect x="292" y="433" width="478.9" height="11" fill="#59a14f" rx="2"/>
+<text x="778.9" y="442" font-size="10.5" fill="#3c4454">0.405%</text>
+<text x="282" y="463" font-size="10.5" fill="#3c4454" text-anchor="end">1X9X · Strength</text>
+<rect x="292" y="454" width="149.4" height="11" fill="#59a14f" rx="2"/>
+<text x="449.4" y="463" font-size="10.5" fill="#3c4454">0.126%</text>
+<text x="282" y="484" font-size="10.5" fill="#3c4454" text-anchor="end">NQ30 · Busyness</text>
+<rect x="292" y="475" width="47.8" height="11" fill="#59a14f" rx="2"/>
+<text x="347.8" y="484" font-size="10.5" fill="#3c4454">0.040%</text>
+<text x="282" y="505" font-size="10.5" fill="#3c4454" text-anchor="end">65HE · Contrast</text>
+<rect x="292" y="496" width="33.7" height="11" fill="#59a14f" rx="2"/>
+<text x="333.7" y="505" font-size="10.5" fill="#3c4454">0.028%</text>
+<text x="282" y="526" font-size="10.5" fill="#3c4454" text-anchor="end">HDEZ · Complexity</text>
+<rect x="292" y="517" width="1.5" height="11" fill="#59a14f" rx="2"/>
+<text x="301.5" y="526" font-size="10.5" fill="#3c4454">0.001%</text>
+<text x="282" y="547" font-size="10.5" fill="#3c4454" text-anchor="end">FP8K · Grey level non-uniformity</text>
+<rect x="292" y="538" width="538.4" height="11" fill="#e08b00" rx="2"/>
+<text x="838.4" y="547" font-size="10.5" fill="#3c4454">0.455%</text>
+<text x="282" y="568" font-size="10.5" fill="#3c4454" text-anchor="end">JA6D · Low dependence high grey l…</text>
+<rect x="292" y="559" width="190.1" height="11" fill="#e08b00" rx="2"/>
+<text x="490.1" y="568" font-size="10.5" fill="#3c4454">0.161%</text>
+<text x="282" y="589" font-size="10.5" fill="#3c4454" text-anchor="end">FCBV · Dependence count entropy</text>
+<rect x="292" y="580" width="187.5" height="11" fill="#e08b00" rx="2"/>
+<text x="487.5" y="589" font-size="10.5" fill="#3c4454">0.158%</text>
+<text x="282" y="610" font-size="10.5" fill="#3c4454" text-anchor="end">1PFV · Grey level variance</text>
+<rect x="292" y="601" width="163.7" height="11" fill="#e08b00" rx="2"/>
+<text x="463.7" y="610" font-size="10.5" fill="#3c4454">0.138%</text>
+<text x="282" y="631" font-size="10.5" fill="#3c4454" text-anchor="end">IMOQ · High dependence emphasis</text>
+<rect x="292" y="622" width="161.4" height="11" fill="#e08b00" rx="2"/>
+<text x="461.4" y="631" font-size="10.5" fill="#3c4454">0.136%</text>
+<text x="282" y="652" font-size="10.5" fill="#3c4454" text-anchor="end">Z87G · Dependence count non-unifo…</text>
+<rect x="292" y="643" width="138.9" height="11" fill="#e08b00" rx="2"/>
+<text x="438.9" y="652" font-size="10.5" fill="#3c4454">0.117%</text>
+<text x="282" y="673" font-size="10.5" fill="#3c4454" text-anchor="end">OKJI · Normalised dependence coun…</text>
+<rect x="292" y="664" width="127.2" height="11" fill="#e08b00" rx="2"/>
+<text x="427.2" y="673" font-size="10.5" fill="#3c4454">0.107%</text>
+<text x="282" y="694" font-size="10.5" fill="#3c4454" text-anchor="end">9QMG · High dependence high grey …</text>
+<rect x="292" y="685" width="53.3" height="11" fill="#e08b00" rx="2"/>
+<text x="353.3" y="694" font-size="10.5" fill="#3c4454">0.045%</text>
+<text x="282" y="715" font-size="10.5" fill="#3c4454" text-anchor="end">SODN · Low dependence emphasis</text>
+<rect x="292" y="706" width="52.6" height="11" fill="#e08b00" rx="2"/>
+<text x="352.6" y="715" font-size="10.5" fill="#3c4454">0.044%</text>
+<text x="282" y="736" font-size="10.5" fill="#3c4454" text-anchor="end">OAE7 · High grey level count emph…</text>
+<rect x="292" y="727" width="48.2" height="11" fill="#e08b00" rx="2"/>
+<text x="348.2" y="736" font-size="10.5" fill="#3c4454">0.041%</text>
+<text x="282" y="757" font-size="10.5" fill="#3c4454" text-anchor="end">TL9H · Low grey level count empha…</text>
+<rect x="292" y="748" width="41.6" height="11" fill="#e08b00" rx="2"/>
+<text x="341.6" y="757" font-size="10.5" fill="#3c4454">0.035%</text>
+<text x="282" y="778" font-size="10.5" fill="#3c4454" text-anchor="end">EQ3F · Low dependence low grey le…</text>
+<rect x="292" y="769" width="23.8" height="11" fill="#e08b00" rx="2"/>
+<text x="323.8" y="778" font-size="10.5" fill="#3c4454">0.020%</text>
+<text x="282" y="799" font-size="10.5" fill="#3c4454" text-anchor="end">DNX2 · Dependence count variance</text>
+<rect x="292" y="790" width="21.5" height="11" fill="#e08b00" rx="2"/>
+<text x="321.5" y="799" font-size="10.5" fill="#3c4454">0.018%</text>
+<text x="282" y="820" font-size="10.5" fill="#3c4454" text-anchor="end">NBZI · High dependence low grey l…</text>
+<rect x="292" y="811" width="2.1" height="11" fill="#e08b00" rx="2"/>
+<text x="302.1" y="820" font-size="10.5" fill="#3c4454">0.002%</text>
+</svg>

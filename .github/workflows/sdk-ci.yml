@@ -1,0 +1,46 @@
+name: SDK CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+
+      - name: Sync dependencies
+        working-directory: packages/python-sdk
+        run: uv sync --dev
+
+      - name: Lint
+        working-directory: packages/python-sdk
+        run: uv run ruff check .
+
+      - name: Test
+        working-directory: packages/python-sdk
+        run: uv run pytest -q
+
+      - name: Schema JSON validity
+        run: |
+          set -euo pipefail
+          find packages -name '*.schema.json' -print0 | while IFS= read -r -d '' f; do
+            node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' "$f"
+          done

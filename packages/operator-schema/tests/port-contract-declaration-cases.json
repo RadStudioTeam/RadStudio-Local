@@ -1,0 +1,153 @@
+[
+  {
+    "name": "legacy",
+    "contract": null,
+    "valid": true
+  },
+  {
+    "name": "integer",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1"
+    },
+    "valid": true
+  },
+  {
+    "name": "release",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1.2.3-rc.1+build.2"
+    },
+    "valid": true
+  },
+  {
+    "name": "blank-id",
+    "contract": {
+      "id": " ",
+      "version": "1"
+    },
+    "valid": false
+  },
+  {
+    "name": "range",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "^1.0"
+    },
+    "valid": false
+  },
+  {
+    "name": "latest",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "latest"
+    },
+    "valid": false
+  },
+  {
+    "name": "wildcard",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1.*"
+    },
+    "valid": false
+  },
+  {
+    "name": "unknown-dimension",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "dimension": "4d"
+    },
+    "valid": false
+  },
+  {
+    "name": "task-space",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "task": "binary class"
+    },
+    "valid": false
+  },
+  {
+    "name": "control",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "modelFamily": "a\u0000b"
+    },
+    "valid": false
+  },
+  {
+    "name": "unicode-space",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "task": "ab"
+    },
+    "valid": false
+  },
+  {
+    "name": "byte-boundary",
+    "contract": {
+      "id": "中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中",
+      "version": "1"
+    },
+    "valid": true
+  },
+  {
+    "name": "too-many-bytes",
+    "contract": {
+      "id": "中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中中",
+      "version": "1"
+    },
+    "valid": false
+  },
+  {
+    "name": "null-task",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "task": null
+    },
+    "valid": false
+  },
+  {
+    "name": "null-modelFamily",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "modelFamily": null
+    },
+    "valid": false
+  },
+  {
+    "name": "null-dimension",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "dimension": null
+    },
+    "valid": false
+  },
+  {
+    "name": "false-contract",
+    "contract": false,
+    "valid": false
+  },
+  {
+    "name": "zero-contract",
+    "contract": 0,
+    "valid": false
+  },
+  {
+    "name": "unknown-field",
+    "contract": {
+      "id": "radstudio/model",
+      "version": "1",
+      "model_family": "cnn"
+    },
+    "valid": false
+  }
+]

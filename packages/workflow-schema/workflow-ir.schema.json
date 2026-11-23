@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:radstudio:schema:workflow-ir.json",
+  "title": "Workflow IR",
+  "description": "RadStudio \u5de5\u4f5c\u6d41\u4e2d\u95f4\u8868\u793a",
+  "type": "object",
+  "required": [
+    "name",
+    "nodes",
+    "edges",
+    "schemaVersion"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "minItems": 1
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Edge"
+      }
+    },
+    "schemaVersion": {
+      "const": "2"
+    }
+  },
+  "$defs": {
+    "Node": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "operatorVersion",
+        "parameters"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ReadImages",
+            "ReadTable",
+            "ReadSingleCell",
+            "ReadDicom",
+            "ReadNifti",
+            "ImageFormatConversion",
+            "QualityControl",
+            "ROIValidation",
+            "Preprocessing2D",
+            "IBSI2DFeatureExtraction",
+            "FeatureFilter",
+            "LogisticRegression",
+            "Evaluation",
+            "Report",
+            "DataSplit"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object"
+        },
+        "operatorVersion": {
+          "const": "1.0.0"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodePort": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "Edge": {
+      "type": "object",
+      "required": [
+        "source",
+        "target",
+        "sourceOutput",
+        "targetInput"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "sourceOutput": {
+          "type": "string",
+          "default": "default"
+        },
+        "targetInput": {
+          "type": "string",
+          "default": "default"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

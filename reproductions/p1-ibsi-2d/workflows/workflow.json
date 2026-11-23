@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-11-22T16:40:17.907251+00:00",
+  "runId": "p1-ibsi-phantom-selfcheck",
+  "nodes": [
+    {
+      "nodeId": "01-read-images",
+      "operatorType": "ReadImages",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 39,
+      "outputs": {
+        "samples": "file:samples.json#sha256=b60168ce9cf9d42e90d9928d80dc5b7a8cefab79f1ee2b225eab164421c0b807;type=sample_collection"
+      }
+    },
+    {
+      "nodeId": "02-format-conversion",
+      "operatorType": "ImageFormatConversion",
+      "operatorVersion": "1.1.0",
+      "parameters": {
+        "imageMode": "grayscale",
+        "roiMode": "binary"
+      },
+      "status": "completed",
+      "durationMs": 58,
+      "outputs": {
+        "samples": "file:samples.json#sha256=b60168ce9cf9d42e90d9928d80dc5b7a8cefab79f1ee2b225eab164421c0b807;type=sample_collection"
+      }
+    },
+    {
+      "nodeId": "03-preprocessing2d",
+      "operatorType": "Preprocessing2D",
+      "operatorVersion": "1.1.0",
+      "parameters": {
+        "binWidth": 1
+      },
+      "status": "completed",
+      "durationMs": 75,
+      "outputs": {
+        "samples": "file:samples.json#sha256=1f6cca5a0659d75478f3fb302d718eefa986e8833039743cd1eff11caf82d4f2;type=sample_collection"
+      }
+    },
+    {
+      "nodeId": "04-ibsi-features",
+      "operatorType": "IBSI2DFeatureExtraction",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "engine": "pyradiomics",
+        "featureFamilies": [
+          "glszm",
+          "gldm",
+          "ngtdm"
+        ],
+        "imageTypes": [
+          "original"
+        ],
+        "binWidth": 1
+      },
+      "status": "completed",
+      "durationMs": 684,
+      "outputs": {
+        "features": "file:features.json#sha256=3fca83ce07e2cb7fec5376361fce30adfd327a6848b04577a18ce7395ed1ff62;type=feature_table",
+        "report": "file:report.json#sha256=ba0e9c011dd511d53f3f7128b346087a553fe21a357a8c7ea9338b194ff41115;type=report"
+      }
+    },
+    {
+      "nodeId": "05-read-reference",
+      "operatorType": "ReadTable",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 31,
+      "outputs": {
+        "records": "file:table.json#sha256=51ae632c55b0c84733d071fe88168c5ee791b09cb0468208248fa59d1d5bc160;type=table"
+      }
+    },
+    {
+      "nodeId": "06-read-mapping",
+      "operatorType": "ReadTable",
+      "operatorVersion": "1.0.0",
+      "parameters": {},
+      "status": "completed",
+      "durationMs": 26,
+      "outputs": {
+        "records": "file:table.json#sha256=2ad4a87e9c4d4ffaf4386682fb02669c663e342c81b31fa910a98e8cd38de92a;type=table"
+      }
+    },
+    {
+      "nodeId": "07-ibsi-comparison",
+      "operatorType": "IBSIReferenceComparison",
+      "operatorVersion": "1.0.0",
+      "parameters": {
+        "dataset": "dig. phantom",
+        "aggregation": "2D",
+        "recordAggregation": "per_slice_mean",
+        "imageType": "original"
+      },
+      "status": "completed",
+      "durationMs": 91,
+      "outputs": {
+        "comparison": "file:comparison.json#sha256=42b3c86a942cde060ce950e2560910e8259870da18dbd7b72eb290efdef5944c;type=table",
+        "summary": "file:summary.json#sha256=c9d74eb5d4f424513d99a926e406630c9ee0a8ecc5eb07af2ba630c0dcff6575;type=metrics",
+        "report": "file:report.json#sha256=c902bb533f33b60d4aa74e779abcbab5ea449c4841596ca67ad05aa0f0d46073;type=report"
+      }
+    }
+  ],
+  "edges": [
+    [
+      "01-read-images",
+      "02-format-conversion"
+    ],
+    [
+      "02-format-conversion",
+      "03-preprocessing2d"
+    ],
+    [
+      "03-preprocessing2d",
+      "04-ibsi-features"
+    ],
+    [
+      "04-ibsi-features",
+      "07-ibsi-comparison"
+    ],
+    [
+      "05-read-reference",
+      "07-ibsi-comparison"
+    ],
+    [
+      "06-read-mapping",
+      "07-ibsi-comparison"
+    ]
+  ],
+  "note": "本地 Python SDK 执行，节点顺序与平台工作流一致；同一工作区下两个 ReadTable 节点输出同名文件，运行时先把参考表复制为独立文件名再交给比对节点。"
+}

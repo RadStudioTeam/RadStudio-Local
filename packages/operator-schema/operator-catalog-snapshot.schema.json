@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:radstudio:schema:operator-catalog-snapshot-v1.json",
+  "title": "Frozen Operator Catalog v1",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "source": {
+      "enum": [
+        "installed-catalog",
+        "registry-at-dispatch",
+        "run-snapshot"
+      ]
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "parameterDialect": {
+          "const": "radstudio-parameters/1"
+        },
+        "implementationSelection": {
+          "const": "exact-v1"
+        },
+        "contentContracts": {
+          "const": 1
+        },
+        "artifactExecution": {
+          "const": 1
+        },
+        "invocationExecution": {
+          "const": 1
+        }
+      },
+      "required": [
+        "parameterDialect",
+        "implementationSelection"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "artifactExecution": [
+          "contentContracts"
+        ],
+        "invocationExecution": [
+          "artifactExecution"
+        ]
+      }
+    },
+    "nodes": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 500,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "requestedType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requestedVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "definition": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "parametersSchema": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "inputs": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "contract": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "cardinality": {
+                      "enum": [
+                        "",
+                        "one",
+                        "many"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "outputs": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "type": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "required": {
+                      "type": "boolean"
+                    },
+                    "contract": {
+                      "type": [
+                        "object",
+                        "null"
+                      ]
+                    },
+                    "mergePart": {
+                      "type": "object",
+                      "properties": {
+                        "artifact": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        },
+                        "port": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 128
+                        },
+                        "file": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256
+                        }
+                      },
+                      "required": [
+                        "artifact",
+                        "port",
+                        "file"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "defaults": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "entrypoint": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "version",
+              "parametersSchema",
+              "inputs",
+              "outputs"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "requestedType",
+          "requestedVersion",
+          "definition"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "version",
+    "source",
+    "rules",
+    "nodes",
+    "digest"
+  ],
+  "additionalProperties": false
+}

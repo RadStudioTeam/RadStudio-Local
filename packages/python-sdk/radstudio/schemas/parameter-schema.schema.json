@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://radstudio.invalid/schemas/parameter-schema-v1.json",
+  "$ref": "#/$defs/parameter",
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "object",
+            "array",
+            "string",
+            "number",
+            "integer",
+            "boolean"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "properties": {
+          "type": "object",
+          "maxProperties": 64,
+          "additionalProperties": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "required": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "additionalProperties": {
+          "type": "boolean"
+        },
+        "items": {
+          "$ref": "#/$defs/parameter"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "minItems": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "maxItems": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "enum": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "default": {},
+        "exclusiveMinimum": {
+          "type": "number"
+        },
+        "exclusiveMaximum": {
+          "type": "number"
+        }
+      },
+      "required": []
+    }
+  }
+}

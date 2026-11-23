@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "如果你在研究中使用了 RadStudio Local，请引用本文件。"
+title: "RadStudio Local: reproducible radiomics workflows on your own machine"
+abstract: >-
+  RadStudio Local 是面向医学影像组学研究的本地可复现工具：统一 Workflow IR、
+  可独立运行的 Python 算子与复现包，数据留在本机，产物可核对。
+authors:
+  - name: "RadStudio Team"
+    affiliation: "RadStudio"
+version: 0.1.0
+date-released: "2026-12-15"
+license: Apache-2.0
+repository-code: "https://github.com/RadStudioTeam/RadStudio-Local"
+keywords:
+  - radiomics
+  - medical imaging
+  - reproducibility
+  - workflow
+  - IBSI

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-11-22T16:40:17.907251+00:00",
+  "runId": "p1-ibsi-phantom-selfcheck",
+  "inputs": {
+    "phantom": {
+      "path": "packages/compliance/ibsi-2d/phantom.nii.gz",
+      "sha256": "83773ac2a288aa93cf819a98eaf301c18d35d5876182ec9c18733184e2b7a83a"
+    },
+    "mask": {
+      "path": "packages/compliance/ibsi-2d/mask.nii.gz",
+      "sha256": "3032d340944b577b83bc559ea7ae9a6034b84633a840eff39570ec17aa1d6281"
+    },
+    "slicesIndex": {
+      "path": "packages/compliance/ibsi-2d/slices/index.json",
+      "sha256": "0f09548443cc76493961f95ffef8fb57e38d1ce4aa6c9f7bc52f6a4d60e6c7fc"
+    },
+    "referenceValues": {
+      "path": "packages/compliance/ibsi-2d/reference-values.csv",
+      "sha256": "4a4fc6c67d7b107bb14dfa63f4e2cbc626b17f7ff064b9e39dc124c608c9e1eb"
+    },
+    "featureMapping": {
+      "path": "packages/compliance/ibsi-2d/feature-mapping.csv",
+      "sha256": "e712662532913a8c6453d14ae17ede2dc07d118210674bcffe8cd1b8312d7043"
+    }
+  },
+  "note": "路径相对仓库根；校验和与实际运行输入一致，可用于还原同一输入"
+}

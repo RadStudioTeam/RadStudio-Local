@@ -1,0 +1,6 @@
+{
+  "version": "3.1.1.dev111+g8ed57938",
+  "commit": "8ed579383b44806651c463d5e691f3b2b57522ab",
+  "requirement": "pyradiomics @ https://github.com/AIM-Harvard/pyradiomics/archive/8ed579383b44806651c463d5e691f3b2b57522ab.tar.gz",
+  "installNote": "PyPI sdist 缺 cmatrices.h（上游 issue #949），必须从 GitHub 源码按 commit 构建；构建依赖见 packages/python-sdk/pyproject.toml 的 tool.uv.extra-build-dependencies。"
+}

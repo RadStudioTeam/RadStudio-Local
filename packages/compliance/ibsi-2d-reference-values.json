@@ -1,0 +1,6082 @@
+{
+  "schemaVersion": "1.0",
+  "title": "IBSI 2D reference values",
+  "description": "2D subset of the reference values published in Chapter 3 of the IBSI reference manual. Values are copied from the rendered tables without numerical modification.",
+  "source": {
+    "organization": "Image Biomarker Standardisation Initiative (IBSI)",
+    "document": "The image biomarker standardisation initiative - Reference manual",
+    "version": "v10 (final pre-print, December 2019)",
+    "citation": "Zwanenburg A, Leger S, Vallières M, Löck S. Image biomarker standardisation initiative. arXiv:1612.07003v10.",
+    "radiologyDoi": "10.1148/radiol.2020191145",
+    "urls": {
+      "readTheDocs": "https://ibsi.readthedocs.io/en/latest/03_Image_features.html",
+      "arxiv": "https://arxiv.org/abs/1612.07003v10",
+      "datasets": "https://github.com/theibsi/data_sets"
+    },
+    "license": {
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "retrievedAt": "2026-11-22T22:14:29+08:00",
+    "sourceFile": {
+      "name": "03_Image_features.html",
+      "bytes": 587889,
+      "sha256": "5263658a4768abd5149db81e0d63bfe0a364dbc16f20227f34e1608c01714028"
+    },
+    "extraction": {
+      "script": "scripts/import_ibsi_2d_reference_values.py",
+      "generatedAt": "2026-11-22T14:20:35Z"
+    }
+  },
+  "subset": {
+    "name": "IBSI 2D reference values",
+    "definition": "Reference values that can be compared with a 2D slice-wise feature extraction pipeline.",
+    "inclusionRules": [
+      "Feature tables in Chapter 3 of the IBSI reference manual.",
+      "Texture features: rows whose aggregation method starts with '2D', for the digital phantom and configurations A/B.",
+      "Non-texture features: configurations A/B, which the manual defines as 2D slice-wise configurations."
+    ],
+    "exclusions": [
+      "Morphological features: the manual defines 25 morphological features in 3D only and provides no 2D reference values.",
+      "Configurations C/D/E and all 3D aggregations.",
+      "Digital phantom rows for non-texture features: these tables do not define a 2D aggregation."
+    ],
+    "counts": {
+      "referenceTablesInManual": 169,
+      "morphologyTablesExcluded": 25,
+      "featuresWith2DValues": 144,
+      "rows": 506,
+      "byFamily": {
+        "Grey level co-occurrence based features": {
+          "features": 25,
+          "rows": 150
+        },
+        "Grey level distance zone based features": {
+          "features": 16,
+          "rows": 48
+        },
+        "Grey level run length based features": {
+          "features": 16,
+          "rows": 96
+        },
+        "Grey level size zone based features": {
+          "features": 16,
+          "rows": 48
+        },
+        "Intensity histogram features": {
+          "features": 23,
+          "rows": 46
+        },
+        "Intensity-based statistical features": {
+          "features": 18,
+          "rows": 36
+        },
+        "Intensity-volume histogram features": {
+          "features": 6,
+          "rows": 12
+        },
+        "Local intensity features": {
+          "features": 2,
+          "rows": 4
+        },
+        "Neighbourhood grey tone difference based features": {
+          "features": 5,
+          "rows": 15
+        },
+        "Neighbouring grey level dependence based features": {
+          "features": 17,
+          "rows": 51
+        }
+      },
+      "byDataset": {
+        "config. A": 185,
+        "config. B": 185,
+        "dig. phantom": 136
+      },
+      "byAggregation": {
+        "2D": 162,
+        "2D, averaged": 123,
+        "2D, slice-merged": 123,
+        "config. A (2D)": 49,
+        "config. B (2D)": 49
+      }
+    },
+    "duplicateCodes": [
+      "1PR8",
+      "BC2M",
+      "GBPN"
+    ],
+    "scopeBreakdown": {
+      "textureFeatures": {
+        "features": 95,
+        "rows": 408,
+        "referenceDatasets": [
+          "dig. phantom",
+          "config. A",
+          "config. B"
+        ]
+      },
+      "nonTextureFeatures": {
+        "features": 49,
+        "rows": 98,
+        "referenceDatasets": [
+          "config. A",
+          "config. B"
+        ],
+        "note": "These features have no 2D digital-phantom reference values; their 2D values come from the CT configurations A/B. A digital-phantom-only run cannot compare them."
+      },
+      "morphologyFeatures": {
+        "features": 25,
+        "rows": 0,
+        "note": "The manual defines no 2D morphological reference values."
+      }
+    },
+    "toleranceRule": {
+      "withTolerance": "Pass when abs(computed - reference) <= tolerance.",
+      "withoutTolerance": "The manual publishes no tolerance for this row. Report the deviation with status 'no_tolerance' and exclude the row from pass/fail consistency counts.",
+      "rowsWithTolerance": 350,
+      "rowsWithoutTolerance": 156,
+      "note": "This rule is pre-registered before the comparison run and does not invent a threshold for rows without a published tolerance."
+    },
+    "status": {
+      "referenceValues": "acquired",
+      "comparison": "not_run",
+      "platformFeatureMapping": "not_started"
+    },
+    "notes": [
+      "Codes are not guaranteed to be unique across tables. Use code + name + tableIndex when joining to a feature mapping.",
+      "Inclusion in this file does not imply that the RadStudio operator implements the feature; platform mapping is a separate task."
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "checks": {
+      "referenceTables": {
+        "expected": 169,
+        "actual": 169,
+        "passed": true
+      },
+      "morphologyTables": {
+        "expected": 25,
+        "actual": 25,
+        "passed": true
+      },
+      "featuresWith2DValues": {
+        "expected": 144,
+        "actual": 144,
+        "passed": true
+      },
+      "rows": {
+        "expected": 506,
+        "actual": 506,
+        "passed": true
+      },
+      "unparsedValues": {
+        "expected": 0,
+        "actual": 0,
+        "passed": true
+      },
+      "missingMetadata": {
+        "expected": 0,
+        "actual": 0,
+        "passed": true
+      }
+    },
+    "unparsedValues": [],
+    "missingMetadata": [],
+    "byFamily": {
+      "Grey level co-occurrence based features": {
+        "features": 25,
+        "rows": 150
+      },
+      "Grey level distance zone based features": {
+        "features": 16,
+        "rows": 48
+      },
+      "Grey level run length based features": {
+        "features": 16,
+        "rows": 96
+      },
+      "Grey level size zone based features": {
+        "features": 16,
+        "rows": 48
+      },
+      "Intensity histogram features": {
+        "features": 23,
+        "rows": 46
+      },
+      "Intensity-based statistical features": {
+        "features": 18,
+        "rows": 36
+      },
+      "Intensity-volume histogram features": {
+        "features": 6,
+        "rows": 12
+      },
+      "Local intensity features": {
+        "features": 2,
+        "rows": 4
+      },
+      "Neighbourhood grey tone difference based features": {
+        "features": 5,
+        "rows": 15
+      },
+      "Neighbouring grey level dependence based features": {
+        "features": 17,
+        "rows": 51
+      }
+    }
+  },
+  "features": [
+    {
+      "code": "VJGA",
+      "name": "Local intensity peak",
+      "family": "Local intensity features",
+      "tableIndex": 27,
+      "tableNumber": 28,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -277,
+          "tolerance": 10,
+          "consensus": "moderate",
+          "rawValue": "\\(-\\) 277",
+          "rawTolerance": "10"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 178,
+          "tolerance": 10,
+          "consensus": "moderate",
+          "rawValue": "178",
+          "rawTolerance": "10"
+        }
+      ]
+    },
+    {
+      "code": "0F91",
+      "name": "Global intensity peak",
+      "family": "Local intensity features",
+      "tableIndex": 28,
+      "tableNumber": 29,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 189,
+          "tolerance": 5,
+          "consensus": "moderate",
+          "rawValue": "189",
+          "rawTolerance": "5"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 178,
+          "tolerance": 5,
+          "consensus": "moderate",
+          "rawValue": "178",
+          "rawTolerance": "5"
+        }
+      ]
+    },
+    {
+      "code": "Q4LE",
+      "name": "Mean intensity",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 29,
+      "tableNumber": 30,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 13.4,
+          "tolerance": 1.1,
+          "consensus": "very strong",
+          "rawValue": "13.4",
+          "rawTolerance": "1.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 11.5,
+          "tolerance": 1.1,
+          "consensus": "strong",
+          "rawValue": "11.5",
+          "rawTolerance": "1.1"
+        }
+      ]
+    },
+    {
+      "code": "ECT3",
+      "name": "Intensity variance",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 30,
+      "tableNumber": 31,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 14200,
+          "tolerance": 400,
+          "consensus": "very strong",
+          "rawValue": "\\(1.42 \\times 10^{4}\\)",
+          "rawTolerance": "400"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 14400,
+          "tolerance": 400,
+          "consensus": "very strong",
+          "rawValue": "\\(1.44 \\times 10^{4}\\)",
+          "rawTolerance": "400"
+        }
+      ]
+    },
+    {
+      "code": "KE2A",
+      "name": "Intensity skewness",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 31,
+      "tableNumber": 32,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -2.47,
+          "tolerance": 0.05,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 2.47",
+          "rawTolerance": "0.05"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -2.49,
+          "tolerance": 0.05,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 2.49",
+          "rawTolerance": "0.05"
+        }
+      ]
+    },
+    {
+      "code": "IPH6",
+      "name": "(Excess) intensity kurtosis",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 32,
+      "tableNumber": 33,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 5.96,
+          "tolerance": 0.24,
+          "consensus": "very strong",
+          "rawValue": "5.96",
+          "rawTolerance": "0.24"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 5.93,
+          "tolerance": 0.24,
+          "consensus": "very strong",
+          "rawValue": "5.93",
+          "rawTolerance": "0.24"
+        }
+      ]
+    },
+    {
+      "code": "Y12H",
+      "name": "Median intensity",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 33,
+      "tableNumber": 34,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 46,
+          "tolerance": 0.3,
+          "consensus": "very strong",
+          "rawValue": "46",
+          "rawTolerance": "0.3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 45,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "45",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "1GSF",
+      "name": "Minimum intensity",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 34,
+      "tableNumber": 35,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -500,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 500",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -500,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 500",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "QG58",
+      "name": "10th intensity percentile",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 35,
+      "tableNumber": 36,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -129,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 129",
+          "rawTolerance": "8"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -136,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 136",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "8DWT",
+      "name": "90th intensity percentile",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 36,
+      "tableNumber": 37,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 95,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "95",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 91,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "91",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "84IY",
+      "name": "Maximum intensity",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 37,
+      "tableNumber": 38,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 377,
+          "tolerance": 9,
+          "consensus": "very strong",
+          "rawValue": "377",
+          "rawTolerance": "9"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 391,
+          "tolerance": 9,
+          "consensus": "strong",
+          "rawValue": "391",
+          "rawTolerance": "9"
+        }
+      ]
+    },
+    {
+      "code": "SALO",
+      "name": "Intensity interquartile range",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 38,
+      "tableNumber": 39,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 56,
+          "tolerance": 0.5,
+          "consensus": "very strong",
+          "rawValue": "56",
+          "rawTolerance": "0.5"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 52,
+          "tolerance": 0.5,
+          "consensus": "strong",
+          "rawValue": "52",
+          "rawTolerance": "0.5"
+        }
+      ]
+    },
+    {
+      "code": "2OJQ",
+      "name": "Intensity range",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 39,
+      "tableNumber": 40,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 877,
+          "tolerance": 9,
+          "consensus": "very strong",
+          "rawValue": "877",
+          "rawTolerance": "9"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 891,
+          "tolerance": 9,
+          "consensus": "strong",
+          "rawValue": "891",
+          "rawTolerance": "9"
+        }
+      ]
+    },
+    {
+      "code": "4FUA",
+      "name": "Intensity-based mean absolute deviation",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 40,
+      "tableNumber": 41,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 73.6,
+          "tolerance": 1.4,
+          "consensus": "very strong",
+          "rawValue": "73.6",
+          "rawTolerance": "1.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 74.4,
+          "tolerance": 1.4,
+          "consensus": "strong",
+          "rawValue": "74.4",
+          "rawTolerance": "1.4"
+        }
+      ]
+    },
+    {
+      "code": "1128",
+      "name": "Intensity-based robust mean absolute deviation",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 41,
+      "tableNumber": 42,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 27.7,
+          "tolerance": 0.8,
+          "consensus": "very strong",
+          "rawValue": "27.7",
+          "rawTolerance": "0.8"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 27.3,
+          "tolerance": 0.8,
+          "consensus": "strong",
+          "rawValue": "27.3",
+          "rawTolerance": "0.8"
+        }
+      ]
+    },
+    {
+      "code": "N72L",
+      "name": "Intensity-based median absolute deviation",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 42,
+      "tableNumber": 43,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 64.3,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "64.3",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 63.8,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "63.8",
+          "rawTolerance": "1"
+        }
+      ]
+    },
+    {
+      "code": "7TET",
+      "name": "Intensity-based coefficient of variation",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 43,
+      "tableNumber": 44,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 8.9,
+          "tolerance": 4.98,
+          "consensus": "strong",
+          "rawValue": "8.9",
+          "rawTolerance": "4.98"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 10.4,
+          "tolerance": 5.2,
+          "consensus": "strong",
+          "rawValue": "10.4",
+          "rawTolerance": "5.2"
+        }
+      ]
+    },
+    {
+      "code": "9S40",
+      "name": "Intensity-based quartile coefficient of dispersion",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 44,
+      "tableNumber": 45,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.636,
+          "tolerance": 0.008,
+          "consensus": "strong",
+          "rawValue": "0.636",
+          "rawTolerance": "0.008"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.591,
+          "tolerance": 0.008,
+          "consensus": "strong",
+          "rawValue": "0.591",
+          "rawTolerance": "0.008"
+        }
+      ]
+    },
+    {
+      "code": "N8CA",
+      "name": "Intensity-based energy",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 45,
+      "tableNumber": 46,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 1650000000,
+          "tolerance": 20000000,
+          "consensus": "very strong",
+          "rawValue": "\\(1.65 \\times 10^{9}\\)",
+          "rawTolerance": "\\(2 \\times 10^{7}\\)"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 398000000,
+          "tolerance": 11000000,
+          "consensus": "strong",
+          "rawValue": "\\(3.98 \\times 10^{8}\\)",
+          "rawTolerance": "\\(1.1 \\times 10^{7}\\)"
+        }
+      ]
+    },
+    {
+      "code": "5ZWQ",
+      "name": "Root mean square intensity",
+      "family": "Intensity-based statistical features",
+      "tableIndex": 46,
+      "tableNumber": 47,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 120,
+          "tolerance": 2,
+          "consensus": "very strong",
+          "rawValue": "120",
+          "rawTolerance": "2"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 121,
+          "tolerance": 2,
+          "consensus": "strong",
+          "rawValue": "121",
+          "rawTolerance": "2"
+        }
+      ]
+    },
+    {
+      "code": "X6K6",
+      "name": "Mean discretised intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 47,
+      "tableNumber": 48,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 21.1,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "21.1",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 18.9,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "18.9",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "CH89",
+      "name": "Discretised intensity variance",
+      "family": "Intensity histogram features",
+      "tableIndex": 48,
+      "tableNumber": 49,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 22.8,
+          "tolerance": 0.6,
+          "consensus": "strong",
+          "rawValue": "22.8",
+          "rawTolerance": "0.6"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 18.7,
+          "tolerance": 0.2,
+          "consensus": "strong",
+          "rawValue": "18.7",
+          "rawTolerance": "0.2"
+        }
+      ]
+    },
+    {
+      "code": "88K1",
+      "name": "Discretised intensity skewness",
+      "family": "Intensity histogram features",
+      "tableIndex": 49,
+      "tableNumber": 50,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -2.46,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 2.46",
+          "rawTolerance": "0.05"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -2.47,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 2.47",
+          "rawTolerance": "0.05"
+        }
+      ]
+    },
+    {
+      "code": "C3I7",
+      "name": "(Excess) discretised intensity kurtosis",
+      "family": "Intensity histogram features",
+      "tableIndex": 50,
+      "tableNumber": 51,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 5.9,
+          "tolerance": 0.24,
+          "consensus": "strong",
+          "rawValue": "5.9",
+          "rawTolerance": "0.24"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 5.84,
+          "tolerance": 0.24,
+          "consensus": "strong",
+          "rawValue": "5.84",
+          "rawTolerance": "0.24"
+        }
+      ]
+    },
+    {
+      "code": "WIFQ",
+      "name": "Median discretised intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 51,
+      "tableNumber": 52,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 22,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "22",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 20,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "20",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "1PR8",
+      "name": "Minimum discretised intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 52,
+      "tableNumber": 53,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 1,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 1,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "1PR8",
+      "name": "10th discretised intensity percentile",
+      "family": "Intensity histogram features",
+      "tableIndex": 53,
+      "tableNumber": 54,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 15,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "15",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 14,
+          "tolerance": 0.5,
+          "consensus": "strong",
+          "rawValue": "14",
+          "rawTolerance": "0.5"
+        }
+      ]
+    },
+    {
+      "code": "GPMT",
+      "name": "90th discretised intensity percentile",
+      "family": "Intensity histogram features",
+      "tableIndex": 54,
+      "tableNumber": 55,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 24,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "24",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 22,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "22",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "3NCY",
+      "name": "Maximum discretised intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 55,
+      "tableNumber": 56,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 36,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "36",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 32,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "32",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "AMMC",
+      "name": "Intensity histogram mode",
+      "family": "Intensity histogram features",
+      "tableIndex": 56,
+      "tableNumber": 57,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 23,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "23",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 20,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "20",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "WR0O",
+      "name": "Discretised intensity interquartile range",
+      "family": "Intensity histogram features",
+      "tableIndex": 57,
+      "tableNumber": 58,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 2,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 2,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "5Z3W",
+      "name": "Discretised intensity range",
+      "family": "Intensity histogram features",
+      "tableIndex": 58,
+      "tableNumber": 59,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 35,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "35",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 31,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "31",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "D2ZX",
+      "name": "Intensity histogram mean absolute deviation",
+      "family": "Intensity histogram features",
+      "tableIndex": 59,
+      "tableNumber": 60,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 2.94,
+          "tolerance": 0.06,
+          "consensus": "strong",
+          "rawValue": "2.94",
+          "rawTolerance": "0.06"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 2.67,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "2.67",
+          "rawTolerance": "0.03"
+        }
+      ]
+    },
+    {
+      "code": "WRZB",
+      "name": "Intensity histogram robust mean absolute deviation",
+      "family": "Intensity histogram features",
+      "tableIndex": 60,
+      "tableNumber": 61,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 1.18,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "1.18",
+          "rawTolerance": "0.04"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 1.03,
+          "tolerance": 0.03,
+          "consensus": "moderate",
+          "rawValue": "1.03",
+          "rawTolerance": "0.03"
+        }
+      ]
+    },
+    {
+      "code": "4RNL",
+      "name": "Intensity histogram median absolute deviation",
+      "family": "Intensity histogram features",
+      "tableIndex": 61,
+      "tableNumber": 62,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 2.58,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "2.58",
+          "rawTolerance": "0.05"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 2.28,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "2.28",
+          "rawTolerance": "0.02"
+        }
+      ]
+    },
+    {
+      "code": "CWYJ",
+      "name": "Intensity histogram coefficient of variation",
+      "family": "Intensity histogram features",
+      "tableIndex": 62,
+      "tableNumber": 63,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.227,
+          "tolerance": 0.004,
+          "consensus": "strong",
+          "rawValue": "0.227",
+          "rawTolerance": "0.004"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.229,
+          "tolerance": 0.004,
+          "consensus": "strong",
+          "rawValue": "0.229",
+          "rawTolerance": "0.004"
+        }
+      ]
+    },
+    {
+      "code": "SLWD",
+      "name": "Intensity histogram quartile coefficient of dispersion",
+      "family": "Intensity histogram features",
+      "tableIndex": 63,
+      "tableNumber": 64,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.0455,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.0455",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.05,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.05",
+          "rawTolerance": "0.0005"
+        }
+      ]
+    },
+    {
+      "code": "TLU2",
+      "name": "Discretised intensity entropy",
+      "family": "Intensity histogram features",
+      "tableIndex": 64,
+      "tableNumber": 65,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 3.36,
+          "tolerance": 0.03,
+          "consensus": "very strong",
+          "rawValue": "3.36",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 3.16,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "3.16",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "BJ5W",
+      "name": "Discretised intensity uniformity",
+      "family": "Intensity histogram features",
+      "tableIndex": 65,
+      "tableNumber": 66,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.15,
+          "tolerance": 0.002,
+          "consensus": "very strong",
+          "rawValue": "0.15",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.174,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.174",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "12CE",
+      "name": "Maximum histogram gradient",
+      "family": "Intensity histogram features",
+      "tableIndex": 66,
+      "tableNumber": 67,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 11000,
+          "tolerance": 100,
+          "consensus": "strong",
+          "rawValue": "\\(1.1 \\times 10^{4}\\)",
+          "rawTolerance": "100"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 3220,
+          "tolerance": 50,
+          "consensus": "strong",
+          "rawValue": "\\(3.22 \\times 10^{3}\\)",
+          "rawTolerance": "50"
+        }
+      ]
+    },
+    {
+      "code": "8E6O",
+      "name": "Maximum histogram gradient intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 67,
+      "tableNumber": 68,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 21,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "21",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 19,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "19",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "VQB3",
+      "name": "Minimum histogram gradient",
+      "family": "Intensity histogram features",
+      "tableIndex": 68,
+      "tableNumber": 69,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -10100,
+          "tolerance": 100,
+          "consensus": "strong",
+          "rawValue": "\\(-1.01 \\times 10^{4}\\)",
+          "rawTolerance": "100"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -3020,
+          "tolerance": 50,
+          "consensus": "strong",
+          "rawValue": "\\(-3.02 \\times 10^{3}\\)",
+          "rawTolerance": "50"
+        }
+      ]
+    },
+    {
+      "code": "RHQZ",
+      "name": "Minimum histogram gradient intensity",
+      "family": "Intensity histogram features",
+      "tableIndex": 69,
+      "tableNumber": 70,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 24,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "24",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 22,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "22",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "BC2M",
+      "name": "Volume at intensity fraction",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 71,
+      "tableNumber": 72,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.978,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.978",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.977,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.977",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "BC2M",
+      "name": "Volume at intensity fraction",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 72,
+      "tableNumber": 73,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 6.98e-05,
+          "tolerance": 1.03e-05,
+          "consensus": "strong",
+          "rawValue": "\\(6.98 \\times 10^{-5}\\)",
+          "rawTolerance": "\\(1.03 \\times 10^{-5}\\)"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 7.31e-05,
+          "tolerance": 1.03e-05,
+          "consensus": "strong",
+          "rawValue": "\\(7.31 \\times 10^{-5}\\)",
+          "rawTolerance": "\\(1.03 \\times 10^{-5}\\)"
+        }
+      ]
+    },
+    {
+      "code": "GBPN",
+      "name": "Intensity at volume fraction",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 73,
+      "tableNumber": 74,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 96,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "96",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 92,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "92",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "GBPN",
+      "name": "Intensity at volume fraction",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 74,
+      "tableNumber": 75,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": -128,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 128",
+          "rawTolerance": "8"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": -135,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 135",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "DDTU",
+      "name": "Volume fraction difference between intensity fractions",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 75,
+      "tableNumber": 76,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 0.978,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.978",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 0.977,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.977",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "CNV2",
+      "name": "Intensity fraction difference between volume fractions",
+      "family": "Intensity-volume histogram features",
+      "tableIndex": 76,
+      "tableNumber": 77,
+      "rows": [
+        {
+          "dataset": "config. A",
+          "aggregation": "config. A (2D)",
+          "value": 224,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "224",
+          "rawTolerance": "8"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "config. B (2D)",
+          "value": 227,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "227",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "GYBY",
+      "name": "Joint maximum",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 77,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.519,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.519",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.512,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.512",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.109,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.109",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.109,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.109",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.156,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.156",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.156,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.156",
+          "rawTolerance": "0.002"
+        }
+      ]
+    },
+    {
+      "code": "60VM",
+      "name": "Joint average",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 78,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 2.14,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "2.14",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 2.14,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.14",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 20.6,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "20.6",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 20.6,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "20.6",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 18.7,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "18.7",
+          "rawTolerance": "0.3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 18.7,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "18.7",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "UR99",
+      "name": "Joint variance",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 79,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 2.69,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "2.69",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 2.71,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.71",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 27,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "27",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 27,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "27",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 21,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "21",
+          "rawTolerance": "0.3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 21,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "21",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "TU9B",
+      "name": "Joint entropy",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 80,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 2.05,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "2.05",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 2.24,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.24",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 5.82,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "5.82",
+          "rawTolerance": "0.04"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 5.9,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "5.9",
+          "rawTolerance": "0.04"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 5.26,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "5.26",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 5.45,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "5.45",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "TF7R",
+      "name": "Difference average",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 81,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 1.42,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "1.42",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 1.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 1.58,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.58",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 1.57,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.57",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 1.81,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "1.81",
+          "rawTolerance": "0.01"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 1.81,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "1.81",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "D3YU",
+      "name": "Difference variance",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 82,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 2.9,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "2.9",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 3.06,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.06",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 4.94,
+          "tolerance": 0.19,
+          "consensus": "strong",
+          "rawValue": "4.94",
+          "rawTolerance": "0.19"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 4.96,
+          "tolerance": 0.19,
+          "consensus": "strong",
+          "rawValue": "4.96",
+          "rawTolerance": "0.19"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 7.74,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "7.74",
+          "rawTolerance": "0.05"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 7.76,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "7.76",
+          "rawTolerance": "0.05"
+        }
+      ]
+    },
+    {
+      "code": "NTRS",
+      "name": "Difference entropy",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 83,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 1.4,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "1.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 1.49,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.49",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 2.27,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "2.27",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 2.28,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "2.28",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 2.35,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "2.35",
+          "rawTolerance": "0.01"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 2.38,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "2.38",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "ZGXS",
+      "name": "Sum average",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 84,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 4.28,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "4.28",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 4.29,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "4.29",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 41.3,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "41.3",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 41.3,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "41.3",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 37.4,
+          "tolerance": 0.5,
+          "consensus": "strong",
+          "rawValue": "37.4",
+          "rawTolerance": "0.5"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 37.4,
+          "tolerance": 0.5,
+          "consensus": "strong",
+          "rawValue": "37.4",
+          "rawTolerance": "0.5"
+        }
+      ]
+    },
+    {
+      "code": "OEEB",
+      "name": "Sum variance",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 85,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 5.47,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "5.47",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 5.66,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "5.66",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 100,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "100",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 100,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "100",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 72.1,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "72.1",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 72.3,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "72.3",
+          "rawTolerance": "1"
+        }
+      ]
+    },
+    {
+      "code": "P6QZ",
+      "name": "Sum entropy",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 86,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 1.6,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "1.6",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 1.79,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.79",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 4.19,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "4.19",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 4.21,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "4.21",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 3.83,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "3.83",
+          "rawTolerance": "0.01"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 3.89,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "3.89",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "8ZQL",
+      "name": "Angular second moment",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 87,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.368,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.368",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.352,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.352",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.045,
+          "tolerance": 0.0008,
+          "consensus": "strong",
+          "rawValue": "0.045",
+          "rawTolerance": "0.0008"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0446,
+          "tolerance": 0.0008,
+          "consensus": "strong",
+          "rawValue": "0.0446",
+          "rawTolerance": "0.0008"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.0678,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.0678",
+          "rawTolerance": "0.0006"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0669,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.0669",
+          "rawTolerance": "0.0006"
+        }
+      ]
+    },
+    {
+      "code": "ACUI",
+      "name": "Contrast",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 88,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 5.28,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "5.28",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 5.19,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "5.19",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 7.85,
+          "tolerance": 0.26,
+          "consensus": "strong",
+          "rawValue": "7.85",
+          "rawTolerance": "0.26"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 7.82,
+          "tolerance": 0.26,
+          "consensus": "strong",
+          "rawValue": "7.82",
+          "rawTolerance": "0.26"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 11.9,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "11.9",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 11.8,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "11.8",
+          "rawTolerance": "0.1"
+        }
+      ]
+    },
+    {
+      "code": "8S9J",
+      "name": "Dissimilarity",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 89,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 1.42,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "1.42",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 1.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 1.58,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.58",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 1.57,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.57",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 1.81,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "1.81",
+          "rawTolerance": "0.01"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 1.81,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "1.81",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "IB1Z",
+      "name": "Inverse difference",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 90,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.678,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.678",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.683,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.683",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.581,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.581",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.581,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.581",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.592,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.592",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.593,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.593",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "NDRX",
+      "name": "Normalised inverse difference",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 91,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.851,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.851",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.854,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.854",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.961,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.961",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.961,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.961",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.952,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.952",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.952,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.952",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "WF0Z",
+      "name": "Inverse difference moment",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 92,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.619,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.619",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.625,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.625",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.544,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.544",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.544,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.544",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.557,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.557",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.558,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.558",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "1QCO",
+      "name": "Normalised inverse difference moment",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 93,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.899,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.899",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.901,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.901",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.994,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.994",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.994,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.994",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.99,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.99",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.99,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.99",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "E8JP",
+      "name": "Inverse variance",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 94,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.0567,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.0567",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0553,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.0553",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.441,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.441",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.441,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.441",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.401,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.401",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.401,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.401",
+          "rawTolerance": "0.002"
+        }
+      ]
+    },
+    {
+      "code": "NI2N",
+      "name": "Correlation",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 95,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": -0.0121,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 0.0121",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0173,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.0173",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.778,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.778",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.78,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.78",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.577,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.577",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.58,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.58",
+          "rawTolerance": "0.002"
+        }
+      ]
+    },
+    {
+      "code": "QWB0",
+      "name": "Autocorrelation",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 96,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 5.09,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "5.09",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 5.14,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "5.14",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 455,
+          "tolerance": 2,
+          "consensus": "strong",
+          "rawValue": "455",
+          "rawTolerance": "2"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 455,
+          "tolerance": 2,
+          "consensus": "strong",
+          "rawValue": "455",
+          "rawTolerance": "2"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 369,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "369",
+          "rawTolerance": "11"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 369,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "369",
+          "rawTolerance": "11"
+        }
+      ]
+    },
+    {
+      "code": "DG8W",
+      "name": "Cluster tendency",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 97,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 5.47,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "5.47",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 5.66,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "5.66",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 100,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "100",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 100,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "100",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 72.1,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "72.1",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 72.3,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "72.3",
+          "rawTolerance": "1"
+        }
+      ]
+    },
+    {
+      "code": "7NFM",
+      "name": "Cluster shade",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 98,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 7,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "7",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 6.98,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "6.98",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": -1040,
+          "tolerance": 20,
+          "consensus": "strong",
+          "rawValue": "\\(-1.04 \\times 10^{3}\\)",
+          "rawTolerance": "20"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": -1050,
+          "tolerance": 20,
+          "consensus": "strong",
+          "rawValue": "\\(-1.05 \\times 10^{3}\\)",
+          "rawTolerance": "20"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": -668,
+          "tolerance": 17,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 668",
+          "rawTolerance": "17"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": -673,
+          "tolerance": 17,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 673",
+          "rawTolerance": "17"
+        }
+      ]
+    },
+    {
+      "code": "AE86",
+      "name": "Cluster prominence",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 99,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 79.1,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "79.1",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 80.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "80.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 52700,
+          "tolerance": 500,
+          "consensus": "strong",
+          "rawValue": "\\(5.27 \\times 10^{4}\\)",
+          "rawTolerance": "500"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 52800,
+          "tolerance": 500,
+          "consensus": "strong",
+          "rawValue": "\\(5.28 \\times 10^{4}\\)",
+          "rawTolerance": "500"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 29400,
+          "tolerance": 1400,
+          "consensus": "strong",
+          "rawValue": "\\(2.94 \\times 10^{4}\\)",
+          "rawTolerance": "\\(1.4 \\times 10^{3}\\)"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 29500,
+          "tolerance": 1400,
+          "consensus": "strong",
+          "rawValue": "\\(2.95 \\times 10^{4}\\)",
+          "rawTolerance": "\\(1.4 \\times 10^{3}\\)"
+        }
+      ]
+    },
+    {
+      "code": "R8DG",
+      "name": "Information correlation 1",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 100,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": -0.155,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "\\(-\\) 0.155",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": -0.0341,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 0.0341",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": -0.236,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 0.236",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": -0.214,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 0.214",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": -0.239,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 0.239",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": -0.181,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "\\(-\\) 0.181",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "JN9H",
+      "name": "Information correlation 2",
+      "family": "Grey level co-occurrence based features",
+      "tableIndex": 101,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.487,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.487",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.263,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.263",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.863,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.863",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.851,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.851",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.837,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.837",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.792,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.792",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "22OV",
+      "name": "Short runs emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 102,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.641,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.641",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.661,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.661",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.785,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.785",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.786,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.786",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.781,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.781",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.782,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.782",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "W4KF",
+      "name": "Long runs emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 103,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 3.78,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "3.78",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 3.51,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.51",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 2.91,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "2.91",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 2.89,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "2.89",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 3.52,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "3.52",
+          "rawTolerance": "0.04"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 3.5,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "3.5",
+          "rawTolerance": "0.04"
+        }
+      ]
+    },
+    {
+      "code": "V3SW",
+      "name": "Low grey level run emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 104,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.604,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.604",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.609,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.609",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.0264,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0264",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0264,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0264",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.0331,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.0331",
+          "rawTolerance": "0.0006"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.033,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.033",
+          "rawTolerance": "0.0006"
+        }
+      ]
+    },
+    {
+      "code": "G3QZ",
+      "name": "High grey level run emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 105,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 9.82,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "9.82",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 9.74,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "9.74",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 428,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "428",
+          "rawTolerance": "3"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 428,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "428",
+          "rawTolerance": "3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 342,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "342",
+          "rawTolerance": "11"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 342,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "342",
+          "rawTolerance": "11"
+        }
+      ]
+    },
+    {
+      "code": "HTZT",
+      "name": "Short run low grey level emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 106,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.294,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.294",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.311,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.311",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.0243,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0243",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0243,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0243",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.0314,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.0314",
+          "rawTolerance": "0.0006"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0313,
+          "tolerance": 0.0006,
+          "consensus": "strong",
+          "rawValue": "0.0313",
+          "rawTolerance": "0.0006"
+        }
+      ]
+    },
+    {
+      "code": "GD3A",
+      "name": "Short run high grey level emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 107,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 8.57,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "8.57",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 8.67,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "8.67",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 320,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "320",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 320,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "320",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 251,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "251",
+          "rawTolerance": "8"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 252,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "252",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "IVPO",
+      "name": "Long run low grey level emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 108,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 3.14,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "3.14",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 2.92,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.92",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.0386,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0386",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0385,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0385",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.0443,
+          "tolerance": 0.0008,
+          "consensus": "strong",
+          "rawValue": "0.0443",
+          "rawTolerance": "0.0008"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.0442,
+          "tolerance": 0.0008,
+          "consensus": "strong",
+          "rawValue": "0.0442",
+          "rawTolerance": "0.0008"
+        }
+      ]
+    },
+    {
+      "code": "3KUM",
+      "name": "Long run high grey level emphasis",
+      "family": "Grey level run length based features",
+      "tableIndex": 109,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 17.4,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "17.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 16.1,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "16.1",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 1410,
+          "tolerance": 20,
+          "consensus": "strong",
+          "rawValue": "\\(1.41 \\times 10^{3}\\)",
+          "rawTolerance": "20"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 1400,
+          "tolerance": 20,
+          "consensus": "strong",
+          "rawValue": "\\(1.4 \\times 10^{3}\\)",
+          "rawTolerance": "20"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 1390,
+          "tolerance": 30,
+          "consensus": "strong",
+          "rawValue": "\\(1.39 \\times 10^{3}\\)",
+          "rawTolerance": "30"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 1380,
+          "tolerance": 30,
+          "consensus": "strong",
+          "rawValue": "\\(1.38 \\times 10^{3}\\)",
+          "rawTolerance": "30"
+        }
+      ]
+    },
+    {
+      "code": "R5YN",
+      "name": "Grey level non-uniformity",
+      "family": "Grey level run length based features",
+      "tableIndex": 110,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 5.2,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "5.2",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 20.5,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "20.5",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 432,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "432",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 1730,
+          "tolerance": 10,
+          "consensus": "strong",
+          "rawValue": "\\(1.73 \\times 10^{3}\\)",
+          "rawTolerance": "10"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 107,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "107",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 427,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "427",
+          "rawTolerance": "1"
+        }
+      ]
+    },
+    {
+      "code": "OVBL",
+      "name": "Normalised grey level non-uniformity",
+      "family": "Grey level run length based features",
+      "tableIndex": 111,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.46,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.46",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.456,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.456",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.128,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.128",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.128,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.128",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.145,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.145",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.145,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.145",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "W92Y",
+      "name": "Run length non-uniformity",
+      "family": "Grey level run length based features",
+      "tableIndex": 112,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 6.12,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "6.12",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 21.6,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "21.6",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 1650,
+          "tolerance": 10,
+          "consensus": "strong",
+          "rawValue": "\\(1.65 \\times 10^{3}\\)",
+          "rawTolerance": "10"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 6600,
+          "tolerance": 30,
+          "consensus": "strong",
+          "rawValue": "\\(6.6 \\times 10^{3}\\)",
+          "rawTolerance": "30"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 365,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "365",
+          "rawTolerance": "3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 1460,
+          "tolerance": 10,
+          "consensus": "strong",
+          "rawValue": "\\(1.46 \\times 10^{3}\\)",
+          "rawTolerance": "10"
+        }
+      ]
+    },
+    {
+      "code": "IC23",
+      "name": "Normalised run length non-uniformity",
+      "family": "Grey level run length based features",
+      "tableIndex": 113,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.492,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.492",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.441,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.441",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.579,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.579",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.579,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.579",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.578,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.578",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.578,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.578",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "9ZK5",
+      "name": "Run percentage",
+      "family": "Grey level run length based features",
+      "tableIndex": 114,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.627,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.627",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.627,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.627",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.704,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.704",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.704,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.704",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 0.681,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.681",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 0.681,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.681",
+          "rawTolerance": "0.002"
+        }
+      ]
+    },
+    {
+      "code": "8CE5",
+      "name": "Grey level variance",
+      "family": "Grey level run length based features",
+      "tableIndex": 115,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 3.35,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "3.35",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 3.37,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.37",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 33.7,
+          "tolerance": 0.6,
+          "consensus": "strong",
+          "rawValue": "33.7",
+          "rawTolerance": "0.6"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 33.7,
+          "tolerance": 0.6,
+          "consensus": "strong",
+          "rawValue": "33.7",
+          "rawTolerance": "0.6"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 28.3,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "28.3",
+          "rawTolerance": "0.3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 28.3,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "28.3",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "SXLW",
+      "name": "Run length variance",
+      "family": "Grey level run length based features",
+      "tableIndex": 116,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 0.761,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "0.761",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 0.778,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.778",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 0.828,
+          "tolerance": 0.008,
+          "consensus": "strong",
+          "rawValue": "0.828",
+          "rawTolerance": "0.008"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 0.826,
+          "tolerance": 0.008,
+          "consensus": "strong",
+          "rawValue": "0.826",
+          "rawTolerance": "0.008"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 1.22,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.22",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 1.21,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.21",
+          "rawTolerance": "0.03"
+        }
+      ]
+    },
+    {
+      "code": "HJ9O",
+      "name": "Run entropy",
+      "family": "Grey level run length based features",
+      "tableIndex": 117,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, averaged",
+          "value": 2.17,
+          "tolerance": null,
+          "consensus": "very strong",
+          "rawValue": "2.17",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D, slice-merged",
+          "value": 2.57,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.57",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, averaged",
+          "value": 4.73,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "4.73",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D, slice-merged",
+          "value": 4.76,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "4.76",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, averaged",
+          "value": 4.53,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "4.53",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D, slice-merged",
+          "value": 4.58,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "4.58",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "9SAK",
+      "name": "Small zone emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 118,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.363,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.363",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.688,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.688",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.745,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.745",
+          "rawTolerance": "0.003"
+        }
+      ]
+    },
+    {
+      "code": "48P8",
+      "name": "Large zone emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 119,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 43.9,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "43.9",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 625,
+          "tolerance": 9,
+          "consensus": "strong",
+          "rawValue": "625",
+          "rawTolerance": "9"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 439,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "439",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "XMSY",
+      "name": "Low grey level zone emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 120,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.371,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.371",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0368,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.0368",
+          "rawTolerance": "0.0005"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0475,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.0475",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "5GN9",
+      "name": "High grey level zone emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 121,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 16.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "16.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 363,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "363",
+          "rawTolerance": "3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 284,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "284",
+          "rawTolerance": "11"
+        }
+      ]
+    },
+    {
+      "code": "5RAI",
+      "name": "Small zone low grey level emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 122,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.0259,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.0259",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0298,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.0298",
+          "rawTolerance": "0.0005"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0415,
+          "tolerance": 0.0008,
+          "consensus": "strong",
+          "rawValue": "0.0415",
+          "rawTolerance": "0.0008"
+        }
+      ]
+    },
+    {
+      "code": "HW1V",
+      "name": "Small zone high grey level emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 123,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 10.3,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "10.3",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 226,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "226",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 190,
+          "tolerance": 7,
+          "consensus": "strong",
+          "rawValue": "190",
+          "rawTolerance": "7"
+        }
+      ]
+    },
+    {
+      "code": "YH51",
+      "name": "Large zone low grey level emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 124,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 40.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "40.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 1.35,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "1.35",
+          "rawTolerance": "0.03"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 1.15,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "1.15",
+          "rawTolerance": "0.04"
+        }
+      ]
+    },
+    {
+      "code": "J17V",
+      "name": "Large zone high grey level emphasis",
+      "family": "Grey level size zone based features",
+      "tableIndex": 125,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 113,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "113",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 316000,
+          "tolerance": 5000,
+          "consensus": "strong",
+          "rawValue": "\\(3.16 \\times 10^{5}\\)",
+          "rawTolerance": "\\(5 \\times 10^{3}\\)"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 181000,
+          "tolerance": 3000,
+          "consensus": "strong",
+          "rawValue": "\\(1.81 \\times 10^{5}\\)",
+          "rawTolerance": "\\(3 \\times 10^{3}\\)"
+        }
+      ]
+    },
+    {
+      "code": "JNSA",
+      "name": "Grey level non-uniformity",
+      "family": "Grey level size zone based features",
+      "tableIndex": 126,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.41,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.41",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 82.2,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "82.2",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 20.5,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "20.5",
+          "rawTolerance": "0.1"
+        }
+      ]
+    },
+    {
+      "code": "Y1RO",
+      "name": "Normalised grey level non-uniformity",
+      "family": "Grey level size zone based features",
+      "tableIndex": 127,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.323,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.323",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0728,
+          "tolerance": 0.0014,
+          "consensus": "strong",
+          "rawValue": "0.0728",
+          "rawTolerance": "0.0014"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0789,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.0789",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "4JP3",
+      "name": "Zone size non-uniformity",
+      "family": "Grey level size zone based features",
+      "tableIndex": 128,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.49,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.49",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 479,
+          "tolerance": 4,
+          "consensus": "strong",
+          "rawValue": "479",
+          "rawTolerance": "4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 140,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "140",
+          "rawTolerance": "3"
+        }
+      ]
+    },
+    {
+      "code": "VB3A",
+      "name": "Normalised zone size non-uniformity",
+      "family": "Grey level size zone based features",
+      "tableIndex": 129,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.333,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.333",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.44,
+          "tolerance": 0.004,
+          "consensus": "strong",
+          "rawValue": "0.44",
+          "rawTolerance": "0.004"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.521,
+          "tolerance": 0.004,
+          "consensus": "strong",
+          "rawValue": "0.521",
+          "rawTolerance": "0.004"
+        }
+      ]
+    },
+    {
+      "code": "P30P",
+      "name": "Zone percentage",
+      "family": "Grey level size zone based features",
+      "tableIndex": 130,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.24,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.24",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.3,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.3",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.324,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.324",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "BYLV",
+      "name": "Grey level variance",
+      "family": "Grey level size zone based features",
+      "tableIndex": 131,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 3.97,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.97",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 42.7,
+          "tolerance": 0.7,
+          "consensus": "strong",
+          "rawValue": "42.7",
+          "rawTolerance": "0.7"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 36.1,
+          "tolerance": 0.3,
+          "consensus": "strong",
+          "rawValue": "36.1",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "3NSA",
+      "name": "Zone size variance",
+      "family": "Grey level size zone based features",
+      "tableIndex": 132,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 21,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "21",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 609,
+          "tolerance": 9,
+          "consensus": "strong",
+          "rawValue": "609",
+          "rawTolerance": "9"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 423,
+          "tolerance": 8,
+          "consensus": "strong",
+          "rawValue": "423",
+          "rawTolerance": "8"
+        }
+      ]
+    },
+    {
+      "code": "GU8N",
+      "name": "Zone size entropy",
+      "family": "Grey level size zone based features",
+      "tableIndex": 133,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.93,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.93",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 5.92,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "5.92",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 5.29,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "5.29",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "0GBI",
+      "name": "Small distance emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 134,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.946,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.946",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.192,
+          "tolerance": 0.006,
+          "consensus": "strong",
+          "rawValue": "0.192",
+          "rawTolerance": "0.006"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.36,
+          "tolerance": 0.005,
+          "consensus": "strong",
+          "rawValue": "0.36",
+          "rawTolerance": "0.005"
+        }
+      ]
+    },
+    {
+      "code": "MB4I",
+      "name": "Large distance emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 135,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.21,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.21",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 161,
+          "tolerance": 1,
+          "consensus": "moderate",
+          "rawValue": "161",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 31.6,
+          "tolerance": 0.2,
+          "consensus": "moderate",
+          "rawValue": "31.6",
+          "rawTolerance": "0.2"
+        }
+      ]
+    },
+    {
+      "code": "S1RA",
+      "name": "Low grey level zone emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 136,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.371,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.371",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0368,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.0368",
+          "rawTolerance": "0.0005"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0475,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.0475",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "K26C",
+      "name": "High grey level zone emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 137,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 16.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "16.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 363,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "363",
+          "rawTolerance": "3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 284,
+          "tolerance": 11,
+          "consensus": "strong",
+          "rawValue": "284",
+          "rawTolerance": "11"
+        }
+      ]
+    },
+    {
+      "code": "RUVG",
+      "name": "Small distance low grey level emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 138,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.367,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.367",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.00913,
+          "tolerance": 0.00023,
+          "consensus": "strong",
+          "rawValue": "0.00913",
+          "rawTolerance": "0.00023"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0192,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.0192",
+          "rawTolerance": "0.0005"
+        }
+      ]
+    },
+    {
+      "code": "DKNJ",
+      "name": "Small distance high grey level emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 139,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 15.2,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "15.2",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 60.1,
+          "tolerance": 3.3,
+          "consensus": "strong",
+          "rawValue": "60.1",
+          "rawTolerance": "3.3"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 95.7,
+          "tolerance": 5.5,
+          "consensus": "strong",
+          "rawValue": "95.7",
+          "rawTolerance": "5.5"
+        }
+      ]
+    },
+    {
+      "code": "A7WM",
+      "name": "Large distance low grey level emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 140,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.386,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.386",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 2.96,
+          "tolerance": 0.02,
+          "consensus": "moderate",
+          "rawValue": "2.96",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.934,
+          "tolerance": 0.018,
+          "consensus": "moderate",
+          "rawValue": "0.934",
+          "rawTolerance": "0.018"
+        }
+      ]
+    },
+    {
+      "code": "KLTH",
+      "name": "Large distance high grey level emphasis",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 141,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 21.3,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "21.3",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 70100,
+          "tolerance": 100,
+          "consensus": "moderate",
+          "rawValue": "\\(7.01 \\times 10^{4}\\)",
+          "rawTolerance": "100"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 10600,
+          "tolerance": 300,
+          "consensus": "strong",
+          "rawValue": "\\(1.06 \\times 10^{4}\\)",
+          "rawTolerance": "300"
+        }
+      ]
+    },
+    {
+      "code": "VFT7",
+      "name": "Grey level non-uniformity",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 142,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.41,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.41",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 82.2,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "82.2",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 20.5,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "20.5",
+          "rawTolerance": "0.1"
+        }
+      ]
+    },
+    {
+      "code": "7HP3",
+      "name": "Normalised grey level non-uniformity",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 143,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.323,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.323",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0728,
+          "tolerance": 0.0014,
+          "consensus": "strong",
+          "rawValue": "0.0728",
+          "rawTolerance": "0.0014"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0789,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.0789",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "V294",
+      "name": "Zone distance non-uniformity",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 144,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 3.79,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.79",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 64,
+          "tolerance": 0.4,
+          "consensus": "moderate",
+          "rawValue": "64",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 39.8,
+          "tolerance": 0.3,
+          "consensus": "moderate",
+          "rawValue": "39.8",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "IATH",
+      "name": "Normalised zone distance non-uniformity",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 145,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.898,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.898",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0716,
+          "tolerance": 0.0022,
+          "consensus": "strong",
+          "rawValue": "0.0716",
+          "rawTolerance": "0.0022"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.174,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.174",
+          "rawTolerance": "0.003"
+        }
+      ]
+    },
+    {
+      "code": "VIWW",
+      "name": "Zone percentage",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 146,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.24,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.24",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.3,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.3",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.324,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.324",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "QK93",
+      "name": "Grey level variance",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 147,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 3.97,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.97",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 42.7,
+          "tolerance": 0.7,
+          "consensus": "moderate",
+          "rawValue": "42.7",
+          "rawTolerance": "0.7"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 36.1,
+          "tolerance": 0.3,
+          "consensus": "moderate",
+          "rawValue": "36.1",
+          "rawTolerance": "0.3"
+        }
+      ]
+    },
+    {
+      "code": "7WT1",
+      "name": "Zone distance variance",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 148,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.051,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.051",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 69.4,
+          "tolerance": 0.1,
+          "consensus": "moderate",
+          "rawValue": "69.4",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 13.5,
+          "tolerance": 0.1,
+          "consensus": "moderate",
+          "rawValue": "13.5",
+          "rawTolerance": "0.1"
+        }
+      ]
+    },
+    {
+      "code": "GBDU",
+      "name": "Zone distance entropy",
+      "family": "Grey level distance zone based features",
+      "tableIndex": 149,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1.73,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1.73",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 8,
+          "tolerance": 0.04,
+          "consensus": "strong",
+          "rawValue": "8",
+          "rawTolerance": "0.04"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 6.47,
+          "tolerance": 0.03,
+          "consensus": "strong",
+          "rawValue": "6.47",
+          "rawTolerance": "0.03"
+        }
+      ]
+    },
+    {
+      "code": "QCDE",
+      "name": "Coarseness",
+      "family": "Neighbourhood grey tone difference based features",
+      "tableIndex": 150,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.121,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.121",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.00629,
+          "tolerance": 0.00046,
+          "consensus": "strong",
+          "rawValue": "0.00629",
+          "rawTolerance": "0.00046"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0168,
+          "tolerance": 0.0005,
+          "consensus": "strong",
+          "rawValue": "0.0168",
+          "rawTolerance": "0.0005"
+        }
+      ]
+    },
+    {
+      "code": "65HE",
+      "name": "Contrast",
+      "family": "Neighbourhood grey tone difference based features",
+      "tableIndex": 151,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.925,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.925",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.107,
+          "tolerance": 0.002,
+          "consensus": "strong",
+          "rawValue": "0.107",
+          "rawTolerance": "0.002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.181,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.181",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "NQ30",
+      "name": "Busyness",
+      "family": "Neighbourhood grey tone difference based features",
+      "tableIndex": 152,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 2.99,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.99",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.489,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.489",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.2,
+          "tolerance": 0.005,
+          "consensus": "strong",
+          "rawValue": "0.2",
+          "rawTolerance": "0.005"
+        }
+      ]
+    },
+    {
+      "code": "HDEZ",
+      "name": "Complexity",
+      "family": "Neighbourhood grey tone difference based features",
+      "tableIndex": 153,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 10.4,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "10.4",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 438,
+          "tolerance": 9,
+          "consensus": "strong",
+          "rawValue": "438",
+          "rawTolerance": "9"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 391,
+          "tolerance": 7,
+          "consensus": "strong",
+          "rawValue": "391",
+          "rawTolerance": "7"
+        }
+      ]
+    },
+    {
+      "code": "1X9X",
+      "name": "Strength",
+      "family": "Neighbourhood grey tone difference based features",
+      "tableIndex": 154,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 2.88,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.88",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 3.33,
+          "tolerance": 0.08,
+          "consensus": "strong",
+          "rawValue": "3.33",
+          "rawTolerance": "0.08"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 6.02,
+          "tolerance": 0.23,
+          "consensus": "strong",
+          "rawValue": "6.02",
+          "rawTolerance": "0.23"
+        }
+      ]
+    },
+    {
+      "code": "SODN",
+      "name": "Low dependence emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 155,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.158,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.158",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.281,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.281",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.31,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.31",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "IMOQ",
+      "name": "High dependence emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 156,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 19.2,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "19.2",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 14.8,
+          "tolerance": 0.1,
+          "consensus": "strong",
+          "rawValue": "14.8",
+          "rawTolerance": "0.1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 17.3,
+          "tolerance": 0.2,
+          "consensus": "strong",
+          "rawValue": "17.3",
+          "rawTolerance": "0.2"
+        }
+      ]
+    },
+    {
+      "code": "TL9H",
+      "name": "Low grey level count emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 157,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.702,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.702",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0233,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0233",
+          "rawTolerance": "0.0003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0286,
+          "tolerance": 0.0004,
+          "consensus": "strong",
+          "rawValue": "0.0286",
+          "rawTolerance": "0.0004"
+        }
+      ]
+    },
+    {
+      "code": "OAE7",
+      "name": "High grey level count emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 158,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 7.49,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "7.49",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 446,
+          "tolerance": 2,
+          "consensus": "strong",
+          "rawValue": "446",
+          "rawTolerance": "2"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 359,
+          "tolerance": 10,
+          "consensus": "strong",
+          "rawValue": "359",
+          "rawTolerance": "10"
+        }
+      ]
+    },
+    {
+      "code": "EQ3F",
+      "name": "Low dependence low grey level emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 159,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.0473,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.0473",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0137,
+          "tolerance": 0.0002,
+          "consensus": "strong",
+          "rawValue": "0.0137",
+          "rawTolerance": "0.0002"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0203,
+          "tolerance": 0.0003,
+          "consensus": "strong",
+          "rawValue": "0.0203",
+          "rawTolerance": "0.0003"
+        }
+      ]
+    },
+    {
+      "code": "JA6D",
+      "name": "Low dependence high grey level emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 160,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 3.06,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.06",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 94.2,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "94.2",
+          "rawTolerance": "0.4"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 78.9,
+          "tolerance": 2.2,
+          "consensus": "strong",
+          "rawValue": "78.9",
+          "rawTolerance": "2.2"
+        }
+      ]
+    },
+    {
+      "code": "NBZI",
+      "name": "High dependence low grey level emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 161,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 17.6,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "17.6",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.116,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.116",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.108,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.108",
+          "rawTolerance": "0.003"
+        }
+      ]
+    },
+    {
+      "code": "9QMG",
+      "name": "High dependence high grey level emphasis",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 162,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 49.5,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "49.5",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 7540,
+          "tolerance": 60,
+          "consensus": "strong",
+          "rawValue": "\\(7.54 \\times 10^{3}\\)",
+          "rawTolerance": "60"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 7210,
+          "tolerance": 130,
+          "consensus": "strong",
+          "rawValue": "\\(7.21 \\times 10^{3}\\)",
+          "rawTolerance": "130"
+        }
+      ]
+    },
+    {
+      "code": "FP8K",
+      "name": "Grey level non-uniformity",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 163,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 10.2,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "10.2",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 757,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "757",
+          "rawTolerance": "1"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 216,
+          "tolerance": 3,
+          "consensus": "strong",
+          "rawValue": "216",
+          "rawTolerance": "3"
+        }
+      ]
+    },
+    {
+      "code": "5SPA",
+      "name": "Normalised grey level non-uniformity",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 164,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.562,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.562",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.151,
+          "tolerance": 0.003,
+          "consensus": "strong",
+          "rawValue": "0.151",
+          "rawTolerance": "0.003"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.184,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.184",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "Z87G",
+      "name": "Dependence count non-uniformity",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 165,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 3.96,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "3.96",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 709,
+          "tolerance": 2,
+          "consensus": "strong",
+          "rawValue": "709",
+          "rawTolerance": "2"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 157,
+          "tolerance": 1,
+          "consensus": "strong",
+          "rawValue": "157",
+          "rawTolerance": "1"
+        }
+      ]
+    },
+    {
+      "code": "OKJI",
+      "name": "Normalised dependence count non-uniformity",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 166,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.212,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.212",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.175,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.175",
+          "rawTolerance": "0.001"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.179,
+          "tolerance": 0.001,
+          "consensus": "strong",
+          "rawValue": "0.179",
+          "rawTolerance": "0.001"
+        }
+      ]
+    },
+    {
+      "code": "6XV8",
+      "name": "Dependence count percentage",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 167,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 1,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "1",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 1,
+          "tolerance": null,
+          "consensus": "moderate",
+          "rawValue": "1",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 1,
+          "tolerance": null,
+          "consensus": "moderate",
+          "rawValue": "1",
+          "rawTolerance": "—"
+        }
+      ]
+    },
+    {
+      "code": "1PFV",
+      "name": "Grey level variance",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 168,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 2.7,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.7",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 31.1,
+          "tolerance": 0.5,
+          "consensus": "strong",
+          "rawValue": "31.1",
+          "rawTolerance": "0.5"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 25.3,
+          "tolerance": 0.4,
+          "consensus": "strong",
+          "rawValue": "25.3",
+          "rawTolerance": "0.4"
+        }
+      ]
+    },
+    {
+      "code": "DNX2",
+      "name": "Dependence count variance",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 169,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 2.73,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.73",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 3.12,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "3.12",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 4.02,
+          "tolerance": 0.05,
+          "consensus": "strong",
+          "rawValue": "4.02",
+          "rawTolerance": "0.05"
+        }
+      ]
+    },
+    {
+      "code": "FCBV",
+      "name": "Dependence count entropy",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 170,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 2.71,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "2.71",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 5.76,
+          "tolerance": 0.02,
+          "consensus": "strong",
+          "rawValue": "5.76",
+          "rawTolerance": "0.02"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 5.38,
+          "tolerance": 0.01,
+          "consensus": "strong",
+          "rawValue": "5.38",
+          "rawTolerance": "0.01"
+        }
+      ]
+    },
+    {
+      "code": "CAS9",
+      "name": "Dependence count energy",
+      "family": "Neighbouring grey level dependence based features",
+      "tableIndex": 171,
+      "tableNumber": null,
+      "rows": [
+        {
+          "dataset": "dig. phantom",
+          "aggregation": "2D",
+          "value": 0.17,
+          "tolerance": null,
+          "consensus": "strong",
+          "rawValue": "0.17",
+          "rawTolerance": "—"
+        },
+        {
+          "dataset": "config. A",
+          "aggregation": "2D",
+          "value": 0.0268,
+          "tolerance": 0.0004,
+          "consensus": "strong",
+          "rawValue": "0.0268",
+          "rawTolerance": "0.0004"
+        },
+        {
+          "dataset": "config. B",
+          "aggregation": "2D",
+          "value": 0.0321,
+          "tolerance": 0.0002,
+          "consensus": "strong",
+          "rawValue": "0.0321",
+          "rawTolerance": "0.0002"
+        }
+      ]
+    }
+  ]
+}

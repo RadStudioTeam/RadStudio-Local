@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1",
+  "runId": "p1-ibsi-clean-rerun",
+  "executedAt": "2026-11-22T16:40:47.172138+00:00",
+  "status": "identical",
+  "cleanEnvironment": {
+    "mode": "fresh-tree + fresh venv from uv.lock",
+    "treeCreated": true,
+    "tempDir": "<tmp>/radstudio-ibsi-clean",
+    "tempDirRemoved": false,
+    "hostPlatform": "clean container (linux/amd64)",
+    "python": "3.12.13",
+    "uv": "uv (see uv.lock)",
+    "installCommand": "uv sync --frozen --no-dev --python 3.12",
+    "repoSource": "source snapshot"
+  },
+  "sourceRun": {
+    "runId": "p1-ibsi-phantom-selfcheck",
+    "comparisonCsvSha256": "194bea14bf079fcefeb5b50755f37f67e7f5450ffee8fd128ce00769f0ec02b8"
+  },
+  "comparison": {
+    "rows": {
+      "formal": 54,
+      "clean": 54
+    },
+    "sameRowSet": true,
+    "rowDiffs": [],
+    "featureTableIdentical": true,
+    "comparisonCsvByteIdentical": true,
+    "comparisonCsvSha256": {
+      "formal": "194bea14bf079fcefeb5b50755f37f67e7f5450ffee8fd128ce00769f0ec02b8",
+      "clean": "194bea14bf079fcefeb5b50755f37f67e7f5450ffee8fd128ce00769f0ec02b8"
+    },
+    "byFamilyCsvSha256": {
+      "formal": "7162cab182650d6a9e747c8ab59e155eb950d0b58efeb8843ef389283dc13e92",
+      "clean": "7162cab182650d6a9e747c8ab59e155eb950d0b58efeb8843ef389283dc13e92"
+    }
+  },
+  "artifacts": {
+    "cleanComparisonCsv": "reproduction/clean-rerun/07-comparison.csv",
+    "cleanByFamilyCsv": "reproduction/clean-rerun/07-comparison_by-family.csv",
+    "cleanSummaryJson": "reproduction/clean-rerun/07-comparison_summary.json",
+    "cleanRunSummary": "reproduction/clean-rerun/run-summary.json"
+  },
+  "notes": [
+    "干净环境为新建临时目录 + 由 uv.lock 新建 venv，不复用全局 site-packages。",
+    "逐特征 computedValue、conclusion 与特征表 JSON 全量相等才算 identical。",
+    "数字体模无容差，本比对不构成 pass/fail 结论。"
+  ]
+}

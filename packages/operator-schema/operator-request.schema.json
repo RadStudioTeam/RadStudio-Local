@@ -1,0 +1,459 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:radstudio:schema:operator-request.json",
+  "title": "Operator Request",
+  "description": "算子执行请求",
+  "type": "object",
+  "required": [
+    "requestId",
+    "runId",
+    "nodeId",
+    "operatorType",
+    "parameters",
+    "inputs"
+  ],
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "nodeId": {
+      "type": "string"
+    },
+    "operatorType": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "inputSets": {
+      "type": "object",
+      "description": "cardinality=many 端口的多值输入（协议 3），按声明顺序排列；同名端口不得同时出现在 inputs 中。",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "environment": {
+      "$ref": "#/$defs/Environment"
+    },
+    "transfer": {
+      "$ref": "#/$defs/Transfer"
+    },
+    "operatorVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "description": "精确请求版本；仅旧调用可缺省/null，结果标记legacy-latest。平台新工作流必须锁版本。"
+    },
+    "parameterContract": {
+      "$ref": "#/$defs/parameterContract"
+    },
+    "executionControls": {
+      "$ref": "#/$defs/executionControls"
+    },
+    "invocationContract": {
+      "$ref": "#/$defs/invocationContract"
+    }
+  },
+  "$defs": {
+    "Transfer": {
+      "type": "object",
+      "description": "带外传输元数据。缺省或 mode=inline 时工作区 tar.gz base64 内联进 body；mode=object 时经对象存储 + 预签名 URL 传输。inputManifestUrl 指向 worker 内容寻址去重上传后生成的输入清单对象，outputUrl 为输出 bundle 的预签名 PUT URL，均由 worker 填写。",
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "object"
+          ]
+        },
+        "inputManifestUrl": {
+          "type": "string",
+          "description": "输入清单对象的预签名 GET URL（mode=object）；清单为 {version,files:[{path,sha256,size,url}]}"
+        },
+        "outputUrl": {
+          "type": "string",
+          "description": "预签名 PUT URL（mode=object）"
+        }
+      }
+    },
+    "Environment": {
+      "type": "object",
+      "properties": {
+        "imageDigest": {
+          "type": "string"
+        },
+        "engineVersion": {
+          "type": "string"
+        },
+        "resourceLimits": {
+          "type": "object",
+          "properties": {
+            "cpu": {
+              "type": "string"
+            },
+            "memory": {
+              "type": "string"
+            },
+            "disk": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "parameterContract": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "dialect": {
+          "const": "radstudio-parameters/1"
+        },
+        "operatorType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operatorVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema": {
+          "type": "object"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifactPorts": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": 1
+            },
+            "contentContracts": {
+              "const": 1
+            },
+            "inputs": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 128,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "type": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "required": {
+                    "type": "boolean"
+                  },
+                  "contract": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 160
+                          },
+                          "version": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 24
+                          },
+                          "task": {
+                            "type": "string",
+                            "maxLength": 80
+                          },
+                          "dimension": {
+                            "enum": [
+                              "",
+                              "2d",
+                              "3d",
+                              "tabular"
+                            ]
+                          },
+                          "modelFamily": {
+                            "type": "string",
+                            "maxLength": 80
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "version"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cardinality": {
+                    "enum": [
+                      "",
+                      "one",
+                      "many"
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "outputs": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 128,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "type": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "required": {
+                    "type": "boolean"
+                  },
+                  "contract": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 160
+                          },
+                          "version": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 24
+                          },
+                          "task": {
+                            "type": "string",
+                            "maxLength": 80
+                          },
+                          "dimension": {
+                            "enum": [
+                              "",
+                              "2d",
+                              "3d",
+                              "tabular"
+                            ]
+                          },
+                          "modelFamily": {
+                            "type": "string",
+                            "maxLength": 80
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "version"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "mergePart": {
+                    "type": "object",
+                    "properties": {
+                      "artifact": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "port": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "file": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                      }
+                    },
+                    "required": [
+                      "artifact",
+                      "port",
+                      "file"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "name",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "version",
+            "contentContracts",
+            "inputs",
+            "outputs"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "version",
+        "dialect",
+        "operatorType",
+        "operatorVersion",
+        "schema",
+        "digest"
+      ],
+      "additionalProperties": false
+    },
+    "executionControls": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "workers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "checkpointEvery": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "progressSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "shardIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1023
+        },
+        "shardCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "mergeParts": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "shardOffset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "foldIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1023
+          },
+          "minItems": 1,
+          "maxItems": 1024,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "invocationContract": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "digest"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "dependencies": {
+    "invocationContract": [
+      "parameterContract",
+      "operatorVersion"
+    ]
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "invocationContract"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operatorVersion": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}

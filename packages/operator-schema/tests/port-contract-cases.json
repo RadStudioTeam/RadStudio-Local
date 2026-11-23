@@ -1,0 +1,329 @@
+[
+  {
+    "name": "exact",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": true
+  },
+  {
+    "name": "legacy consumer",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model"
+    },
+    "valid": true
+  },
+  {
+    "name": "legacy both",
+    "output": {
+      "type": "model"
+    },
+    "input": {
+      "type": "model"
+    },
+    "valid": true
+  },
+  {
+    "name": "missing producer contract",
+    "output": {
+      "type": "model"
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "mismatch id",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "org/other",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "mismatch version",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "2",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "mismatch task",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "regression",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "mismatch dimension",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "3d",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "mismatch modelFamily",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "cnn_checkpoint"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "missing task",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "missing dimension",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "missing modelFamily",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  },
+  {
+    "name": "unconstrained dimensions",
+    "output": {
+      "name": "out",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1"
+      }
+    },
+    "valid": true
+  },
+  {
+    "name": "physical type first",
+    "output": {
+      "name": "out",
+      "type": "file",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "input": {
+      "name": "in",
+      "type": "model",
+      "contract": {
+        "id": "radstudio/model",
+        "version": "1",
+        "task": "binary_classification",
+        "dimension": "tabular",
+        "modelFamily": "tabular_pipeline"
+      }
+    },
+    "valid": false
+  }
+]

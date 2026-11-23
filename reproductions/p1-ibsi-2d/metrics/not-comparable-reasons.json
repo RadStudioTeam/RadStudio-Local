@@ -1,0 +1,6 @@
+{
+  "家族缺失": 16,
+  "PyRadiomics gldm.GrayLevelNonUniformityNormalized 已弃用（Nz=Np 时与 GLNU 等价）": 1,
+  "PyRadiomics gldm.DependencePercentage 已弃用（恒为 1）": 1,
+  "PyRadiomics gldm 无能量特征": 1
+}

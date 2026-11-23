@@ -1,0 +1,484 @@
+[
+  {
+    "name": "cv valid",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": true
+  },
+  {
+    "name": "holdout valid",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": true
+  },
+  {
+    "name": "duplicate fold",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 0,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/folds/1/fold"
+  },
+  {
+    "name": "train test overlap",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3",
+            "i0"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/folds/0"
+  },
+  {
+    "name": "repeat oof test",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i1",
+            "i2"
+          ],
+          "testIds": [
+            "i0",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/folds/1/testIds"
+  },
+  {
+    "name": "different universe",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/folds/1"
+  },
+  {
+    "name": "overlapping holdout",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [
+          "i0"
+        ],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/partitions/validation"
+  },
+  {
+    "name": "fold gap",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 3,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/folds"
+  },
+  {
+    "name": "source traversal",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:../features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "source wrong type",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=model",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false,
+    "fieldPath": "/source"
+  },
+  {
+    "name": "source required",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4"
+    },
+    "valid": false
+  },
+  {
+    "name": "ambiguous CV discriminator",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "method": "StratifiedGroupKFold",
+      "seed": 42,
+      "folds": [
+        {
+          "fold": 0,
+          "trainIds": [
+            "i2",
+            "i3"
+          ],
+          "testIds": [
+            "i0",
+            "i1"
+          ]
+        },
+        {
+          "fold": 1,
+          "trainIds": [
+            "i0",
+            "i1"
+          ],
+          "testIds": [
+            "i2",
+            "i3"
+          ]
+        }
+      ],
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4",
+      "scheme": "holdout"
+    },
+    "valid": false
+  },
+  {
+    "name": "ambiguous holdout discriminator",
+    "physicalType": "split_plan",
+    "contract": {
+      "id": "radstudio/split-plan",
+      "version": "1"
+    },
+    "value": {
+      "scheme": "holdout",
+      "seed": 42,
+      "stratified": true,
+      "partitions": {
+        "train": [
+          "i0",
+          "i1"
+        ],
+        "validation": [],
+        "test": [
+          "i2",
+          "i3"
+        ]
+      },
+      "source": "file:features.json#sha256=7de0e32e3780044f9f0bdb859fb888622ca586e8be311b62c0357f001a763a52;type=feature_table",
+      "identityHash": "023031099afbec36e2efee00dfc55146dfe2271962b5a5d1bd1177c37d6f63e4",
+      "method": "StratifiedGroupKFold"
+    },
+    "valid": false
+  }
+]

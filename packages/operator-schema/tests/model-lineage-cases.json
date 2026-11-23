@@ -1,0 +1,105 @@
+{
+ "version": 1,
+ "note": "模型拟合血缘共享正反例。@features/@split/@identity/@weights/@weightsSize 由每个语言的运行器在规范化编码前注入；break 指定运行器应用的一处确定性破坏。contract 为 2 时走折内血缘场景：划分取 cvSplit、清单取 cvModel，端口契约版本 2；scene/plan 可逐例改写清单形态与划分方案，用于证明同一份字节在两个契约版本下判定不同。折权重的字节由运行器按「同一权重字节 + 折号」派生，因此逐折摘要天然互不相同，重复摘要才是被检查出来的破坏。",
+ "weights": "seed-weight-bytes",
+ "table": {
+  "featureNames": ["a", "b"],
+  "records": [
+   {"imageId": "i0", "patientId": "p0", "label": 0, "values": [0.1, 0.2]},
+   {"imageId": "i1", "patientId": "p1", "label": 1, "values": [0.3, 0.4]},
+   {"imageId": "i2", "patientId": "p2", "label": 0, "values": [0.5, 0.6]},
+   {"imageId": "i3", "patientId": "p3", "label": 1, "values": [0.7, 0.8]}
+  ]
+ },
+ "split": {
+  "scheme": "holdout",
+  "seed": 7,
+  "stratified": true,
+  "partitions": {"train": ["i0", "i1"], "validation": ["i2"], "test": ["i3"]},
+  "source": "@features",
+  "identityHash": "@identity"
+ },
+ "model": {
+  "task": "binary_classification",
+  "dimension": "tabular",
+  "family": "random_forest",
+  "featureNames": ["a", "b"],
+  "preprocess": ["standardize"],
+  "fit": {
+   "features": "@features",
+   "split": "@split",
+   "trainedImageIds": ["i0", "i1", "i2"],
+   "trainedCount": 3
+  },
+  "weights": {"path": "weights.bin", "sha256": "@weights", "sizeBytes": "@weightsSize"}
+ },
+ "cvSplit": {
+  "method": "StratifiedGroupKFold",
+  "seed": 7,
+  "folds": [
+   {"fold": 0, "trainIds": ["i0", "i1"], "testIds": ["i2", "i3"]},
+   {"fold": 1, "trainIds": ["i2", "i3"], "testIds": ["i0", "i1"]}
+  ],
+  "source": "@features",
+  "identityHash": "@identity"
+ },
+ "cvModel": {
+  "task": "binary_classification",
+  "dimension": "tabular",
+  "family": "random_forest",
+  "featureNames": ["a", "b"],
+  "preprocess": ["standardize"],
+  "fit": {
+   "features": "@features",
+   "split": "@split",
+   "folds": [
+    {"fold": 0, "trainedImageIds": ["i0", "i1"], "trainedCount": 2, "weights": {"path": "weights.fold0.bin", "sha256": "@weights", "sizeBytes": "@weightsSize"}},
+    {"fold": 1, "trainedImageIds": ["i2", "i3"], "trainedCount": 2, "weights": {"path": "weights.fold1.bin", "sha256": "@weights", "sizeBytes": "@weightsSize"}}
+   ]
+  },
+  "weights": {"path": "weights.bin", "sha256": "@weights", "sizeBytes": "@weightsSize"}
+ },
+ "cases": [
+  {"name": "bound model", "break": "", "valid": true},
+  {"name": "task constraint satisfied", "break": "", "modelTask": "binary_classification", "valid": true},
+  {"name": "task constraint conflict", "break": "", "modelTask": "multiclass_classification", "valid": false, "fieldPath": "/task"},
+  {"name": "dimension constraint satisfied", "break": "", "modelDimension": "tabular", "valid": true},
+  {"name": "dimension constraint conflict", "break": "", "modelDimension": "3d", "valid": false, "fieldPath": "/dimension"},
+  {"name": "family constraint satisfied", "break": "", "modelFamily": "random_forest", "valid": true},
+  {"name": "family constraint conflict", "break": "", "modelFamily": "logistic_regression", "valid": false, "fieldPath": "/family"},
+  {"name": "feature order drift", "break": "feature_order", "valid": false, "fieldPath": "/featureNames"},
+  {"name": "trained sample outside source table", "break": "unknown_trained", "valid": false, "fieldPath": "/fit/trainedImageIds"},
+  {"name": "trained count mismatch", "break": "count_mismatch", "valid": false, "fieldPath": "/fit/trainedCount"},
+  {"name": "holdout test set fitted", "break": "holdout_leakage", "valid": false, "fieldPath": "/fit/trainedImageIds"},
+  {"name": "split bound to another table path", "break": "split_alias_path", "valid": false, "fieldPath": "/fit/split"},
+  {"name": "source table missing", "break": "features_missing", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "source table hash stale", "break": "features_hash_stale", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "weights bytes tampered", "break": "weights_tampered", "valid": false, "fieldPath": "/weights/sha256"},
+  {"name": "weights size wrong", "break": "weights_size", "valid": false, "fieldPath": "/weights/sizeBytes"},
+  {"name": "weights larger than the budget", "break": "weights_over_budget", "valid": false, "fieldPath": "/weights/sizeBytes"},
+  {"name": "weights reference is the model file", "break": "weights_self_reference", "valid": false, "fieldPath": "/weights/path"},
+  {"name": "weights path escapes the workspace", "break": "weights_escape", "valid": false, "fieldPath": "/weights/path"},
+  {"name": "source reference escapes the workspace", "break": "features_escape", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "bound fold lineage", "contract": 2, "break": "", "valid": true},
+  {"name": "fold family constraint satisfied", "contract": 2, "break": "", "modelFamily": "random_forest", "valid": true},
+  {"name": "fold family constraint conflict", "contract": 2, "break": "", "modelFamily": "logistic_regression", "valid": false, "fieldPath": "/family"},
+  {"name": "fold feature order drift", "contract": 2, "break": "feature_order", "valid": false, "fieldPath": "/featureNames"},
+  {"name": "fold source table missing", "contract": 2, "break": "features_missing", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "fold split bound to another table path", "contract": 2, "break": "split_alias_path", "valid": false, "fieldPath": "/fit/split"},
+  {"name": "fold fitted set inflated to the union", "contract": 2, "break": "fold_train_union", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold test samples fitted", "contract": 2, "break": "fold_test_sample_fitted", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold trained sample outside source table", "contract": 2, "break": "fold_trained_sample_unknown", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold trained count mismatch", "contract": 2, "break": "fold_count_mismatch", "valid": false, "fieldPath": "/fit/folds/0/trainedCount"},
+  {"name": "fold declaration missing", "contract": 2, "break": "fold_set_missing", "valid": false, "fieldPath": "/fit/folds"},
+  {"name": "fold declaration not in split plan", "contract": 2, "break": "fold_set_extra", "valid": false, "fieldPath": "/fit/folds/2/fold"},
+  {"name": "fold number duplicated", "contract": 2, "break": "fold_duplicate", "valid": false, "fieldPath": "/fit/folds/1/fold"},
+  {"name": "fold weights bytes tampered", "contract": 2, "break": "fold_weights_tampered", "valid": false, "fieldPath": "/fit/folds/1/weights/sha256"},
+  {"name": "fold weights byte-identical across folds", "contract": 2, "break": "fold_weights_identical_bytes", "valid": false, "fieldPath": "/fit/folds/1/weights/sha256"},
+  {"name": "fold weights share one path", "contract": 2, "break": "fold_weights_shared_path", "valid": false, "fieldPath": "/fit/folds/1/weights/path"},
+  {"name": "fold weights point at the packed ensemble", "contract": 2, "break": "fold_weights_point_at_ensemble", "valid": false, "fieldPath": "/fit/folds/0/weights/path"},
+  {"name": "fold weights path escapes the workspace", "contract": 2, "break": "fold_weights_escape", "valid": false, "fieldPath": "/fit/folds/1/weights/path"},
+  {"name": "holdout plan with fold lineage", "contract": 2, "break": "", "plan": "holdout", "valid": false, "fieldPath": "/fit/split"},
+  {"name": "union form refused by fold contract", "contract": 2, "break": "", "scene": "union", "valid": false, "fieldPath": "/fit/folds"},
+  {"name": "fold envelope refused by union contract", "contract": 1, "break": "", "scene": "fold", "plan": "cv", "valid": false, "fieldPath": "/fit/trainedImageIds"}
+ ]
+}

@@ -1,0 +1,31 @@
+# 单细胞研究算子云函数镜像：与基础算子镜像同一构建基座，额外安装 [sc] extra
+# （scanpy/anndata/leidenalg/igraph），入口同为 serve 模式（HTTP /invoke）。
+# 部署约定与 Dockerfile.operator 一致（RADSTUDIO_OPERATOR_TOKEN、8080 端口、
+# POST /invoke + GET /healthz）；FC 函数独立于 radstudio-operator / operator-dl。
+# 构建：docker build -f packages/python-sdk/Dockerfile.operator-sc -t radstudio-operator-sc:<TAG> .
+#   UV_DEFAULT_INDEX：PyPI 直连不稳时传国内镜像（如 https://mirrors.aliyun.com/pypi/simple/）
+FROM python:3.12-slim AS builder
+ARG UV_DEFAULT_INDEX=""
+ENV UV_DEFAULT_INDEX=${UV_DEFAULT_INDEX}
+COPY --from=ghcr.io/astral-sh/uv:0.8.22 /uv /usr/local/bin/uv
+# pyradiomics 是 GitHub 源码包（无 cp312 wheel），uv sync 必须本地编译，装最小编译器集合
+# gcc/g++ 即可；CMake/Ninja 由 scikit-build-core 从 PyPI 装 wheel，python:3.12-slim 自带
+# Python.h，均无需 apt。构建容器到 Debian apt 源的网络不稳：换阿里云镜像源并加大重试。
+RUN sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources \
+    && apt-get update -o Acquire::Retries=8 \
+    && apt-get install -y --no-install-recommends -o Acquire::Retries=8 gcc g++ \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/runner
+COPY packages/python-sdk/pyproject.toml packages/python-sdk/uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project --extra sc
+
+FROM python:3.12-slim
+WORKDIR /opt/runner
+# .venv 须归运行用户所有：scanpy 1.12 的 numba cache=True 要在 site-packages
+# 源码旁写 __pycache__，root 所有会让非 root 运行时 import scanpy 直接失败。
+COPY --from=builder --chown=65532:65532 /opt/runner/.venv /opt/runner/.venv
+COPY packages/python-sdk/radstudio ./radstudio
+ENV PATH="/opt/runner/.venv/bin:$PATH" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/matplotlib
+EXPOSE 8080
+USER 65532:65532
+ENTRYPOINT ["python", "-m", "radstudio.operator_serve", "--host", "0.0.0.0", "--port", "8080"]

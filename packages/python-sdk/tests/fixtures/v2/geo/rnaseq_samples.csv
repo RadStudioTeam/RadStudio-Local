@@ -1,0 +1,9 @@
+sample_id,subject_id,group,batch,age,sex,survival_time_days,survival_event
+S1,P1,A,B1,45,F,820,1
+S2,P2,A,B1,52,M,640,0
+S3,P3,A,B2,61,F,510,1
+S4,P4,A,B2,38,F,900,0
+S5,P5,B,B1,49,M,300,1
+S6,P6,B,B1,57,F,420,1
+S7,P7,B,B2,64,M,260,1
+S8,P8,B,B2,41,F,610,0

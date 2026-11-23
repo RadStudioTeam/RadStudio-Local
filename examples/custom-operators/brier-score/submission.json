@@ -1,0 +1,13 @@
+{
+  "type": "ResearchBrierScore",
+  "version": "1.0.0",
+  "name": "科研示例：二分类 Brier 分数",
+  "category": "results",
+  "description": "按图像等权计算 mean((p-y)^2)，越低越好；不验证独立性，不替代患者级统计分析。",
+  "parametersSchema": {"type": "object", "properties": {}, "additionalProperties": false},
+  "defaults": {},
+  "inputs": [{"name": "predictions", "type": "prediction_table", "required": true}],
+  "outputs": [{"name": "metrics", "type": "metrics"}],
+  "entrypoint": "brier_operator:BrierScore",
+  "dependencies": []
+}

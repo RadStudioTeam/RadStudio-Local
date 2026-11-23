@@ -1,0 +1,507 @@
+code,name,family,tableIndex,dataset,aggregation,value,tolerance,consensus
+VJGA,Local intensity peak,Local intensity features,27,config. A,config. A (2D),-277,10,moderate
+VJGA,Local intensity peak,Local intensity features,27,config. B,config. B (2D),178,10,moderate
+0F91,Global intensity peak,Local intensity features,28,config. A,config. A (2D),189,5,moderate
+0F91,Global intensity peak,Local intensity features,28,config. B,config. B (2D),178,5,moderate
+Q4LE,Mean intensity,Intensity-based statistical features,29,config. A,config. A (2D),13.4,1.1,very strong
+Q4LE,Mean intensity,Intensity-based statistical features,29,config. B,config. B (2D),11.5,1.1,strong
+ECT3,Intensity variance,Intensity-based statistical features,30,config. A,config. A (2D),14200,400,very strong
+ECT3,Intensity variance,Intensity-based statistical features,30,config. B,config. B (2D),14400,400,very strong
+KE2A,Intensity skewness,Intensity-based statistical features,31,config. A,config. A (2D),-2.47,0.05,very strong
+KE2A,Intensity skewness,Intensity-based statistical features,31,config. B,config. B (2D),-2.49,0.05,very strong
+IPH6,(Excess) intensity kurtosis,Intensity-based statistical features,32,config. A,config. A (2D),5.96,0.24,very strong
+IPH6,(Excess) intensity kurtosis,Intensity-based statistical features,32,config. B,config. B (2D),5.93,0.24,very strong
+Y12H,Median intensity,Intensity-based statistical features,33,config. A,config. A (2D),46,0.3,very strong
+Y12H,Median intensity,Intensity-based statistical features,33,config. B,config. B (2D),45,0.3,strong
+1GSF,Minimum intensity,Intensity-based statistical features,34,config. A,config. A (2D),-500,,very strong
+1GSF,Minimum intensity,Intensity-based statistical features,34,config. B,config. B (2D),-500,,very strong
+QG58,10th intensity percentile,Intensity-based statistical features,35,config. A,config. A (2D),-129,8,strong
+QG58,10th intensity percentile,Intensity-based statistical features,35,config. B,config. B (2D),-136,8,strong
+8DWT,90th intensity percentile,Intensity-based statistical features,36,config. A,config. A (2D),95,,strong
+8DWT,90th intensity percentile,Intensity-based statistical features,36,config. B,config. B (2D),91,,strong
+84IY,Maximum intensity,Intensity-based statistical features,37,config. A,config. A (2D),377,9,very strong
+84IY,Maximum intensity,Intensity-based statistical features,37,config. B,config. B (2D),391,9,strong
+SALO,Intensity interquartile range,Intensity-based statistical features,38,config. A,config. A (2D),56,0.5,very strong
+SALO,Intensity interquartile range,Intensity-based statistical features,38,config. B,config. B (2D),52,0.5,strong
+2OJQ,Intensity range,Intensity-based statistical features,39,config. A,config. A (2D),877,9,very strong
+2OJQ,Intensity range,Intensity-based statistical features,39,config. B,config. B (2D),891,9,strong
+4FUA,Intensity-based mean absolute deviation,Intensity-based statistical features,40,config. A,config. A (2D),73.6,1.4,very strong
+4FUA,Intensity-based mean absolute deviation,Intensity-based statistical features,40,config. B,config. B (2D),74.4,1.4,strong
+1128,Intensity-based robust mean absolute deviation,Intensity-based statistical features,41,config. A,config. A (2D),27.7,0.8,very strong
+1128,Intensity-based robust mean absolute deviation,Intensity-based statistical features,41,config. B,config. B (2D),27.3,0.8,strong
+N72L,Intensity-based median absolute deviation,Intensity-based statistical features,42,config. A,config. A (2D),64.3,1,strong
+N72L,Intensity-based median absolute deviation,Intensity-based statistical features,42,config. B,config. B (2D),63.8,1,strong
+7TET,Intensity-based coefficient of variation,Intensity-based statistical features,43,config. A,config. A (2D),8.9,4.98,strong
+7TET,Intensity-based coefficient of variation,Intensity-based statistical features,43,config. B,config. B (2D),10.4,5.2,strong
+9S40,Intensity-based quartile coefficient of dispersion,Intensity-based statistical features,44,config. A,config. A (2D),0.636,0.008,strong
+9S40,Intensity-based quartile coefficient of dispersion,Intensity-based statistical features,44,config. B,config. B (2D),0.591,0.008,strong
+N8CA,Intensity-based energy,Intensity-based statistical features,45,config. A,config. A (2D),1650000000,20000000,very strong
+N8CA,Intensity-based energy,Intensity-based statistical features,45,config. B,config. B (2D),398000000,11000000,strong
+5ZWQ,Root mean square intensity,Intensity-based statistical features,46,config. A,config. A (2D),120,2,very strong
+5ZWQ,Root mean square intensity,Intensity-based statistical features,46,config. B,config. B (2D),121,2,strong
+X6K6,Mean discretised intensity,Intensity histogram features,47,config. A,config. A (2D),21.1,0.1,strong
+X6K6,Mean discretised intensity,Intensity histogram features,47,config. B,config. B (2D),18.9,0.3,strong
+CH89,Discretised intensity variance,Intensity histogram features,48,config. A,config. A (2D),22.8,0.6,strong
+CH89,Discretised intensity variance,Intensity histogram features,48,config. B,config. B (2D),18.7,0.2,strong
+88K1,Discretised intensity skewness,Intensity histogram features,49,config. A,config. A (2D),-2.46,0.05,strong
+88K1,Discretised intensity skewness,Intensity histogram features,49,config. B,config. B (2D),-2.47,0.05,strong
+C3I7,(Excess) discretised intensity kurtosis,Intensity histogram features,50,config. A,config. A (2D),5.9,0.24,strong
+C3I7,(Excess) discretised intensity kurtosis,Intensity histogram features,50,config. B,config. B (2D),5.84,0.24,strong
+WIFQ,Median discretised intensity,Intensity histogram features,51,config. A,config. A (2D),22,,strong
+WIFQ,Median discretised intensity,Intensity histogram features,51,config. B,config. B (2D),20,0.3,strong
+1PR8,Minimum discretised intensity,Intensity histogram features,52,config. A,config. A (2D),1,,strong
+1PR8,Minimum discretised intensity,Intensity histogram features,52,config. B,config. B (2D),1,,strong
+1PR8,10th discretised intensity percentile,Intensity histogram features,53,config. A,config. A (2D),15,0.4,strong
+1PR8,10th discretised intensity percentile,Intensity histogram features,53,config. B,config. B (2D),14,0.5,strong
+GPMT,90th discretised intensity percentile,Intensity histogram features,54,config. A,config. A (2D),24,,strong
+GPMT,90th discretised intensity percentile,Intensity histogram features,54,config. B,config. B (2D),22,0.3,strong
+3NCY,Maximum discretised intensity,Intensity histogram features,55,config. A,config. A (2D),36,0.4,strong
+3NCY,Maximum discretised intensity,Intensity histogram features,55,config. B,config. B (2D),32,,strong
+AMMC,Intensity histogram mode,Intensity histogram features,56,config. A,config. A (2D),23,,strong
+AMMC,Intensity histogram mode,Intensity histogram features,56,config. B,config. B (2D),20,0.3,strong
+WR0O,Discretised intensity interquartile range,Intensity histogram features,57,config. A,config. A (2D),2,,strong
+WR0O,Discretised intensity interquartile range,Intensity histogram features,57,config. B,config. B (2D),2,,strong
+5Z3W,Discretised intensity range,Intensity histogram features,58,config. A,config. A (2D),35,0.4,strong
+5Z3W,Discretised intensity range,Intensity histogram features,58,config. B,config. B (2D),31,,strong
+D2ZX,Intensity histogram mean absolute deviation,Intensity histogram features,59,config. A,config. A (2D),2.94,0.06,strong
+D2ZX,Intensity histogram mean absolute deviation,Intensity histogram features,59,config. B,config. B (2D),2.67,0.03,strong
+WRZB,Intensity histogram robust mean absolute deviation,Intensity histogram features,60,config. A,config. A (2D),1.18,0.04,strong
+WRZB,Intensity histogram robust mean absolute deviation,Intensity histogram features,60,config. B,config. B (2D),1.03,0.03,moderate
+4RNL,Intensity histogram median absolute deviation,Intensity histogram features,61,config. A,config. A (2D),2.58,0.05,strong
+4RNL,Intensity histogram median absolute deviation,Intensity histogram features,61,config. B,config. B (2D),2.28,0.02,strong
+CWYJ,Intensity histogram coefficient of variation,Intensity histogram features,62,config. A,config. A (2D),0.227,0.004,strong
+CWYJ,Intensity histogram coefficient of variation,Intensity histogram features,62,config. B,config. B (2D),0.229,0.004,strong
+SLWD,Intensity histogram quartile coefficient of dispersion,Intensity histogram features,63,config. A,config. A (2D),0.0455,,strong
+SLWD,Intensity histogram quartile coefficient of dispersion,Intensity histogram features,63,config. B,config. B (2D),0.05,0.0005,strong
+TLU2,Discretised intensity entropy,Intensity histogram features,64,config. A,config. A (2D),3.36,0.03,very strong
+TLU2,Discretised intensity entropy,Intensity histogram features,64,config. B,config. B (2D),3.16,0.01,strong
+BJ5W,Discretised intensity uniformity,Intensity histogram features,65,config. A,config. A (2D),0.15,0.002,very strong
+BJ5W,Discretised intensity uniformity,Intensity histogram features,65,config. B,config. B (2D),0.174,0.001,strong
+12CE,Maximum histogram gradient,Intensity histogram features,66,config. A,config. A (2D),11000,100,strong
+12CE,Maximum histogram gradient,Intensity histogram features,66,config. B,config. B (2D),3220,50,strong
+8E6O,Maximum histogram gradient intensity,Intensity histogram features,67,config. A,config. A (2D),21,,strong
+8E6O,Maximum histogram gradient intensity,Intensity histogram features,67,config. B,config. B (2D),19,0.3,strong
+VQB3,Minimum histogram gradient,Intensity histogram features,68,config. A,config. A (2D),-10100,100,strong
+VQB3,Minimum histogram gradient,Intensity histogram features,68,config. B,config. B (2D),-3020,50,strong
+RHQZ,Minimum histogram gradient intensity,Intensity histogram features,69,config. A,config. A (2D),24,,strong
+RHQZ,Minimum histogram gradient intensity,Intensity histogram features,69,config. B,config. B (2D),22,0.3,strong
+BC2M,Volume at intensity fraction,Intensity-volume histogram features,71,config. A,config. A (2D),0.978,0.001,strong
+BC2M,Volume at intensity fraction,Intensity-volume histogram features,71,config. B,config. B (2D),0.977,0.001,strong
+BC2M,Volume at intensity fraction,Intensity-volume histogram features,72,config. A,config. A (2D),6.98e-05,1.03e-05,strong
+BC2M,Volume at intensity fraction,Intensity-volume histogram features,72,config. B,config. B (2D),7.31e-05,1.03e-05,strong
+GBPN,Intensity at volume fraction,Intensity-volume histogram features,73,config. A,config. A (2D),96,,strong
+GBPN,Intensity at volume fraction,Intensity-volume histogram features,73,config. B,config. B (2D),92,,strong
+GBPN,Intensity at volume fraction,Intensity-volume histogram features,74,config. A,config. A (2D),-128,8,strong
+GBPN,Intensity at volume fraction,Intensity-volume histogram features,74,config. B,config. B (2D),-135,8,strong
+DDTU,Volume fraction difference between intensity fractions,Intensity-volume histogram features,75,config. A,config. A (2D),0.978,0.001,strong
+DDTU,Volume fraction difference between intensity fractions,Intensity-volume histogram features,75,config. B,config. B (2D),0.977,0.001,strong
+CNV2,Intensity fraction difference between volume fractions,Intensity-volume histogram features,76,config. A,config. A (2D),224,8,strong
+CNV2,Intensity fraction difference between volume fractions,Intensity-volume histogram features,76,config. B,config. B (2D),227,8,strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,dig. phantom,"2D, averaged",0.519,,very strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,dig. phantom,"2D, slice-merged",0.512,,strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,config. A,"2D, averaged",0.109,0.001,strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,config. A,"2D, slice-merged",0.109,0.001,strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,config. B,"2D, averaged",0.156,0.002,strong
+GYBY,Joint maximum,Grey level co-occurrence based features,77,config. B,"2D, slice-merged",0.156,0.002,strong
+60VM,Joint average,Grey level co-occurrence based features,78,dig. phantom,"2D, averaged",2.14,,very strong
+60VM,Joint average,Grey level co-occurrence based features,78,dig. phantom,"2D, slice-merged",2.14,,strong
+60VM,Joint average,Grey level co-occurrence based features,78,config. A,"2D, averaged",20.6,0.1,strong
+60VM,Joint average,Grey level co-occurrence based features,78,config. A,"2D, slice-merged",20.6,0.1,strong
+60VM,Joint average,Grey level co-occurrence based features,78,config. B,"2D, averaged",18.7,0.3,strong
+60VM,Joint average,Grey level co-occurrence based features,78,config. B,"2D, slice-merged",18.7,0.3,strong
+UR99,Joint variance,Grey level co-occurrence based features,79,dig. phantom,"2D, averaged",2.69,,very strong
+UR99,Joint variance,Grey level co-occurrence based features,79,dig. phantom,"2D, slice-merged",2.71,,strong
+UR99,Joint variance,Grey level co-occurrence based features,79,config. A,"2D, averaged",27,0.4,strong
+UR99,Joint variance,Grey level co-occurrence based features,79,config. A,"2D, slice-merged",27,0.4,strong
+UR99,Joint variance,Grey level co-occurrence based features,79,config. B,"2D, averaged",21,0.3,strong
+UR99,Joint variance,Grey level co-occurrence based features,79,config. B,"2D, slice-merged",21,0.3,strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,dig. phantom,"2D, averaged",2.05,,very strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,dig. phantom,"2D, slice-merged",2.24,,strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,config. A,"2D, averaged",5.82,0.04,strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,config. A,"2D, slice-merged",5.9,0.04,strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,config. B,"2D, averaged",5.26,0.02,strong
+TU9B,Joint entropy,Grey level co-occurrence based features,80,config. B,"2D, slice-merged",5.45,0.01,strong
+TF7R,Difference average,Grey level co-occurrence based features,81,dig. phantom,"2D, averaged",1.42,,very strong
+TF7R,Difference average,Grey level co-occurrence based features,81,dig. phantom,"2D, slice-merged",1.4,,strong
+TF7R,Difference average,Grey level co-occurrence based features,81,config. A,"2D, averaged",1.58,0.03,strong
+TF7R,Difference average,Grey level co-occurrence based features,81,config. A,"2D, slice-merged",1.57,0.03,strong
+TF7R,Difference average,Grey level co-occurrence based features,81,config. B,"2D, averaged",1.81,0.01,strong
+TF7R,Difference average,Grey level co-occurrence based features,81,config. B,"2D, slice-merged",1.81,0.01,strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,dig. phantom,"2D, averaged",2.9,,very strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,dig. phantom,"2D, slice-merged",3.06,,strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,config. A,"2D, averaged",4.94,0.19,strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,config. A,"2D, slice-merged",4.96,0.19,strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,config. B,"2D, averaged",7.74,0.05,strong
+D3YU,Difference variance,Grey level co-occurrence based features,82,config. B,"2D, slice-merged",7.76,0.05,strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,dig. phantom,"2D, averaged",1.4,,very strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,dig. phantom,"2D, slice-merged",1.49,,strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,config. A,"2D, averaged",2.27,0.03,strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,config. A,"2D, slice-merged",2.28,0.03,strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,config. B,"2D, averaged",2.35,0.01,strong
+NTRS,Difference entropy,Grey level co-occurrence based features,83,config. B,"2D, slice-merged",2.38,0.01,strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,dig. phantom,"2D, averaged",4.28,,very strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,dig. phantom,"2D, slice-merged",4.29,,strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,config. A,"2D, averaged",41.3,0.1,strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,config. A,"2D, slice-merged",41.3,0.1,strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,config. B,"2D, averaged",37.4,0.5,strong
+ZGXS,Sum average,Grey level co-occurrence based features,84,config. B,"2D, slice-merged",37.4,0.5,strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,dig. phantom,"2D, averaged",5.47,,very strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,dig. phantom,"2D, slice-merged",5.66,,strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,config. A,"2D, averaged",100,1,strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,config. A,"2D, slice-merged",100,1,strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,config. B,"2D, averaged",72.1,1,strong
+OEEB,Sum variance,Grey level co-occurrence based features,85,config. B,"2D, slice-merged",72.3,1,strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,dig. phantom,"2D, averaged",1.6,,very strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,dig. phantom,"2D, slice-merged",1.79,,strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,config. A,"2D, averaged",4.19,0.03,strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,config. A,"2D, slice-merged",4.21,0.03,strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,config. B,"2D, averaged",3.83,0.01,strong
+P6QZ,Sum entropy,Grey level co-occurrence based features,86,config. B,"2D, slice-merged",3.89,0.01,strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,dig. phantom,"2D, averaged",0.368,,very strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,dig. phantom,"2D, slice-merged",0.352,,strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,config. A,"2D, averaged",0.045,0.0008,strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,config. A,"2D, slice-merged",0.0446,0.0008,strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,config. B,"2D, averaged",0.0678,0.0006,strong
+8ZQL,Angular second moment,Grey level co-occurrence based features,87,config. B,"2D, slice-merged",0.0669,0.0006,strong
+ACUI,Contrast,Grey level co-occurrence based features,88,dig. phantom,"2D, averaged",5.28,,very strong
+ACUI,Contrast,Grey level co-occurrence based features,88,dig. phantom,"2D, slice-merged",5.19,,strong
+ACUI,Contrast,Grey level co-occurrence based features,88,config. A,"2D, averaged",7.85,0.26,strong
+ACUI,Contrast,Grey level co-occurrence based features,88,config. A,"2D, slice-merged",7.82,0.26,strong
+ACUI,Contrast,Grey level co-occurrence based features,88,config. B,"2D, averaged",11.9,0.1,strong
+ACUI,Contrast,Grey level co-occurrence based features,88,config. B,"2D, slice-merged",11.8,0.1,strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,dig. phantom,"2D, averaged",1.42,,very strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,dig. phantom,"2D, slice-merged",1.4,,strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,config. A,"2D, averaged",1.58,0.03,strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,config. A,"2D, slice-merged",1.57,0.03,strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,config. B,"2D, averaged",1.81,0.01,strong
+8S9J,Dissimilarity,Grey level co-occurrence based features,89,config. B,"2D, slice-merged",1.81,0.01,strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,dig. phantom,"2D, averaged",0.678,,very strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,dig. phantom,"2D, slice-merged",0.683,,strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,config. A,"2D, averaged",0.581,0.003,strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,config. A,"2D, slice-merged",0.581,0.003,strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,config. B,"2D, averaged",0.592,0.001,strong
+IB1Z,Inverse difference,Grey level co-occurrence based features,90,config. B,"2D, slice-merged",0.593,0.001,strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,dig. phantom,"2D, averaged",0.851,,very strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,dig. phantom,"2D, slice-merged",0.854,,strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,config. A,"2D, averaged",0.961,0.001,strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,config. A,"2D, slice-merged",0.961,0.001,strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,config. B,"2D, averaged",0.952,0.001,strong
+NDRX,Normalised inverse difference,Grey level co-occurrence based features,91,config. B,"2D, slice-merged",0.952,0.001,strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,dig. phantom,"2D, averaged",0.619,,very strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,dig. phantom,"2D, slice-merged",0.625,,strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,config. A,"2D, averaged",0.544,0.003,strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,config. A,"2D, slice-merged",0.544,0.003,strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,config. B,"2D, averaged",0.557,0.001,strong
+WF0Z,Inverse difference moment,Grey level co-occurrence based features,92,config. B,"2D, slice-merged",0.558,0.001,strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,dig. phantom,"2D, averaged",0.899,,very strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,dig. phantom,"2D, slice-merged",0.901,,strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,config. A,"2D, averaged",0.994,0.001,strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,config. A,"2D, slice-merged",0.994,0.001,strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,config. B,"2D, averaged",0.99,0.001,strong
+1QCO,Normalised inverse difference moment,Grey level co-occurrence based features,93,config. B,"2D, slice-merged",0.99,0.001,strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,dig. phantom,"2D, averaged",0.0567,,very strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,dig. phantom,"2D, slice-merged",0.0553,,strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,config. A,"2D, averaged",0.441,0.001,strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,config. A,"2D, slice-merged",0.441,0.001,strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,config. B,"2D, averaged",0.401,0.002,strong
+E8JP,Inverse variance,Grey level co-occurrence based features,94,config. B,"2D, slice-merged",0.401,0.002,strong
+NI2N,Correlation,Grey level co-occurrence based features,95,dig. phantom,"2D, averaged",-0.0121,,very strong
+NI2N,Correlation,Grey level co-occurrence based features,95,dig. phantom,"2D, slice-merged",0.0173,,strong
+NI2N,Correlation,Grey level co-occurrence based features,95,config. A,"2D, averaged",0.778,0.002,strong
+NI2N,Correlation,Grey level co-occurrence based features,95,config. A,"2D, slice-merged",0.78,0.002,strong
+NI2N,Correlation,Grey level co-occurrence based features,95,config. B,"2D, averaged",0.577,0.002,strong
+NI2N,Correlation,Grey level co-occurrence based features,95,config. B,"2D, slice-merged",0.58,0.002,strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,dig. phantom,"2D, averaged",5.09,,very strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,dig. phantom,"2D, slice-merged",5.14,,strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,config. A,"2D, averaged",455,2,strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,config. A,"2D, slice-merged",455,2,strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,config. B,"2D, averaged",369,11,strong
+QWB0,Autocorrelation,Grey level co-occurrence based features,96,config. B,"2D, slice-merged",369,11,strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,dig. phantom,"2D, averaged",5.47,,very strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,dig. phantom,"2D, slice-merged",5.66,,strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,config. A,"2D, averaged",100,1,strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,config. A,"2D, slice-merged",100,1,strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,config. B,"2D, averaged",72.1,1,strong
+DG8W,Cluster tendency,Grey level co-occurrence based features,97,config. B,"2D, slice-merged",72.3,1,strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,dig. phantom,"2D, averaged",7,,very strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,dig. phantom,"2D, slice-merged",6.98,,strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,config. A,"2D, averaged",-1040,20,strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,config. A,"2D, slice-merged",-1050,20,strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,config. B,"2D, averaged",-668,17,strong
+7NFM,Cluster shade,Grey level co-occurrence based features,98,config. B,"2D, slice-merged",-673,17,strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,dig. phantom,"2D, averaged",79.1,,very strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,dig. phantom,"2D, slice-merged",80.4,,strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,config. A,"2D, averaged",52700,500,strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,config. A,"2D, slice-merged",52800,500,strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,config. B,"2D, averaged",29400,1400,strong
+AE86,Cluster prominence,Grey level co-occurrence based features,99,config. B,"2D, slice-merged",29500,1400,strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,dig. phantom,"2D, averaged",-0.155,,very strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,dig. phantom,"2D, slice-merged",-0.0341,,strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,config. A,"2D, averaged",-0.236,0.001,strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,config. A,"2D, slice-merged",-0.214,0.001,strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,config. B,"2D, averaged",-0.239,0.001,strong
+R8DG,Information correlation 1,Grey level co-occurrence based features,100,config. B,"2D, slice-merged",-0.181,0.001,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,dig. phantom,"2D, averaged",0.487,,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,dig. phantom,"2D, slice-merged",0.263,,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,config. A,"2D, averaged",0.863,0.003,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,config. A,"2D, slice-merged",0.851,0.002,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,config. B,"2D, averaged",0.837,0.001,strong
+JN9H,Information correlation 2,Grey level co-occurrence based features,101,config. B,"2D, slice-merged",0.792,0.001,strong
+22OV,Short runs emphasis,Grey level run length based features,102,dig. phantom,"2D, averaged",0.641,,very strong
+22OV,Short runs emphasis,Grey level run length based features,102,dig. phantom,"2D, slice-merged",0.661,,strong
+22OV,Short runs emphasis,Grey level run length based features,102,config. A,"2D, averaged",0.785,0.003,strong
+22OV,Short runs emphasis,Grey level run length based features,102,config. A,"2D, slice-merged",0.786,0.003,strong
+22OV,Short runs emphasis,Grey level run length based features,102,config. B,"2D, averaged",0.781,0.001,strong
+22OV,Short runs emphasis,Grey level run length based features,102,config. B,"2D, slice-merged",0.782,0.001,strong
+W4KF,Long runs emphasis,Grey level run length based features,103,dig. phantom,"2D, averaged",3.78,,very strong
+W4KF,Long runs emphasis,Grey level run length based features,103,dig. phantom,"2D, slice-merged",3.51,,strong
+W4KF,Long runs emphasis,Grey level run length based features,103,config. A,"2D, averaged",2.91,0.03,strong
+W4KF,Long runs emphasis,Grey level run length based features,103,config. A,"2D, slice-merged",2.89,0.03,strong
+W4KF,Long runs emphasis,Grey level run length based features,103,config. B,"2D, averaged",3.52,0.04,strong
+W4KF,Long runs emphasis,Grey level run length based features,103,config. B,"2D, slice-merged",3.5,0.04,strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,dig. phantom,"2D, averaged",0.604,,very strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,dig. phantom,"2D, slice-merged",0.609,,strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,config. A,"2D, averaged",0.0264,0.0003,strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,config. A,"2D, slice-merged",0.0264,0.0003,strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,config. B,"2D, averaged",0.0331,0.0006,strong
+V3SW,Low grey level run emphasis,Grey level run length based features,104,config. B,"2D, slice-merged",0.033,0.0006,strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,dig. phantom,"2D, averaged",9.82,,very strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,dig. phantom,"2D, slice-merged",9.74,,strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,config. A,"2D, averaged",428,3,strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,config. A,"2D, slice-merged",428,3,strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,config. B,"2D, averaged",342,11,strong
+G3QZ,High grey level run emphasis,Grey level run length based features,105,config. B,"2D, slice-merged",342,11,strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,dig. phantom,"2D, averaged",0.294,,very strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,dig. phantom,"2D, slice-merged",0.311,,strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,config. A,"2D, averaged",0.0243,0.0003,strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,config. A,"2D, slice-merged",0.0243,0.0003,strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,config. B,"2D, averaged",0.0314,0.0006,strong
+HTZT,Short run low grey level emphasis,Grey level run length based features,106,config. B,"2D, slice-merged",0.0313,0.0006,strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,dig. phantom,"2D, averaged",8.57,,very strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,dig. phantom,"2D, slice-merged",8.67,,strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,config. A,"2D, averaged",320,1,strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,config. A,"2D, slice-merged",320,1,strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,config. B,"2D, averaged",251,8,strong
+GD3A,Short run high grey level emphasis,Grey level run length based features,107,config. B,"2D, slice-merged",252,8,strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,dig. phantom,"2D, averaged",3.14,,very strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,dig. phantom,"2D, slice-merged",2.92,,strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,config. A,"2D, averaged",0.0386,0.0003,strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,config. A,"2D, slice-merged",0.0385,0.0003,strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,config. B,"2D, averaged",0.0443,0.0008,strong
+IVPO,Long run low grey level emphasis,Grey level run length based features,108,config. B,"2D, slice-merged",0.0442,0.0008,strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,dig. phantom,"2D, averaged",17.4,,very strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,dig. phantom,"2D, slice-merged",16.1,,strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,config. A,"2D, averaged",1410,20,strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,config. A,"2D, slice-merged",1400,20,strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,config. B,"2D, averaged",1390,30,strong
+3KUM,Long run high grey level emphasis,Grey level run length based features,109,config. B,"2D, slice-merged",1380,30,strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,dig. phantom,"2D, averaged",5.2,,very strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,dig. phantom,"2D, slice-merged",20.5,,strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,config. A,"2D, averaged",432,1,strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,config. A,"2D, slice-merged",1730,10,strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,config. B,"2D, averaged",107,1,strong
+R5YN,Grey level non-uniformity,Grey level run length based features,110,config. B,"2D, slice-merged",427,1,strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,dig. phantom,"2D, averaged",0.46,,very strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,dig. phantom,"2D, slice-merged",0.456,,strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,config. A,"2D, averaged",0.128,0.003,strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,config. A,"2D, slice-merged",0.128,0.003,strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,config. B,"2D, averaged",0.145,0.001,strong
+OVBL,Normalised grey level non-uniformity,Grey level run length based features,111,config. B,"2D, slice-merged",0.145,0.001,strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,dig. phantom,"2D, averaged",6.12,,very strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,dig. phantom,"2D, slice-merged",21.6,,strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,config. A,"2D, averaged",1650,10,strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,config. A,"2D, slice-merged",6600,30,strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,config. B,"2D, averaged",365,3,strong
+W92Y,Run length non-uniformity,Grey level run length based features,112,config. B,"2D, slice-merged",1460,10,strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,dig. phantom,"2D, averaged",0.492,,very strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,dig. phantom,"2D, slice-merged",0.441,,strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,config. A,"2D, averaged",0.579,0.003,strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,config. A,"2D, slice-merged",0.579,0.003,strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,config. B,"2D, averaged",0.578,0.001,strong
+IC23,Normalised run length non-uniformity,Grey level run length based features,113,config. B,"2D, slice-merged",0.578,0.001,strong
+9ZK5,Run percentage,Grey level run length based features,114,dig. phantom,"2D, averaged",0.627,,very strong
+9ZK5,Run percentage,Grey level run length based features,114,dig. phantom,"2D, slice-merged",0.627,,strong
+9ZK5,Run percentage,Grey level run length based features,114,config. A,"2D, averaged",0.704,0.003,strong
+9ZK5,Run percentage,Grey level run length based features,114,config. A,"2D, slice-merged",0.704,0.003,strong
+9ZK5,Run percentage,Grey level run length based features,114,config. B,"2D, averaged",0.681,0.002,strong
+9ZK5,Run percentage,Grey level run length based features,114,config. B,"2D, slice-merged",0.681,0.002,strong
+8CE5,Grey level variance,Grey level run length based features,115,dig. phantom,"2D, averaged",3.35,,very strong
+8CE5,Grey level variance,Grey level run length based features,115,dig. phantom,"2D, slice-merged",3.37,,strong
+8CE5,Grey level variance,Grey level run length based features,115,config. A,"2D, averaged",33.7,0.6,strong
+8CE5,Grey level variance,Grey level run length based features,115,config. A,"2D, slice-merged",33.7,0.6,strong
+8CE5,Grey level variance,Grey level run length based features,115,config. B,"2D, averaged",28.3,0.3,strong
+8CE5,Grey level variance,Grey level run length based features,115,config. B,"2D, slice-merged",28.3,0.3,strong
+SXLW,Run length variance,Grey level run length based features,116,dig. phantom,"2D, averaged",0.761,,very strong
+SXLW,Run length variance,Grey level run length based features,116,dig. phantom,"2D, slice-merged",0.778,,strong
+SXLW,Run length variance,Grey level run length based features,116,config. A,"2D, averaged",0.828,0.008,strong
+SXLW,Run length variance,Grey level run length based features,116,config. A,"2D, slice-merged",0.826,0.008,strong
+SXLW,Run length variance,Grey level run length based features,116,config. B,"2D, averaged",1.22,0.03,strong
+SXLW,Run length variance,Grey level run length based features,116,config. B,"2D, slice-merged",1.21,0.03,strong
+HJ9O,Run entropy,Grey level run length based features,117,dig. phantom,"2D, averaged",2.17,,very strong
+HJ9O,Run entropy,Grey level run length based features,117,dig. phantom,"2D, slice-merged",2.57,,strong
+HJ9O,Run entropy,Grey level run length based features,117,config. A,"2D, averaged",4.73,0.02,strong
+HJ9O,Run entropy,Grey level run length based features,117,config. A,"2D, slice-merged",4.76,0.02,strong
+HJ9O,Run entropy,Grey level run length based features,117,config. B,"2D, averaged",4.53,0.02,strong
+HJ9O,Run entropy,Grey level run length based features,117,config. B,"2D, slice-merged",4.58,0.01,strong
+9SAK,Small zone emphasis,Grey level size zone based features,118,dig. phantom,2D,0.363,,strong
+9SAK,Small zone emphasis,Grey level size zone based features,118,config. A,2D,0.688,0.003,strong
+9SAK,Small zone emphasis,Grey level size zone based features,118,config. B,2D,0.745,0.003,strong
+48P8,Large zone emphasis,Grey level size zone based features,119,dig. phantom,2D,43.9,,strong
+48P8,Large zone emphasis,Grey level size zone based features,119,config. A,2D,625,9,strong
+48P8,Large zone emphasis,Grey level size zone based features,119,config. B,2D,439,8,strong
+XMSY,Low grey level zone emphasis,Grey level size zone based features,120,dig. phantom,2D,0.371,,strong
+XMSY,Low grey level zone emphasis,Grey level size zone based features,120,config. A,2D,0.0368,0.0005,strong
+XMSY,Low grey level zone emphasis,Grey level size zone based features,120,config. B,2D,0.0475,0.001,strong
+5GN9,High grey level zone emphasis,Grey level size zone based features,121,dig. phantom,2D,16.4,,strong
+5GN9,High grey level zone emphasis,Grey level size zone based features,121,config. A,2D,363,3,strong
+5GN9,High grey level zone emphasis,Grey level size zone based features,121,config. B,2D,284,11,strong
+5RAI,Small zone low grey level emphasis,Grey level size zone based features,122,dig. phantom,2D,0.0259,,strong
+5RAI,Small zone low grey level emphasis,Grey level size zone based features,122,config. A,2D,0.0298,0.0005,strong
+5RAI,Small zone low grey level emphasis,Grey level size zone based features,122,config. B,2D,0.0415,0.0008,strong
+HW1V,Small zone high grey level emphasis,Grey level size zone based features,123,dig. phantom,2D,10.3,,strong
+HW1V,Small zone high grey level emphasis,Grey level size zone based features,123,config. A,2D,226,1,strong
+HW1V,Small zone high grey level emphasis,Grey level size zone based features,123,config. B,2D,190,7,strong
+YH51,Large zone low grey level emphasis,Grey level size zone based features,124,dig. phantom,2D,40.4,,strong
+YH51,Large zone low grey level emphasis,Grey level size zone based features,124,config. A,2D,1.35,0.03,strong
+YH51,Large zone low grey level emphasis,Grey level size zone based features,124,config. B,2D,1.15,0.04,strong
+J17V,Large zone high grey level emphasis,Grey level size zone based features,125,dig. phantom,2D,113,,strong
+J17V,Large zone high grey level emphasis,Grey level size zone based features,125,config. A,2D,316000,5000,strong
+J17V,Large zone high grey level emphasis,Grey level size zone based features,125,config. B,2D,181000,3000,strong
+JNSA,Grey level non-uniformity,Grey level size zone based features,126,dig. phantom,2D,1.41,,strong
+JNSA,Grey level non-uniformity,Grey level size zone based features,126,config. A,2D,82.2,0.1,strong
+JNSA,Grey level non-uniformity,Grey level size zone based features,126,config. B,2D,20.5,0.1,strong
+Y1RO,Normalised grey level non-uniformity,Grey level size zone based features,127,dig. phantom,2D,0.323,,strong
+Y1RO,Normalised grey level non-uniformity,Grey level size zone based features,127,config. A,2D,0.0728,0.0014,strong
+Y1RO,Normalised grey level non-uniformity,Grey level size zone based features,127,config. B,2D,0.0789,0.001,strong
+4JP3,Zone size non-uniformity,Grey level size zone based features,128,dig. phantom,2D,1.49,,strong
+4JP3,Zone size non-uniformity,Grey level size zone based features,128,config. A,2D,479,4,strong
+4JP3,Zone size non-uniformity,Grey level size zone based features,128,config. B,2D,140,3,strong
+VB3A,Normalised zone size non-uniformity,Grey level size zone based features,129,dig. phantom,2D,0.333,,strong
+VB3A,Normalised zone size non-uniformity,Grey level size zone based features,129,config. A,2D,0.44,0.004,strong
+VB3A,Normalised zone size non-uniformity,Grey level size zone based features,129,config. B,2D,0.521,0.004,strong
+P30P,Zone percentage,Grey level size zone based features,130,dig. phantom,2D,0.24,,strong
+P30P,Zone percentage,Grey level size zone based features,130,config. A,2D,0.3,0.003,strong
+P30P,Zone percentage,Grey level size zone based features,130,config. B,2D,0.324,0.001,strong
+BYLV,Grey level variance,Grey level size zone based features,131,dig. phantom,2D,3.97,,strong
+BYLV,Grey level variance,Grey level size zone based features,131,config. A,2D,42.7,0.7,strong
+BYLV,Grey level variance,Grey level size zone based features,131,config. B,2D,36.1,0.3,strong
+3NSA,Zone size variance,Grey level size zone based features,132,dig. phantom,2D,21,,strong
+3NSA,Zone size variance,Grey level size zone based features,132,config. A,2D,609,9,strong
+3NSA,Zone size variance,Grey level size zone based features,132,config. B,2D,423,8,strong
+GU8N,Zone size entropy,Grey level size zone based features,133,dig. phantom,2D,1.93,,strong
+GU8N,Zone size entropy,Grey level size zone based features,133,config. A,2D,5.92,0.02,strong
+GU8N,Zone size entropy,Grey level size zone based features,133,config. B,2D,5.29,0.01,strong
+0GBI,Small distance emphasis,Grey level distance zone based features,134,dig. phantom,2D,0.946,,strong
+0GBI,Small distance emphasis,Grey level distance zone based features,134,config. A,2D,0.192,0.006,strong
+0GBI,Small distance emphasis,Grey level distance zone based features,134,config. B,2D,0.36,0.005,strong
+MB4I,Large distance emphasis,Grey level distance zone based features,135,dig. phantom,2D,1.21,,strong
+MB4I,Large distance emphasis,Grey level distance zone based features,135,config. A,2D,161,1,moderate
+MB4I,Large distance emphasis,Grey level distance zone based features,135,config. B,2D,31.6,0.2,moderate
+S1RA,Low grey level zone emphasis,Grey level distance zone based features,136,dig. phantom,2D,0.371,,strong
+S1RA,Low grey level zone emphasis,Grey level distance zone based features,136,config. A,2D,0.0368,0.0005,strong
+S1RA,Low grey level zone emphasis,Grey level distance zone based features,136,config. B,2D,0.0475,0.001,strong
+K26C,High grey level zone emphasis,Grey level distance zone based features,137,dig. phantom,2D,16.4,,strong
+K26C,High grey level zone emphasis,Grey level distance zone based features,137,config. A,2D,363,3,strong
+K26C,High grey level zone emphasis,Grey level distance zone based features,137,config. B,2D,284,11,strong
+RUVG,Small distance low grey level emphasis,Grey level distance zone based features,138,dig. phantom,2D,0.367,,strong
+RUVG,Small distance low grey level emphasis,Grey level distance zone based features,138,config. A,2D,0.00913,0.00023,strong
+RUVG,Small distance low grey level emphasis,Grey level distance zone based features,138,config. B,2D,0.0192,0.0005,strong
+DKNJ,Small distance high grey level emphasis,Grey level distance zone based features,139,dig. phantom,2D,15.2,,strong
+DKNJ,Small distance high grey level emphasis,Grey level distance zone based features,139,config. A,2D,60.1,3.3,strong
+DKNJ,Small distance high grey level emphasis,Grey level distance zone based features,139,config. B,2D,95.7,5.5,strong
+A7WM,Large distance low grey level emphasis,Grey level distance zone based features,140,dig. phantom,2D,0.386,,strong
+A7WM,Large distance low grey level emphasis,Grey level distance zone based features,140,config. A,2D,2.96,0.02,moderate
+A7WM,Large distance low grey level emphasis,Grey level distance zone based features,140,config. B,2D,0.934,0.018,moderate
+KLTH,Large distance high grey level emphasis,Grey level distance zone based features,141,dig. phantom,2D,21.3,,strong
+KLTH,Large distance high grey level emphasis,Grey level distance zone based features,141,config. A,2D,70100,100,moderate
+KLTH,Large distance high grey level emphasis,Grey level distance zone based features,141,config. B,2D,10600,300,strong
+VFT7,Grey level non-uniformity,Grey level distance zone based features,142,dig. phantom,2D,1.41,,strong
+VFT7,Grey level non-uniformity,Grey level distance zone based features,142,config. A,2D,82.2,0.1,strong
+VFT7,Grey level non-uniformity,Grey level distance zone based features,142,config. B,2D,20.5,0.1,strong
+7HP3,Normalised grey level non-uniformity,Grey level distance zone based features,143,dig. phantom,2D,0.323,,strong
+7HP3,Normalised grey level non-uniformity,Grey level distance zone based features,143,config. A,2D,0.0728,0.0014,strong
+7HP3,Normalised grey level non-uniformity,Grey level distance zone based features,143,config. B,2D,0.0789,0.001,strong
+V294,Zone distance non-uniformity,Grey level distance zone based features,144,dig. phantom,2D,3.79,,strong
+V294,Zone distance non-uniformity,Grey level distance zone based features,144,config. A,2D,64,0.4,moderate
+V294,Zone distance non-uniformity,Grey level distance zone based features,144,config. B,2D,39.8,0.3,moderate
+IATH,Normalised zone distance non-uniformity,Grey level distance zone based features,145,dig. phantom,2D,0.898,,strong
+IATH,Normalised zone distance non-uniformity,Grey level distance zone based features,145,config. A,2D,0.0716,0.0022,strong
+IATH,Normalised zone distance non-uniformity,Grey level distance zone based features,145,config. B,2D,0.174,0.003,strong
+VIWW,Zone percentage,Grey level distance zone based features,146,dig. phantom,2D,0.24,,strong
+VIWW,Zone percentage,Grey level distance zone based features,146,config. A,2D,0.3,0.003,strong
+VIWW,Zone percentage,Grey level distance zone based features,146,config. B,2D,0.324,0.001,strong
+QK93,Grey level variance,Grey level distance zone based features,147,dig. phantom,2D,3.97,,strong
+QK93,Grey level variance,Grey level distance zone based features,147,config. A,2D,42.7,0.7,moderate
+QK93,Grey level variance,Grey level distance zone based features,147,config. B,2D,36.1,0.3,moderate
+7WT1,Zone distance variance,Grey level distance zone based features,148,dig. phantom,2D,0.051,,strong
+7WT1,Zone distance variance,Grey level distance zone based features,148,config. A,2D,69.4,0.1,moderate
+7WT1,Zone distance variance,Grey level distance zone based features,148,config. B,2D,13.5,0.1,moderate
+GBDU,Zone distance entropy,Grey level distance zone based features,149,dig. phantom,2D,1.73,,strong
+GBDU,Zone distance entropy,Grey level distance zone based features,149,config. A,2D,8,0.04,strong
+GBDU,Zone distance entropy,Grey level distance zone based features,149,config. B,2D,6.47,0.03,strong
+QCDE,Coarseness,Neighbourhood grey tone difference based features,150,dig. phantom,2D,0.121,,strong
+QCDE,Coarseness,Neighbourhood grey tone difference based features,150,config. A,2D,0.00629,0.00046,strong
+QCDE,Coarseness,Neighbourhood grey tone difference based features,150,config. B,2D,0.0168,0.0005,strong
+65HE,Contrast,Neighbourhood grey tone difference based features,151,dig. phantom,2D,0.925,,strong
+65HE,Contrast,Neighbourhood grey tone difference based features,151,config. A,2D,0.107,0.002,strong
+65HE,Contrast,Neighbourhood grey tone difference based features,151,config. B,2D,0.181,0.001,strong
+NQ30,Busyness,Neighbourhood grey tone difference based features,152,dig. phantom,2D,2.99,,strong
+NQ30,Busyness,Neighbourhood grey tone difference based features,152,config. A,2D,0.489,0.001,strong
+NQ30,Busyness,Neighbourhood grey tone difference based features,152,config. B,2D,0.2,0.005,strong
+HDEZ,Complexity,Neighbourhood grey tone difference based features,153,dig. phantom,2D,10.4,,strong
+HDEZ,Complexity,Neighbourhood grey tone difference based features,153,config. A,2D,438,9,strong
+HDEZ,Complexity,Neighbourhood grey tone difference based features,153,config. B,2D,391,7,strong
+1X9X,Strength,Neighbourhood grey tone difference based features,154,dig. phantom,2D,2.88,,strong
+1X9X,Strength,Neighbourhood grey tone difference based features,154,config. A,2D,3.33,0.08,strong
+1X9X,Strength,Neighbourhood grey tone difference based features,154,config. B,2D,6.02,0.23,strong
+SODN,Low dependence emphasis,Neighbouring grey level dependence based features,155,dig. phantom,2D,0.158,,strong
+SODN,Low dependence emphasis,Neighbouring grey level dependence based features,155,config. A,2D,0.281,0.003,strong
+SODN,Low dependence emphasis,Neighbouring grey level dependence based features,155,config. B,2D,0.31,0.001,strong
+IMOQ,High dependence emphasis,Neighbouring grey level dependence based features,156,dig. phantom,2D,19.2,,strong
+IMOQ,High dependence emphasis,Neighbouring grey level dependence based features,156,config. A,2D,14.8,0.1,strong
+IMOQ,High dependence emphasis,Neighbouring grey level dependence based features,156,config. B,2D,17.3,0.2,strong
+TL9H,Low grey level count emphasis,Neighbouring grey level dependence based features,157,dig. phantom,2D,0.702,,strong
+TL9H,Low grey level count emphasis,Neighbouring grey level dependence based features,157,config. A,2D,0.0233,0.0003,strong
+TL9H,Low grey level count emphasis,Neighbouring grey level dependence based features,157,config. B,2D,0.0286,0.0004,strong
+OAE7,High grey level count emphasis,Neighbouring grey level dependence based features,158,dig. phantom,2D,7.49,,strong
+OAE7,High grey level count emphasis,Neighbouring grey level dependence based features,158,config. A,2D,446,2,strong
+OAE7,High grey level count emphasis,Neighbouring grey level dependence based features,158,config. B,2D,359,10,strong
+EQ3F,Low dependence low grey level emphasis,Neighbouring grey level dependence based features,159,dig. phantom,2D,0.0473,,strong
+EQ3F,Low dependence low grey level emphasis,Neighbouring grey level dependence based features,159,config. A,2D,0.0137,0.0002,strong
+EQ3F,Low dependence low grey level emphasis,Neighbouring grey level dependence based features,159,config. B,2D,0.0203,0.0003,strong
+JA6D,Low dependence high grey level emphasis,Neighbouring grey level dependence based features,160,dig. phantom,2D,3.06,,strong
+JA6D,Low dependence high grey level emphasis,Neighbouring grey level dependence based features,160,config. A,2D,94.2,0.4,strong
+JA6D,Low dependence high grey level emphasis,Neighbouring grey level dependence based features,160,config. B,2D,78.9,2.2,strong
+NBZI,High dependence low grey level emphasis,Neighbouring grey level dependence based features,161,dig. phantom,2D,17.6,,strong
+NBZI,High dependence low grey level emphasis,Neighbouring grey level dependence based features,161,config. A,2D,0.116,0.001,strong
+NBZI,High dependence low grey level emphasis,Neighbouring grey level dependence based features,161,config. B,2D,0.108,0.003,strong
+9QMG,High dependence high grey level emphasis,Neighbouring grey level dependence based features,162,dig. phantom,2D,49.5,,strong
+9QMG,High dependence high grey level emphasis,Neighbouring grey level dependence based features,162,config. A,2D,7540,60,strong
+9QMG,High dependence high grey level emphasis,Neighbouring grey level dependence based features,162,config. B,2D,7210,130,strong
+FP8K,Grey level non-uniformity,Neighbouring grey level dependence based features,163,dig. phantom,2D,10.2,,strong
+FP8K,Grey level non-uniformity,Neighbouring grey level dependence based features,163,config. A,2D,757,1,strong
+FP8K,Grey level non-uniformity,Neighbouring grey level dependence based features,163,config. B,2D,216,3,strong
+5SPA,Normalised grey level non-uniformity,Neighbouring grey level dependence based features,164,dig. phantom,2D,0.562,,strong
+5SPA,Normalised grey level non-uniformity,Neighbouring grey level dependence based features,164,config. A,2D,0.151,0.003,strong
+5SPA,Normalised grey level non-uniformity,Neighbouring grey level dependence based features,164,config. B,2D,0.184,0.001,strong
+Z87G,Dependence count non-uniformity,Neighbouring grey level dependence based features,165,dig. phantom,2D,3.96,,strong
+Z87G,Dependence count non-uniformity,Neighbouring grey level dependence based features,165,config. A,2D,709,2,strong
+Z87G,Dependence count non-uniformity,Neighbouring grey level dependence based features,165,config. B,2D,157,1,strong
+OKJI,Normalised dependence count non-uniformity,Neighbouring grey level dependence based features,166,dig. phantom,2D,0.212,,strong
+OKJI,Normalised dependence count non-uniformity,Neighbouring grey level dependence based features,166,config. A,2D,0.175,0.001,strong
+OKJI,Normalised dependence count non-uniformity,Neighbouring grey level dependence based features,166,config. B,2D,0.179,0.001,strong
+6XV8,Dependence count percentage,Neighbouring grey level dependence based features,167,dig. phantom,2D,1,,strong
+6XV8,Dependence count percentage,Neighbouring grey level dependence based features,167,config. A,2D,1,,moderate
+6XV8,Dependence count percentage,Neighbouring grey level dependence based features,167,config. B,2D,1,,moderate
+1PFV,Grey level variance,Neighbouring grey level dependence based features,168,dig. phantom,2D,2.7,,strong
+1PFV,Grey level variance,Neighbouring grey level dependence based features,168,config. A,2D,31.1,0.5,strong
+1PFV,Grey level variance,Neighbouring grey level dependence based features,168,config. B,2D,25.3,0.4,strong
+DNX2,Dependence count variance,Neighbouring grey level dependence based features,169,dig. phantom,2D,2.73,,strong
+DNX2,Dependence count variance,Neighbouring grey level dependence based features,169,config. A,2D,3.12,0.02,strong
+DNX2,Dependence count variance,Neighbouring grey level dependence based features,169,config. B,2D,4.02,0.05,strong
+FCBV,Dependence count entropy,Neighbouring grey level dependence based features,170,dig. phantom,2D,2.71,,strong
+FCBV,Dependence count entropy,Neighbouring grey level dependence based features,170,config. A,2D,5.76,0.02,strong
+FCBV,Dependence count entropy,Neighbouring grey level dependence based features,170,config. B,2D,5.38,0.01,strong
+CAS9,Dependence count energy,Neighbouring grey level dependence based features,171,dig. phantom,2D,0.17,,strong
+CAS9,Dependence count energy,Neighbouring grey level dependence based features,171,config. A,2D,0.0268,0.0004,strong
+CAS9,Dependence count energy,Neighbouring grey level dependence based features,171,config. B,2D,0.0321,0.0002,strong

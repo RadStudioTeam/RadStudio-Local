@@ -1,0 +1,74 @@
+{
+ "version": 1,
+ "note": "影像模型拟合血缘（radstudio/model@3）共享正反例。@features/@split/@identity/@weights/@weightsSize 由每个语言的运行器在规范化编码前注入；break 指定运行器应用的一处确定性破坏。影像形态只认交叉验证划分：fit.folds 逐折声明训练影像集与训练/测试数量，顶层权重是合并后的 checkpoint；plan=holdout 用留出划分证明影像形态拒绝非交叉验证来源。",
+ "weights": "seed-checkpoint-bytes",
+ "table": {
+  "featureNames": ["mean_intensity", "texture_entropy"],
+  "records": [
+   {"imageId": "i0", "patientId": "p0", "label": 0, "values": [0.11, 0.21]},
+   {"imageId": "i1", "patientId": "p1", "label": 1, "values": [0.31, 0.41]},
+   {"imageId": "i2", "patientId": "p2", "label": 0, "values": [0.51, 0.61]},
+   {"imageId": "i3", "patientId": "p3", "label": 1, "values": [0.71, 0.81]}
+  ]
+ },
+ "split": {
+  "method": "StratifiedGroupKFold",
+  "seed": 7,
+  "folds": [
+   {"fold": 0, "trainIds": ["i0", "i1"], "testIds": ["i2", "i3"]},
+   {"fold": 1, "trainIds": ["i2", "i3"], "testIds": ["i0", "i1"]}
+  ],
+  "source": "@features",
+  "identityHash": "@identity"
+ },
+ "holdoutSplit": {
+  "scheme": "holdout",
+  "seed": 7,
+  "stratified": true,
+  "partitions": {"train": ["i0", "i1"], "validation": ["i2"], "test": ["i3"]},
+  "source": "@features",
+  "identityHash": "@identity"
+ },
+ "model": {
+  "task": "binary_classification",
+  "dimension": "2d",
+  "family": "resnet18",
+  "fit": {
+   "features": "@features",
+   "split": "@split",
+   "folds": [
+    {"fold": 0, "trainedImageIds": ["i0", "i1"], "trainedCount": 2, "testCount": 2},
+    {"fold": 1, "trainedImageIds": ["i2", "i3"], "trainedCount": 2, "testCount": 2}
+   ]
+  },
+  "weights": {"path": "checkpoint.pt", "sha256": "@weights", "sizeBytes": "@weightsSize"}
+ },
+ "cases": [
+  {"name": "bound image model", "break": "", "valid": true},
+  {"name": "task constraint satisfied", "break": "", "modelTask": "binary_classification", "valid": true},
+  {"name": "task constraint conflict", "break": "", "modelTask": "multiclass_classification", "valid": false, "fieldPath": "/task"},
+  {"name": "dimension constraint satisfied", "break": "", "modelDimension": "2d", "valid": true},
+  {"name": "dimension constraint conflict", "break": "", "modelDimension": "tabular", "valid": false, "fieldPath": "/dimension"},
+  {"name": "family constraint satisfied", "break": "", "modelFamily": "resnet18", "valid": true},
+  {"name": "family constraint conflict", "break": "", "modelFamily": "densenet121", "valid": false, "fieldPath": "/family"},
+  {"name": "model dimension other than 2d", "break": "dimension_tabular", "valid": false, "fieldPath": "/dimension"},
+  {"name": "union form refused by image contract", "break": "union_form", "valid": false, "fieldPath": "/fit/folds"},
+  {"name": "holdout plan with image lineage", "break": "", "plan": "holdout", "valid": false, "fieldPath": "/fit/split"},
+  {"name": "source table missing", "break": "features_missing", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "source table hash stale", "break": "features_hash_stale", "valid": false, "fieldPath": "/fit/features"},
+  {"name": "split bound to another table path", "break": "split_alias_path", "valid": false, "fieldPath": "/fit/split"},
+  {"name": "fold set missing", "break": "fold_set_missing", "valid": false, "fieldPath": "/fit/folds"},
+  {"name": "fold set extra", "break": "fold_set_extra", "valid": false, "fieldPath": "/fit/folds/2/fold"},
+  {"name": "fold number duplicated", "break": "fold_duplicate", "valid": false, "fieldPath": "/fit/folds/1/fold"},
+  {"name": "fold fitted set inflated to the union", "break": "fold_train_union", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold test samples fitted", "break": "fold_test_sample_fitted", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold trained sample outside source table", "break": "fold_trained_unknown", "valid": false, "fieldPath": "/fit/folds/0/trainedImageIds"},
+  {"name": "fold trained count mismatch", "break": "fold_count_mismatch", "valid": false, "fieldPath": "/fit/folds/0/trainedCount"},
+  {"name": "fold test count mismatch", "break": "fold_test_count_mismatch", "valid": false, "fieldPath": "/fit/folds/0/testCount"},
+  {"name": "weights bytes tampered", "break": "weights_tampered", "valid": false, "fieldPath": "/weights/sha256"},
+  {"name": "weights size wrong", "break": "weights_size", "valid": false, "fieldPath": "/weights/sizeBytes"},
+  {"name": "weights reference is the model file", "break": "weights_self_reference", "valid": false, "fieldPath": "/weights/path"},
+  {"name": "weights path escapes the workspace", "break": "weights_escape", "valid": false, "fieldPath": "/weights/path"},
+  {"name": "source reference escapes the workspace", "break": "features_escape", "valid": false, "fieldPath": "/fit/features"}
+ ]
+}

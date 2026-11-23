@@ -1,0 +1,46 @@
+# 示例：把算子镜像部署到阿里云函数计算 FC 3.0（Serverless Devs）
+# 复制为 s.yaml 并按你的环境替换 <...>；不要把真实账号/仓库/bucket/Token 提交到仓库。
+# 该文件不参与官方构建，FC 运维仅社区支持。
+edition: 3.0.0
+name: radstudio-operator-example
+access: default
+
+vars:
+  region: <region>
+  image: <registry>/<namespace>/<repo>:<tag>
+  role: acs:ram::<account-id>:role/<role-name>
+  bucket: <oss-bucket>
+  endpoint: https://oss-<region>-internal.aliyuncs.com
+
+resources:
+  radstudio-operator:
+    component: fc3
+    props:
+      region: ${vars.region}
+      functionName: radstudio-operator
+      runtime: custom-container
+      customContainerConfig:
+        image: ${vars.image}
+        port: 8080
+      role: ${vars.role}
+      timeout: 14400
+      diskSize: 10240
+      instanceConcurrency: 1
+      internetAccess: true
+      environmentVariables:
+        RADSTUDIO_OPERATOR_TOKEN: ${env(RADSTUDIO_OPERATOR_TOKEN)}
+      ossMountConfig:
+        mountPoints:
+          - endpoint: ${vars.endpoint}
+            bucketName: ${vars.bucket}
+            bucketPath: /readonly
+            mountDir: /mnt/oss
+            readOnly: true
+      triggers:
+        - triggerName: invoke
+          triggerType: http
+          qualifier: LATEST
+          triggerConfig:
+            authType: anonymous
+            methods:
+              - POST

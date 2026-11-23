@@ -1,0 +1,2 @@
+# 无容器镜像
+本轮为本地 Python SDK 执行，未产生镜像摘要；见 runtime.md。

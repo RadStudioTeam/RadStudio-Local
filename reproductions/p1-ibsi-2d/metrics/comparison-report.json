@@ -1,0 +1,30 @@
+{
+  "aggregationCaveat": "recordAggregation=per_slice_mean 仅在 aggregation=2D 时有效：IBSI 的 2D, averaged 与 2D, slice-merged 需要矩阵级聚合，逐层特征均值不能重建这两个口径。",
+  "mappedFeatures": 35,
+  "missingFeatureKeys": [],
+  "note": "PyRadiomics 是 IBSI 的参与软件之一，本结果是参与软件对照官方参考值，不是独立第三方验证；对外只能表述为 IBSI 2D 子集的一致性检查。",
+  "selfAttestation": true,
+  "status": "compared",
+  "uncomparableFeatures": [
+    "0GBI",
+    "5SPA",
+    "6XV8",
+    "7HP3",
+    "7WT1",
+    "A7WM",
+    "CAS9",
+    "DKNJ",
+    "GBDU",
+    "IATH",
+    "K26C",
+    "KLTH",
+    "MB4I",
+    "QK93",
+    "RUVG",
+    "S1RA",
+    "V294",
+    "VFT7",
+    "VIWW"
+  ],
+  "validated": false
+}

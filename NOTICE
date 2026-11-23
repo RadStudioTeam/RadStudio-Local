@@ -1,0 +1,57 @@
+RadStudio Local
+Copyright 2026 RadStudio
+
+This product includes software and data developed by third parties.
+The notices below are provided for attribution and license compliance.
+
+====================================================================
+IBSI digital phantom and reference values
+====================================================================
+Files under packages/compliance/ibsi-2d/ and reproductions/p1-ibsi-2d/
+contain the IBSI 1 digital phantom, mask, slice images and 2D reference
+values derived from the Image Biomarker Standardization Initiative.
+
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+Source: https://github.com/theibsi/data_sets (commit 6da9602...)
+Reference manual: IBSI reference manual v10, Chapter 3
+
+Please cite:
+Zwanenburg A, Vallieres M, Abdalah MA, et al. The Image Biomarker
+Standardization Initiative: Standardized Quantitative Radiomics for
+High-Throughput Image-based Phenotyping. Radiology. 2020;295(2):328-338.
+doi:10.1148/radiol.2020191145
+
+====================================================================
+Python dependencies (installed separately by the user)
+====================================================================
+PyRadiomics                     BSD-3-Clause
+NumPy                           BSD-3-Clause
+SciPy                           BSD-3-Clause
+scikit-learn                    BSD-3-Clause
+joblib                          BSD-3-Clause
+Pillow                          HPND (MIT-CMU)
+matplotlib                      PSF-based (BSD-compatible)
+PyWavelets                      MIT
+openpyxl                        MIT
+pydantic                        MIT
+httpx                           BSD-3-Clause
+jsonschema                      MIT
+anndata                         BSD-3-Clause
+
+Optional extras (NOT distributed in official wheels/images):
+torch, torchvision              BSD-3-Clause
+MONAI                           Apache-2.0
+scanpy                          BSD-3-Clause
+leidenalg                       GPL-3.0-or-later
+python-igraph                   GPL-2.0-or-later
+
+If you install the optional single-cell extra ([sc]) yourself, you are
+responsible for complying with the GPL licenses of leidenalg and
+python-igraph. The official distributions of RadStudio Local do not
+bundle them.
+
+====================================================================
+JSON Schema identifiers
+====================================================================
+Schema $id values use the urn:radstudio:schema: namespace and are
+identifiers only; they are not fetched over the network.

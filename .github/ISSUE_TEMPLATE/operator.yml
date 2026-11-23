@@ -1,0 +1,39 @@
+name: Operator proposal
+description: 提议一个新算子或贡献自定义算子
+labels: [operator]
+body:
+  - type: input
+    id: type
+    attributes:
+      label: 算子类型与版本
+      placeholder: "MyOperator@1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: 输入/输出契约
+      description: 端口、类型、参数 schema、错误码。
+    validations:
+      required: true
+  - type: textarea
+    id: algorithm
+    attributes:
+      label: 算法与参考
+      description: 公式、论文/标准、与现有算子的差异。
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: 合成数据测试计划
+      description: 请说明如何在不使用患者数据的情况下验证。
+    validations:
+      required: true
+  - type: checkboxes
+    id: license
+    attributes:
+      label: 合规确认
+      options:
+        - label: 代码可由我按 Apache-2.0 贡献，且不包含患者数据
+          required: true

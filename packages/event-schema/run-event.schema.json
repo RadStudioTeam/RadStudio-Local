@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:radstudio:schema:run-event.json",
+  "title": "Run Event",
+  "description": "实验运行事件",
+  "type": "object",
+  "required": ["eventId", "runId", "sequenceNo", "eventType", "payload"],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "事件唯一标识，用于幂等"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sequenceNo": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "run.started",
+        "run.completed",
+        "run.failed",
+        "run.cancelled",
+        "node.started",
+        "node.completed",
+        "node.failed",
+        "artifact.created",
+        "log.emitted"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
