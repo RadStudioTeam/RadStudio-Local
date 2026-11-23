@@ -24,4 +24,4 @@ COPY packages/python-sdk/radstudio ./radstudio
 COPY packages/operator-schema/operators.json ./radstudio/operators.json
 ENV PATH="/opt/runner/.venv/bin:$PATH" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 USER 65532:65532
-ENTRYPOINT ["python", "-m", "radstudio.runner"]
+ENTRYPOINT ["python", "-m", "radstudio.cli"]

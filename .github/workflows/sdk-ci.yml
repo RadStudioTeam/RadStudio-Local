@@ -57,3 +57,13 @@ jobs:
           enable-cache: true
       - name: Run reproduction package
         run: bash reproductions/p1-ibsi-2d/reproduction/run.sh
+
+  docker:
+    name: Docker runner image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build runner image
+        run: docker build -t radstudio-local -f packages/python-sdk/Dockerfile.runner .
+      - name: CLI doctor in container
+        run: docker run --rm radstudio-local doctor

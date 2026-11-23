@@ -1,6 +1,7 @@
 # RadStudio Local 文档
 
-- [快速开始](quickstart.md)：从 clone 到跑通 IBSI 2D 自检
+- [快速开始](quickstart.md)：从 clone 到跑通 IBSI 2D 自检，并用 CLI 跑自己的数据
+- [命令行（CLI）](cli.md)：run / replay / report / doctor
 - [执行契约](workflows/README.md)：Workflow IR、算子快照、产物边界、复现
 - [指南](guides/)：核心概念、算子开发、算子参考、案例
 - [复现包](../reproductions/p1-ibsi-2d/README.md)：P1 数字体模自检的范围、产物与已知波动

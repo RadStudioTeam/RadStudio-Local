@@ -15,7 +15,7 @@
 
 </div>
 
-> **状态**：`v0.1.0-beta`（Python SDK / 单机 runner / IBSI 2D 复现包）。本地 Web UI 计划 2027-01。
+> **状态**：`v0.1.1`（Python SDK / 单机 runner / CLI / IBSI 2D 复现包）。本地 Web UI 计划 2027-01。
 > **范围**：仅供科学研究与教学，**不用于临床诊断，不构成医疗器械**。
 
 ---
@@ -64,6 +64,26 @@ bash reproductions/p1-ibsi-2d/reproduction/run.sh
 <p align="center">
   <img src="reproductions/p1-ibsi-2d/figures/p1-ibsi-2d-by-family.svg" alt="IBSI 2D 按特征族偏差" width="720">
 </p>
+
+### 跑自己的数据（CLI）
+
+```text
+my-study/
+├── data/
+│   ├── images/       # case1.png, case2.png, ...
+│   ├── masks/        # 与图片同名；也支持同目录 _mask 后缀
+│   └── labels.csv    # sample_id,label[,patient_id]
+└── workflow.json     # Workflow IR，或云端导出的 workflow.json
+```
+
+```bash
+cd packages/python-sdk && uv sync
+uv run radstudio doctor                                   # 检查环境
+uv run radstudio run workflow.json --data ./data --out ./out
+uv run radstudio report ./out --open                      # 静态 HTML 报告
+```
+
+每次运行都会留下 `_inputs/request.json`、`events.jsonl` 与 `manifest.json`，便于复核与复跑。完整参数见 [docs/cli.md](docs/cli.md)。
 
 ## 你能用它做什么
 
@@ -136,7 +156,7 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 | 版本 | 内容 | 状态 |
 | --- | --- | --- |
 | `v0.1.0-beta` | SDK / runner / IBSI 2D 复现包 / Schema / 本地算子指南 | ✅ 已发布 |
-| `v0.1.x` | `radstudio` CLI（run / replay / doctor）、预构建 Docker 镜像 | 🚧 开发中 |
+| `v0.1.1` | `radstudio` CLI（run / replay / report / doctor）、静态报告、预构建 Docker 镜像 | ✅ 已发布 |
 | `v0.2.0` | **本地 Web UI**：选数据、选模板、填参数、跑、看结果（单用户，计划 2027-01） | 计划 |
 | `v0.2.x` | Windows 便携包、模板库、更多公开复现案例 | 计划 |
 
@@ -161,7 +181,7 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 
 <details>
 <summary><b>现在有图形界面吗？</b></summary>
-v0.1.0-beta 没有本地 Web UI；当前用复现包与 SDK。本地 Web UI（选数据/模板/运行/结果）计划 2027-01，见[路线图](#路线图)。
+v0.1.1 仍没有本地 Web UI；当前用 CLI + 静态 HTML 报告。本地 Web UI（选数据/模板/运行/结果）计划 2027-01，见[路线图](#路线图)。
 </details>
 
 <details>
