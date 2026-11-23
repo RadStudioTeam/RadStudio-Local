@@ -86,6 +86,14 @@ uv run radstudio doctor
 
 检查 Python、numpy/scipy/scikit-learn/Pillow/PyRadiomics 是否就绪。
 
+## ui
+
+```bash
+uv run radstudio ui --workspace ~/RadStudioLocal
+```
+
+启动单用户本地 Web UI（默认 <http://127.0.0.1:8765>）。详见 [本地 Web UI](ui.md)。
+
 ## Docker
 
 ```bash
@@ -95,8 +103,8 @@ docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:/work" radstudio-local \
 docker run --rm radstudio-local doctor
 ```
 
-## 当前限制（v0.1.1）
+## 当前限制（v0.2.0）
 
 - 只支持以 `ReadImages` 开头的影像工作流；`ReadTable`/DICOM/NIfTI 序列/单细胞读取器在后续版本。
 - 单机 CPU；不做 GPU、云函数派发、多用户协作。
-- 本地 UI 尚未提供（计划 v0.2）；当前用 CLI + 静态报告。
+- 本地 UI 已提供（`radstudio ui`），单用户、无拖拽编辑；详见 [本地 UI](ui.md)。

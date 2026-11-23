@@ -15,7 +15,7 @@
 
 </div>
 
-> **状态**：`v0.1.1`（Python SDK / 单机 runner / CLI / IBSI 2D 复现包）。本地 Web UI 计划 2027-01。
+> **状态**：`v0.2.0`（Python SDK / 单机 runner / CLI / **本地 Web UI** / IBSI 2D 复现包）。
 > **范围**：仅供科学研究与教学，**不用于临床诊断，不构成医疗器械**。
 
 ---
@@ -85,6 +85,24 @@ uv run radstudio report ./out --open                      # 静态 HTML 报告
 
 每次运行都会留下 `_inputs/request.json`、`events.jsonl` 与 `manifest.json`，便于复核与复跑。完整参数见 [docs/cli.md](docs/cli.md)。
 
+### 本地 Web UI（v0.2，推荐给不写代码的用户）
+
+```bash
+uv run radstudio ui --workspace ~/RadStudioLocal
+```
+
+浏览器打开 <http://127.0.0.1:8765>，五个页面完成：**数据扫描 → 选模板/改参数 → 运行 → 看指标/图 → 导出报告**。单用户、离线、只监听本机；不需要命令行。
+
+| 页面 | 能做什么 |
+| --- | --- |
+| 数据 | 扫描本机目录，校验图片/掩膜/标签配对 |
+| 工作流 | 选模板、编辑 JSON、改 ReadImages 参数、只读 DAG |
+| 运行 | 后台启动、进度/事件/日志、取消 |
+| 结果 | 指标、图表、产物清单、静态报告 |
+| 设置 | 工作区与默认数据目录 |
+
+详见 [docs/ui.md](docs/ui.md)。需要拖拽编辑/协作/GPU 时用云端版。
+
 ## 你能用它做什么
 
 ```mermaid
@@ -125,7 +143,7 @@ flowchart LR
 | 数据管理 / 团队协作 / 权限 / 审计 | — | ✅ |
 | GPU / 深度学习 / 大规模并行 | — | ✅ |
 | AI 助手 / 自动编排 / 数据广场 | — | ✅ |
-| 本地 Web UI（数据/模板/运行/结果） | 🚧 计划 2027-01 | ✅ 完整工作台 |
+| 本地 Web UI（数据/模板/运行/结果） | ✅ 单用户五页 | ✅ 完整工作台 |
 
 需要可视化编排、GPU 训练或团队协作时，把本地导出的工作流带到云端：
 
@@ -157,8 +175,8 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 | --- | --- | --- |
 | `v0.1.0-beta` | SDK / runner / IBSI 2D 复现包 / Schema / 本地算子指南 | ✅ 已发布 |
 | `v0.1.1` | `radstudio` CLI（run / replay / report / doctor）、静态报告、预构建 Docker 镜像 | ✅ 已发布 |
-| `v0.2.0` | **本地 Web UI**：选数据、选模板、填参数、跑、看结果（单用户，计划 2027-01） | 计划 |
-| `v0.2.x` | Windows 便携包、模板库、更多公开复现案例 | 计划 |
+| `v0.2.0` | **本地 Web UI**：数据/工作流/运行/结果/设置五页，只读 DAG，静态报告（单用户） | ✅ 已发布 |
+| `v0.3.x` | Windows 便携包、模板库、更多公开复现案例 | 计划 |
 
 不在路线图：临床诊断、医疗器械注册、多用户私有化部署、患者数据托管。
 
@@ -181,7 +199,7 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 
 <details>
 <summary><b>现在有图形界面吗？</b></summary>
-v0.1.1 仍没有本地 Web UI；当前用 CLI + 静态 HTML 报告。本地 Web UI（选数据/模板/运行/结果）计划 2027-01，见[路线图](#路线图)。
+有。v0.2 提供本地 Web UI：`radstudio ui --workspace ~/RadStudioLocal`，浏览器完成数据/模板/参数/运行/结果，单用户、只读 DAG。拖拽编辑与协作仍在云端。
 </details>
 
 <details>

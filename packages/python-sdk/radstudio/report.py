@@ -105,14 +105,27 @@ def _table(headers: list[str], rows: list[list[str]], empty: str = "（无）") 
     return f'<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>'
 
 
-def build_report(out_dir: Path) -> Path:
+def collect_report_data(out_dir: Path) -> dict[str, Any]:
+    """收集报告/UI 需要的元数据、指标、图片与产物清单。"""
     out_dir = out_dir.resolve()
     if not out_dir.is_dir():
         raise FileNotFoundError(f"输出目录不存在: {out_dir}")
-    meta = _run_meta(out_dir)
-    metrics = _metrics(out_dir)
-    images = _images(out_dir)
-    artifacts = _artifacts(out_dir)
+    return {
+        "dir": out_dir,
+        "meta": _run_meta(out_dir),
+        "metrics": _metrics(out_dir),
+        "images": _images(out_dir),
+        "artifacts": _artifacts(out_dir),
+    }
+
+
+def build_report(out_dir: Path) -> Path:
+    data = collect_report_data(out_dir)
+    out_dir = data["dir"]
+    meta = data["meta"]
+    metrics = data["metrics"]
+    images = data["images"]
+    artifacts = data["artifacts"]
 
     metric_sections = []
     for name, values in metrics:

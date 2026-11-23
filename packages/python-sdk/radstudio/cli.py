@@ -67,6 +67,13 @@ def _build_report_parser(sub: argparse.ArgumentParser) -> None:
     sub.add_argument("--open", action="store_true", help="生成后用默认浏览器打开")
 
 
+def _build_ui_parser(sub: argparse.ArgumentParser) -> None:
+    sub.add_argument("--workspace", type=Path, default=Path.home() / "RadStudioLocal", help="本地工作区目录")
+    sub.add_argument("--host", default="127.0.0.1", help="监听地址（默认仅本机）")
+    sub.add_argument("--port", type=int, default=8765, help="端口")
+    sub.add_argument("--no-browser", action="store_true", help="不自动打开浏览器")
+
+
 def _build_doctor_parser(sub: argparse.ArgumentParser) -> None:
     pass
 
@@ -190,6 +197,13 @@ def cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ui(args: argparse.Namespace) -> int:
+    from .local_ui import serve
+
+    serve(args.workspace, host=args.host, port=args.port, open_browser=not args.no_browser)
+    return 0
+
+
 def cmd_doctor(args: argparse.Namespace) -> int:
     import importlib
 
@@ -245,6 +259,10 @@ def main(argv: list[str] | None = None) -> int:
     report_parser = subparsers.add_parser("report", help="生成静态 HTML 报告")
     _build_report_parser(report_parser)
     report_parser.set_defaults(func=cmd_report)
+
+    ui_parser = subparsers.add_parser("ui", help="启动本地 Web UI")
+    _build_ui_parser(ui_parser)
+    ui_parser.set_defaults(func=cmd_ui)
 
     doctor_parser = subparsers.add_parser("doctor", help="检查本地环境")
     _build_doctor_parser(doctor_parser)

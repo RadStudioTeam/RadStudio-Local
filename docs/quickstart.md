@@ -86,7 +86,18 @@ uv run radstudio report ../../my-study/out --open
 
 无服务端、双击 `report.html` 即可查看指标、图表与产物清单。
 
-## 4. Docker（可选）
+## 4. 本地 Web UI（v0.2）
+
+不写代码的用户可以直接用浏览器：
+
+```bash
+cd packages/python-sdk
+uv run radstudio ui --workspace ~/RadStudioLocal
+```
+
+打开 <http://127.0.0.1:8765>，按「数据 → 工作流 → 运行 → 结果」操作；工作流默认模板会自动复制到工作区。单用户、只监听本机。详见 [本地 UI 文档](ui.md)。
+
+## 5. Docker（可选）
 
 ```bash
 # 在仓库根目录构建
@@ -96,9 +107,13 @@ docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:/work" radstudio-local \
   run /work/my-study/workflow.json --data /work/my-study/data --out /work/my-study/out
 
 docker run --rm radstudio-local doctor
+
+# Docker 里的本地 UI（宿主机只映射 127.0.0.1）
+docker run --rm -p 127.0.0.1:8765:8765 -v "$HOME/RadStudioLocal:/workspace" \
+  radstudio-local ui --no-browser --host 0.0.0.0 --workspace /workspace
 ```
 
-## 5. 复现包重跑
+## 6. 复现包重跑
 
 ```bash
 uv run radstudio replay ../../bundle --dataset-dir ../../my-study/data --out ../../my-study/out
@@ -106,14 +121,14 @@ uv run radstudio replay ../../bundle --dataset-dir ../../my-study/data --out ../
 
 复现包需包含 `request.json` 与 `input-hashes.json`（由云端运行或 `out/_inputs/` 生成）。
 
-## 6. 当前限制（v0.1.1）
+## 7. 当前限制（v0.2.0）
 
 - 只支持以 `ReadImages` 开头的影像工作流；`ReadTable`、DICOM 序列、NIfTI 序列、单细胞读取器在后续版本。
 - 单机 CPU；不做 GPU、云函数派发、多用户协作。
-- 本地 Web UI 计划 v0.2（2027-01）；当前用 CLI + 静态报告。
+- 本地 Web UI 已提供（v0.2），但只做单用户、模板+JSON 编辑，不做拖拽编辑。
 - 仅供科研与教学，不构成医疗器械，不用于临床诊断。
 
-## 7. 常见问题
+## 8. 常见问题
 
 | 现象 | 处理 |
 | --- | --- |

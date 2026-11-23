@@ -67,3 +67,15 @@ jobs:
         run: docker build -t radstudio-local -f packages/python-sdk/Dockerfile.runner .
       - name: CLI doctor in container
         run: docker run --rm radstudio-local doctor
+      - name: Web UI healthz in container
+        run: |
+          set -euo pipefail
+          docker run -d --name radstudio-ui -p 127.0.0.1:8765:8765 radstudio-local ui --no-browser --host 0.0.0.0 --workspace /tmp/ws
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:8765/healthz >/tmp/healthz.json; then break; fi
+            sleep 1
+          done
+          cat /tmp/healthz.json
+          grep -q '"status": "ok"' /tmp/healthz.json
+          docker logs radstudio-ui
+          docker rm -f radstudio-ui
