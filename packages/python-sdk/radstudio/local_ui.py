@@ -141,7 +141,7 @@ class Workspace:
         except json.JSONDecodeError as exc:
             raise ValueError(f"工作流不是合法 JSON: {exc}") from exc
         if not isinstance(payload, dict) or not isinstance(payload.get("nodes"), list):
-            raise ValueError("工作流需要包含 nodes 数组")
+            raise TypeError("工作流需要包含 nodes 数组")
         path = (self.workflows_dir / name).resolve()
         if path.parent != self.workflows_dir.resolve():
             raise ValueError("工作流路径不合法")
@@ -334,7 +334,6 @@ def dag_svg(ir: dict) -> str:
     if not nodes:
         return "<p class='empty'>工作流没有节点</p>"
     ids = [str(node.get("id")) for node in nodes]
-    index = {node_id: i for i, node_id in enumerate(ids)}
     incoming: dict[str, list[str]] = {node_id: [] for node_id in ids}
     outgoing: dict[str, list[str]] = {node_id: [] for node_id in ids}
     for edge in ir.get("edges") or []:
@@ -370,8 +369,11 @@ def dag_svg(ir: dict) -> str:
             pos[node_id] = (20 + lvl * (box_w + gap_x), 25 + row * (box_h + gap_y))
     parts = [
         f'<svg class="dag" viewBox="0 0 {width} {height}" role="img" aria-label="工作流只读图">',
-        '<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">'
-        '<path d="M0,0 L8,4 L0,8 z" fill="#7b8ca6"/></marker></defs>',
+        (
+            '<defs><marker id="arrow" markerWidth="8" markerHeight="8"'
+            ' refX="7" refY="4" orient="auto">'
+            '<path d="M0,0 L8,4 L0,8 z" fill="#7b8ca6"/></marker></defs>'
+        ),
     ]
     for edge in ir.get("edges") or []:
         source, target = str(edge.get("source")), str(edge.get("target"))
@@ -657,7 +659,7 @@ class LocalUIHandler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     workspace: Workspace
 
-    def log_message(self, format, *args) -> None:  # noqa: A002,D401
+    def log_message(self, format, *args) -> None:
         return
 
     # ---- helpers ----
@@ -690,7 +692,7 @@ class LocalUIHandler(BaseHTTPRequestHandler):
         self._html(status, layout("runs", "出错了", f"<h1>出错了</h1><div class='error'>{_e(message)}</div>", self.workspace))
 
     # ---- GET ----
-    def do_GET(self) -> None:  # noqa: N802
+    def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
         query = parse_qs(parsed.query)
@@ -748,7 +750,7 @@ class LocalUIHandler(BaseHTTPRequestHandler):
             self._error_page(500, str(exc))
 
     # ---- POST ----
-    def do_POST(self) -> None:  # noqa: N802
+    def do_POST(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
         form = self._form()
