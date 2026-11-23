@@ -10,6 +10,7 @@
 [![Release](https://img.shields.io/github/v/release/RadStudioTeam/RadStudio-Local?include_prereleases&label=release)](https://github.com/RadStudioTeam/RadStudio-Local/releases)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![Gitee mirror](https://img.shields.io/badge/Gitee-mirror-c71d23)](https://gitee.com/rad-studio-team/radstudio-local)
 
 [快速开始](#5-分钟跑通) · [为什么开源](#为什么做-radstudio-local) · [路线图](#路线图) · [English](#english)
 
@@ -49,6 +50,9 @@ RadStudio Local 把「数据 → 质控 → 预处理 → IBSI 特征 → 建模
 git clone https://github.com/RadStudioTeam/RadStudio-Local.git
 cd RadStudio-Local
 bash reproductions/p1-ibsi-2d/reproduction/run.sh
+
+# 国内网络可用 Gitee 镜像：
+# git clone https://gitee.com/rad-studio-team/radstudio-local.git
 ```
 
 首次会按 `uv.lock` 建环境（PyRadiomics 需本地编译，约 3–10 分钟）。成功后得到：
@@ -211,6 +215,11 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 <summary><b>可以商用或二次开发吗？</b></summary>
 代码 Apache-2.0，可自由使用/修改/分发；名称与 Logo 商标保留（见 [TRADEMARK.md](TRADEMARK.md)）；云端服务与私有化支持另议。
 </details>
+
+## 国内镜像
+
+- GitHub 主仓：<https://github.com/RadStudioTeam/RadStudio-Local>
+- Gitee 镜像：<https://gitee.com/rad-studio-team/radstudio-local>（同步 main 与 tag，供国内访问；Issue/PR 优先 GitHub）
 
 ## 参与贡献
 

@@ -11,6 +11,8 @@ RadStudio Local 有两条路径：先用官方数字体模验证链路，再用 
 ```bash
 git clone https://github.com/RadStudioTeam/RadStudio-Local.git
 cd RadStudio-Local
+# 国内网络可用镜像：
+# git clone https://gitee.com/rad-studio-team/radstudio-local.git
 ```
 
 ## 2. 跑通 IBSI 2D 自检（不需要真实数据）
