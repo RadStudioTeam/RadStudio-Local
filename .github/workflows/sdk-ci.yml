@@ -28,7 +28,7 @@ jobs:
 
       - name: Sync dependencies
         working-directory: packages/python-sdk
-        run: uv sync --dev
+        run: uv sync --extra dev --frozen
 
       - name: Lint
         working-directory: packages/python-sdk
