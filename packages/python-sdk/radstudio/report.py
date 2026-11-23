@@ -28,10 +28,16 @@ def _flatten(value: Any, prefix: str = "", depth: int = 0, out: dict[str, Any] |
     if isinstance(value, dict):
         for key, child in value.items():
             _flatten(child, f"{prefix}.{key}" if prefix else str(key), depth + 1, out)
-    elif isinstance(value, (int, float)) and not isinstance(value, bool):
-        out[prefix] = value
-    elif isinstance(value, str) and len(value) <= 80 and prefix and any(
-        word in prefix.lower() for word in ("auc", "accuracy", "sensitivity", "specificity", "f1", "brier", "score")
+    elif (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        or isinstance(value, str)
+        and len(value) <= 80
+        and bool(prefix)
+        and any(
+            word in prefix.lower()
+            for word in ("auc", "accuracy", "sensitivity", "specificity", "f1", "brier", "score")
+        )
     ):
         out[prefix] = value
     return out
