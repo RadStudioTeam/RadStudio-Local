@@ -1,5 +1,8 @@
 # RadStudio Local
 
+[![SDK CI](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml/badge.svg)](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+
 **面向医学影像组学研究的本地可复现工具。数据留在本机，工作流是纯 JSON，产物可独立复核。**
 
 > 状态：`v0.1.0-beta`（CLI / Docker / 复现包；本地 Web UI 在路线图中，计划 2027-01-15）
