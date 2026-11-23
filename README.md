@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.png" alt="RadStudio Local" width="128">
+
 # RadStudio Local
 
 **把影像组学论文变成可复现的本地工作流。数据不出院，结果可核对。**

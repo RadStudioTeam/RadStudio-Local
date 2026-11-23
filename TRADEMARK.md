@@ -14,6 +14,10 @@
 - 将修改版继续使用「RadStudio/RadStudio Local」作为产品名（fork 请改名，例如 `YourLab-Radiomics`）。
 - 在商业宣传中把本项目的科研用途表述为临床/医疗器械能力。
 
+## 仓库内的 Logo 文件
+
+仓库内 `assets/logo.png` 与 `assets/social-preview.png` 仅用于项目识别与展示，**不随 Apache-2.0 代码许可授权**；fork 请替换为自己的品牌素材。
+
 ## 学术引用
 
 引用请使用 `CITATION.cff`；论文中提及工具名不受限制。
