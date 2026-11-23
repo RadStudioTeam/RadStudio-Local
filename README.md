@@ -109,6 +109,8 @@ flowchart LR
 
 **[→ 了解云端 RadStudio](https://radstudioi.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_launch)** · **[→ 进入工作台](https://app.radstudioi.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_launch)**
 
+> **为什么开源**：可复现的本地能力应该是科研基础设施，而不是某家平台的锁定。我们开放格式、SDK 与本地执行；云端负责算力、协作与 AI。你随时可以把工作流与复现包带走。
+
 ## 为什么可信
 
 - **CI 全绿**：每次提交在 Python 3.11/3.12 上跑 lint、pytest、JSON Schema 校验，并真实执行 IBSI 2D 自检（[workflow](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml)）。
@@ -137,6 +139,38 @@ docs/                    快速开始、执行契约（docs/workflows/）、本�
 | `v0.2.x` | Windows 便携包、模板库、更多公开复现案例 | 计划 |
 
 不在路线图：临床诊断、医疗器械注册、多用户私有化部署、患者数据托管。
+
+## 常见问题
+
+<details>
+<summary><b>需要把数据上传到哪里吗？</b></summary>
+不需要。开源版默认本地执行，不上传、无遥测；数据目录由你自己管理。
+</details>
+
+<details>
+<summary><b>和云端版是什么关系？</b></summary>
+同一套 Workflow IR 与算子契约。本地免费、可复现；云端提供可视化工作台、GPU、协作、AI 与数据广场。工作流可双向导入/导出。
+</details>
+
+<details>
+<summary><b>能用于临床诊断吗？</b></summary>
+不能。本项目仅用于科研与教学，不构成医疗器械，输出不能作为诊断依据。
+</details>
+
+<details>
+<summary><b>现在有图形界面吗？</b></summary>
+v0.1.0-beta 没有本地 Web UI；当前用复现包与 SDK。本地 Web UI（选数据/模板/运行/结果）计划 2027-01，见[路线图](#路线图)。
+</details>
+
+<details>
+<summary><b>支持 Windows 吗？</b></summary>
+源码路径支持 Python 3.12 + uv；预构建 Docker 镜像与 Windows 便携包在后续版本提供。当前建议 Linux/macOS 或 Docker Desktop。
+</details>
+
+<details>
+<summary><b>可以商用或二次开发吗？</b></summary>
+代码 Apache-2.0，可自由使用/修改/分发；名称与 Logo 商标保留（见 [TRADEMARK.md](TRADEMARK.md)）；云端服务与私有化支持另议。
+</details>
 
 ## 参与贡献
 
