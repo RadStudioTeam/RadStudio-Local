@@ -1,107 +1,174 @@
+<div align="center">
+
 # RadStudio Local
 
+**把影像组学论文变成可复现的本地工作流。数据不出院，结果可核对。**
+
 [![SDK CI](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml/badge.svg)](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml)
+[![Release](https://img.shields.io/github/v/release/RadStudioTeam/RadStudio-Local?include_prereleases&label=release)](https://github.com/RadStudioTeam/RadStudio-Local/releases)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 
-**面向医学影像组学研究的本地可复现工具。数据留在本机，工作流是纯 JSON，产物可独立复核。**
+[快速开始](#5-分钟跑通) · [为什么开源](#为什么做-radstudio-local) · [路线图](#路线图) · [English](#english)
 
-> 状态：`v0.1.0-beta`（CLI / Docker / 复现包；本地 Web UI 在路线图中，计划 2027-01-15）
-> 定位：**仅供科学研究与教学，不用于临床诊断，不构成医疗器械。**
-> 上游：RadStudio（云端低代码科研平台）的本地执行与复现能力开源版。
+</div>
 
-## 这是什么
+> **状态**：`v0.1.0-beta`（Python SDK / 单机 runner / IBSI 2D 复现包）。本地 Web UI 计划 2027-01。
+> **范围**：仅供科学研究与教学，**不用于临床诊断，不构成医疗器械**。
 
-- **本地执行**：用同一套算子实现跑影像组学链路（质控 → 预处理 → IBSI 2D 特征 → 建模 → 评估 → 图表），不依赖云端。
-- **可复现**：输入哈希、算子快照、参数、产物与已知波动随复现包保存；同一环境可重跑对照。
-- **可移植**：工作流是带版本的 JSON（Workflow IR），可在本地与云端之间导入/导出。
-- **可扩展**：按统一算子契约写 Python 自定义算子，本地调试后既可在本地用，也可提交到云端。
+---
 
-## 这不是什么
+## 为什么做 RadStudio Local
 
-- 不是临床诊断软件；输出不能作为诊断依据。
-- 不是云端平台的替代：**没有多用户、协作、GPU 集群、AI 助手与数据广场**。这些在云端版提供。
-- 不是「一键论文」工具：它把流程变得可追溯、可复核，但不替你选题、统计或写作。
+影像组学研究的真实日常，往往不是「缺一个算法」，而是：
 
-## 快速开始（v0.1.0-beta）
+- 脚本散落在不同人的电脑里，参数只存在聊天记录里；
+- 换台机器、换个库版本，特征值就对不上；
+- 论文要交可复现材料，却只能给一堆截图和 Excel；
+- 医院数据不能出院，云端工具再好也用不了。
 
-### 前置
+RadStudio Local 把「数据 → 质控 → 预处理 → IBSI 特征 → 建模 → 评估 → 报告/复现包」冻结成一条**可重跑的工作流**：
 
-- Python 3.12 + [uv](https://docs.astral.sh/uv/)
-- 或 Docker（本地 Web UI / 预构建镜像在后续版本提供）
+| 你得到的 | 具体是什么 |
+| --- | --- |
+| **数据不出本机** | 本地执行，默认不上传、无遥测；适合院内/课题组数据合规要求 |
+| **可复现** | 输入 SHA-256、算子版本快照、参数、环境、产物全部留痕；复现包可独立重跑 |
+| **可核对** | 内置 IBSI 2D 数字体模自检：54 行逐特征偏差，按族汇总，**不伪造 pass/fail** |
+| **可移植** | 工作流是版本化 JSON（Workflow IR），本地与云端之间可导入/导出 |
+| **可扩展** | 按统一契约写 Python 自定义算子，本地调试通过后可带到云端 |
 
-### 跑通 IBSI 2D 数字体模自检
+> 这不是「又一个 PyRadiomics 脚本封装」。它解决的是**科研流程的可追溯与可交接**：同一份工作流，任何人、任何机器，都能核对它是怎么算出来的。
+
+## 5 分钟跑通
+
+不需要真实患者数据，用 IBSI 官方数字体模验证整条链路：
 
 ```bash
 git clone https://github.com/RadStudioTeam/RadStudio-Local.git
-cd radstudio-local
+cd RadStudio-Local
 bash reproductions/p1-ibsi-2d/reproduction/run.sh
 ```
 
-首次会按 `uv.lock` 创建虚拟环境（PyRadiomics 需本地编译，耗时数分钟）。成功后应看到：
+首次会按 `uv.lock` 建环境（PyRadiomics 需本地编译，约 3–10 分钟）。成功后得到：
 
-- `07-comparison.csv`：54 行逐特征偏差
-- `07-comparison_by-family.csv`：按特征族汇总
-- `run-summary.json`：节点、参数、输入哈希与环境登记
+| 产物 | 内容 |
+| --- | --- |
+| `07-comparison.csv` | 54 行逐特征偏差（no_tolerance 35 + not_comparable 19） |
+| `07-comparison_by-family.csv` | GLSZM / NGTDM / NGLDM / GLDZM 按族汇总 |
+| `run-summary.json` | 节点、参数、输入哈希、Python/PyRadiomics 环境 |
 
-> 口径：数字体模的 54 行参考值**没有公布容差**，因此本自检只产出偏差，不产出 pass/fail，也不代表「通过 IBSI 认证」。详见 `reproductions/p1-ibsi-2d/README.md`。
+**口径说明**：数字体模的参考值没有公布容差，所以本项目只产出偏差，不产出「通过 IBSI」的结论；有容差的 350 行来自 CT 配置 A/B，不在本包范围。详见 [`reproductions/p1-ibsi-2d/README.md`](reproductions/p1-ibsi-2d/README.md)。
 
-### 跑自己的数据（v0.1 CLI，随 beta 逐步完善）
+<p align="center">
+  <img src="reproductions/p1-ibsi-2d/figures/p1-ibsi-2d-by-family.svg" alt="IBSI 2D 按特征族偏差" width="720">
+</p>
 
-```bash
-cd packages/python-sdk && uv sync
-# 规划中的命令（v0.1 交付）：
-# radstudio init  ./my-study
-# radstudio run   ./my-study/workflow.json --data ./my-study/data --out ./my-study/out
+## 你能用它做什么
+
+```mermaid
+flowchart LR
+  A[影像 + ROI + 标签] --> B[质控/配对校验]
+  B --> C[预处理]
+  C --> D[IBSI 2D 特征]
+  D --> E[建模/交叉验证/评估]
+  E --> F[指标/图表/报告]
+  E --> G[复现包]
 ```
 
-v0.1 的 CLI 与本地 Web UI 正在开发；当前版本请以复现包与 `python -m radstudio.runner --request <request.json> --output <out>` 为准。
+- **影像组学特征**：IBSI 2D 一阶/形状/纹理特征，参数与口径可查；
+- **建模与评估**：分组交叉验证、OOF 评估、ROC/混淆矩阵/Brier 等指标；
+- **复现与交接**：一次运行导出输入清单、算子快照、产物与复现脚本；
+- **自定义算法**：按 `operator-schema` 写 Python 算子，本地调试、版本固定；
+- **教学与演示**：合成体模 + 公开案例，不碰患者数据也能讲完整链路。
 
-## 仓库结构
+## 适合谁
 
-```text
-packages/python-sdk/     SDK、runner、算子、执行契约（含 tests）
-packages/*-schema/       Workflow IR / Operator / Event / Artifact / Analysis JSON Schema
-packages/compliance/     IBSI 2D 数字体模与参考值（CC BY 4.0）
-reproductions/           P1 IBSI 2D 复现包（输入哈希、产物、已知波动）
-examples/                自定义算子示例（Brier Score）
-docs/                    quickstart、执行契约（docs/workflows/）
-```
+| 人群 | 典型用法 |
+| --- | --- |
+| 影像科医生 / 医学生 | 复现论文方法、生成特征表/指标/图，写进论文材料 |
+| 课题组 / 实验室 | 统一流程与版本，学生毕业/交接时不丢参数 |
+| 生信 / 影像 AI 工程师 | 用 SDK 与 Workflow IR 搭建、扩展、集成自己的算子 |
+| 高校教师 | 用合成体模与公开案例做课程/工作坊，无需数据审批 |
 
-## 与云端的关系
+**不适合**：把输出当诊断结论、需要多人在线协作、需要 GPU 集群或开箱即用图形界面（这些在云端版/路线图中）。
+
+## 本地免费，云端省事
+
+开源版不限制功能，只限制「规模与协作」：
 
 | 能力 | RadStudio Local | 云端 RadStudio |
 | --- | --- | --- |
 | 影像组学 CPU 链路、复现、导出 | ✅ 免费 | ✅ |
-| 自定义算子本地开发 | ✅ | ✅（网页 IDE） |
-| 数据管理/协作/权限/审计 | — | ✅ |
-| GPU / DL / 大规模并行 | — | ✅ |
+| 自定义算子本地开发 | ✅ | ✅ 网页 IDE |
+| 数据管理 / 团队协作 / 权限 / 审计 | — | ✅ |
+| GPU / 深度学习 / 大规模并行 | — | ✅ |
 | AI 助手 / 自动编排 / 数据广场 | — | ✅ |
-| 本地 Web UI（数据/模板/运行/结果） | 🚧 计划 v0.2 | ✅ 完整工作台 |
+| 本地 Web UI（数据/模板/运行/结果） | 🚧 计划 2027-01 | ✅ 完整工作台 |
 
-**开源版不限制功能，只限制「规模与协作」。** 需要云端时，可从本地导出的工作流无缝带入。
+需要可视化编排、GPU 训练或团队协作时，把本地导出的工作流带到云端：
 
-## 版本与兼容
+**[→ 了解云端 RadStudio](https://radstudioi.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_launch)** · **[→ 进入工作台](https://app.radstudioi.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_launch)**
 
-- `0.x` 期间不承诺 Workflow IR 向后兼容；每次破坏性变更会在 Release Notes 给出迁移说明。
-- 复现包以 `uv.lock` 与算子快照为准；跨环境不保证逐位一致，差异原因见各复现包 `known-variation.md`。
+## 为什么可信
 
-## 引用
+- **CI 全绿**：每次提交在 Python 3.11/3.12 上跑 lint、pytest、JSON Schema 校验，并真实执行 IBSI 2D 自检（[workflow](https://github.com/RadStudioTeam/RadStudio-Local/actions/workflows/sdk-ci.yml)）。
+- **口径诚实**：数字体模不产出一致率；已知波动、不可比原因逐条写在复现包里。
+- **数据干净**：仓库只含合成体模与公开数据；贡献指南禁止患者数据/PHI。
+- **许可清晰**：代码 Apache-2.0；IBSI 数据 CC BY 4.0（署名见 [NOTICE](NOTICE)）；名称与 Logo 商标保留（[TRADEMARK.md](TRADEMARK.md)）。
 
-如果本项目对你的研究有帮助，请按 `CITATION.cff` 引用；复现包与数据请同时引用 IBSI 原始论文（见 `packages/compliance/ibsi-2d/README.md`）。
+## 仓库结构
+
+```text
+packages/python-sdk/     SDK、runner、算子、执行契约与测试
+packages/*-schema/       Workflow IR / Operator / Event / Artifact / Analysis JSON Schema
+packages/compliance/     IBSI 2D 数字体模与参考值（CC BY 4.0）
+reproductions/           P1 IBSI 2D 复现包（输入哈希、产物、已知波动）
+examples/                自定义算子示例（Brier Score）
+docs/                    快速开始、执行契约（docs/workflows/）、本地算子开发
+```
+
+## 路线图
+
+| 版本 | 内容 | 状态 |
+| --- | --- | --- |
+| `v0.1.0-beta` | SDK / runner / IBSI 2D 复现包 / Schema / 本地算子指南 | ✅ 已发布 |
+| `v0.1.x` | `radstudio` CLI（run / replay / doctor）、预构建 Docker 镜像 | 🚧 开发中 |
+| `v0.2.0` | **本地 Web UI**：选数据、选模板、填参数、跑、看结果（单用户，计划 2027-01） | 计划 |
+| `v0.2.x` | Windows 便携包、模板库、更多公开复现案例 | 计划 |
+
+不在路线图：临床诊断、医疗器械注册、多用户私有化部署、患者数据托管。
 
 ## 参与贡献
 
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。**禁止提交任何患者数据、PHI 或未脱敏影像**；示例仅接受合成/公开数据。
+- 发现 Bug / 想要功能：[开 Issue](https://github.com/RadStudioTeam/RadStudio-Local/issues)
+- 贡献算子、复现包、文档：先看 [CONTRIBUTING.md](CONTRIBUTING.md)（DCO，无需 CLA）
+- 安全问题：按 [SECURITY.md](SECURITY.md) 私下报告，不要开公开 Issue
+- 觉得有用？**Star** 一下，是我们持续投入开源的最大动力 ⭐
 
-## 许可
+## 引用与许可
 
-- 代码：Apache-2.0（见 [LICENSE](LICENSE)）
-- 文档：CC BY 4.0
-- IBSI 体模/参考值：CC BY 4.0（署名见 [NOTICE](NOTICE)）
-- 名称与 Logo：商标保留（见 [TRADEMARK.md](TRADEMARK.md)）
+- 学术引用：见 [CITATION.cff](CITATION.cff)；复现包请同时引用 IBSI 原始论文。
+- 代码：Apache-2.0；文档：CC BY 4.0；IBSI 数据：CC BY 4.0（见 [NOTICE](NOTICE)）。
+- 商标与品牌使用边界：见 [TRADEMARK.md](TRADEMARK.md)。
 
-## 安全与合规
+## 免责声明
 
-- 仅用于科研与教学；不用于临床诊断。
-- 本地执行，默认不上传数据；不含遥测。
-- 漏洞报告见 [SECURITY.md](SECURITY.md)。
+本项目仅用于科学研究与教学，不构成医疗器械，不用于临床诊断。使用者需自行确保数据已脱敏并符合机构伦理与数据使用许可。
+
+---
+
+## English
+
+**RadStudio Local** is an open-source, local-first toolkit for reproducible radiomics research. Run the same workflow and operators on your own machine; every run records input hashes, operator snapshots, parameters and artifacts, so results can be audited and replayed. Data stays local by default.
+
+```bash
+git clone https://github.com/RadStudioTeam/RadStudio-Local.git
+cd RadStudio-Local
+bash reproductions/p1-ibsi-2d/reproduction/run.sh
+```
+
+- License: Apache-2.0 (code), CC BY 4.0 (docs/IBSI data)
+- Scope: research and education only; **not a medical device, not for clinical diagnosis**
+- Local web UI is on the roadmap (2027-01); cloud edition offers GPU, collaboration and AI
+
+If this project helps your research, please cite it via [CITATION.cff](CITATION.cff) and star the repo.
